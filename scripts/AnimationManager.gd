@@ -5,11 +5,11 @@ class_name AnimationManager
 @export var animation_player: AnimationPlayer
 @export var audio_container: AudioContainer
 
-func play(animation_name: String) -> void:
+func play(animation_name: String, reverse: bool = false) -> void:
 	animation_name.to_lower()
 	
-	play_sprite_animation(animation_name)
-	play_animation(animation_name)
+	play_sprite_animation(animation_name, reverse)
+	play_animation(animation_name, reverse)
 	play_audio(animation_name)
 
 func play_random_frame(animation_name: String) -> void:
@@ -19,17 +19,27 @@ func play_random_frame(animation_name: String) -> void:
 		animated_sprite.play(animation_name)
 		animated_sprite.frame = randi_range(0, animated_sprite.sprite_frames.get_frame_count(animation_name) - 1)
 
-func play_sprite_animation(animation_name: String) -> void:
+func play_sprite_animation(animation_name: String, reverse: bool = false) -> void:
 	animation_name.to_lower()
 	
 	if animated_sprite and animated_sprite.sprite_frames.has_animation(animation_name):
 		animated_sprite.play(animation_name)
+		if reverse:
+			animated_sprite.speed_scale = -1
+			# Se positionner sur le dernier frame pour jouer à l'envers
+			animated_sprite.frame = animated_sprite.sprite_frames.get_frame_count(animation_name) - 1
+		else:
+			animated_sprite.speed_scale = 1
+			animated_sprite.frame = 0
 
-func play_animation(animation_name: String) -> void:
+func play_animation(animation_name: String, reverse: bool = false) -> void:
 	animation_name.to_lower()
 	
 	if animation_player and animation_player.has_animation(animation_name):
-		animation_player.play(animation_name)
+		if reverse:
+			animation_player.play_backwards(animation_name)
+		else:
+			animation_player.play(animation_name)
 
 func play_audio(audio_name: String) -> void:
 	audio_name.to_lower()
