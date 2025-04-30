@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=31 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://buunmo3lt81li" path="res://scripts/player/states/PlayerAirDashState.gd" id="8_h17s1"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
+[ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="11_je7p5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -29,15 +30,11 @@ region = Rect2(50, 518, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
 atlas = ExtResource("1_dovo2")
-region = Rect2(200, 74, 50, 37)
+region = Rect2(50, 111, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
 atlas = ExtResource("1_dovo2")
-region = Rect2(250, 74, 50, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
-atlas = ExtResource("1_dovo2")
-region = Rect2(300, 74, 50, 37)
+region = Rect2(100, 111, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
 atlas = ExtResource("1_dovo2")
@@ -54,6 +51,10 @@ region = Rect2(100, 0, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(150, 0, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(100, 74, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
 atlas = ExtResource("1_dovo2")
@@ -104,9 +105,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcs02")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_myrg7")
 }],
 "loop": true,
 "name": &"fall",
@@ -128,6 +126,14 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myrg7")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -160,7 +166,8 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"air_dash"
+animation = &"jump"
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -186,17 +193,19 @@ animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 
-[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component")]
+[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component")]
 script = ExtResource("6_qek5x")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
+jump_component = NodePath("../../Components/JumpComponent")
 
-[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component")]
+[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component")]
 script = ExtResource("7_5gtgg")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
+jump_component = NodePath("../../Components/JumpComponent")
 
 [node name="AirDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component")]
 script = ExtResource("8_h17s1")
@@ -218,3 +227,7 @@ metadata/_custom_type_script = "uid://cugqo0bdw51ja"
 [node name="SpeedComponent" type="Node2D" parent="Components"]
 script = ExtResource("8_qek5x")
 metadata/_custom_type_script = "uid://ck58qp1xub6f1"
+
+[node name="JumpComponent" type="Node2D" parent="Components"]
+script = ExtResource("11_je7p5")
+metadata/_custom_type_script = "uid://dllf1u7papfbf"

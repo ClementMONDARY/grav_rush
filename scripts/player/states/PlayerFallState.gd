@@ -3,6 +3,7 @@ extends State
 @export var animation_manager: AnimationManager
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
+@export var jump_component: JumpComponent
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -16,6 +17,11 @@ func Update(_delta: float) -> void:
 	pass
 
 func Physics_Update(delta: float) -> void:
+	# Double jump check
+	if Input.is_action_just_pressed("jump") and jump_component.jumps_remaining > 0:
+		Transitioned.emit(self, "jump")
+		return
+
 	# Apply gravity
 	player.velocity.y += gravity * delta
 	
@@ -28,7 +34,7 @@ func Physics_Update(delta: float) -> void:
 		animation_manager.flip_sprite(false)
 	elif input_dir < 0:
 		animation_manager.flip_sprite(true)
-	
+	 
 	player.move_and_slide()
 	
 	# Air dash transition
@@ -38,6 +44,7 @@ func Physics_Update(delta: float) -> void:
 	
 	# Transition to idle or run when landing
 	if player.is_on_floor():
+		jump_component.jumps_remaining = jump_component.max_jumps
 		if input_dir == 0:
 			Transitioned.emit(self, "idle")
 		else:
