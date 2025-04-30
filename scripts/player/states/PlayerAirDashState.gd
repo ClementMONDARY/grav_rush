@@ -9,6 +9,7 @@ var dash_timer: float = 0.0
 var dash_direction: float = 0.0
 
 func Enter() -> void:
+	dash_component.use_dash()
 	animation_manager.play("air_dash")
 	dash_timer = dash_component.dash_duration
 	
@@ -34,7 +35,6 @@ func Physics_Update(delta: float) -> void:
 	dash_timer -= delta
 	
 	if dash_timer <= 0:
-		dash_component.can_dash = false
 		Transitioned.emit(self, "fall")
 		return
 	

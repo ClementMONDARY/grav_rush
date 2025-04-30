@@ -39,13 +39,14 @@ func Physics_Update(delta: float) -> void:
 	player.move_and_slide()
 	
 	# Air dash transition
-	if Input.is_action_just_pressed("dash") and dash_component.can_dash:
+	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "airdash")
 		return
 	
 	# Transition to idle or run when landing
 	if player.is_on_floor():
 		jump_component.jumps_remaining = jump_component.max_jumps
+		dash_component.remaining_dashs = dash_component.max_dash
 		if input_dir == 0:
 			Transitioned.emit(self, "idle")
 		else:
