@@ -19,7 +19,7 @@ func Physics_Update(delta: float) -> void:
 	# Apply gravity
 	player.velocity.y += gravity * delta
 	
-	# Horizontal movement
+	# Horizontal mvement
 	var input_dir = Input.get_axis("move_left", "move_right")
 	player.velocity.x = input_dir * speed_component.speed
 	
@@ -30,6 +30,11 @@ func Physics_Update(delta: float) -> void:
 		animation_manager.flip_sprite(true)
 	
 	player.move_and_slide()
+	
+	# Air dash transition
+	if Input.is_action_just_pressed("dash"):
+		Transitioned.emit(self, "airdash")
+		return
 	
 	# Transition to idle or run when landing
 	if player.is_on_floor():

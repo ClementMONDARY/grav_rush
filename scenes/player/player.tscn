@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=30 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cugqo0bdw51ja" path="res://scripts/AnimationManager.gd" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
+[ext_resource type="Script" uid="uid://buunmo3lt81li" path="res://scripts/player/states/PlayerAirDashState.gd" id="8_h17s1"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
@@ -94,7 +95,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_8ydkj")
 }],
 "loop": false,
-"name": &"dash_air",
+"name": &"air_dash",
 "speed": 10.0
 }, {
 "frames": [{
@@ -159,7 +160,7 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"idle"
+animation = &"air_dash"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -196,6 +197,14 @@ script = ExtResource("7_5gtgg")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
+
+[node name="AirDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component")]
+script = ExtResource("8_h17s1")
+animation_manager = NodePath("../../AnimationManager")
+player = NodePath("../..")
+speed_component = NodePath("../../Components/SpeedComponent")
+dash_speed = 600.0
+dash_duration = 0.4
 
 [node name="AnimationManager" type="Node" parent="." node_paths=PackedStringArray("animated_sprite", "animation_player", "audio_container")]
 script = ExtResource("5_p47bc")

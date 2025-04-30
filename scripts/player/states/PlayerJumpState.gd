@@ -17,21 +17,6 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	pass
 
-func Physics_Update(delta: float) -> void:
-	# Apply gravity
-	player.velocity.y += gravity * delta
-	
-	# Horizontal movement
-	var input_dir = Input.get_axis("move_left", "move_right")
-	player.velocity.x = input_dir * speed_component.speed
-	
-	if input_dir > 0:
-		animation_manager.flip_sprite(false)
-	elif input_dir < 0:
-		animation_manager.flip_sprite(true)
-	
-	player.move_and_slide()
-	
-	# Transition to fall state when velocity is positive (falling)
+func Physics_Update(_delta: float) -> void:
 	if player.velocity.y != 0:
 		Transitioned.emit(self, "fall")
