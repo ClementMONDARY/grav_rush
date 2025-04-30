@@ -2,7 +2,7 @@ extends State
 
 @export var animation_manager: AnimationManager
 @export var player: CharacterBody2D
-@export var move_speed: float = 150.0
+@export var speed_component: SpeedComponent
 
 func Enter() -> void:
 	animation_manager.play("run")
@@ -27,7 +27,7 @@ func Physics_Update(_delta: float) -> void:
 		Transitioned.emit(self, "jump")
 		return
 		
-	player.velocity.x = input_dir * move_speed
+	player.velocity.x = input_dir * speed_component.speed
 	
 	# Flip sprite based on direction
 	if input_dir > 0:
