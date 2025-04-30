@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drhiurudftmpm"]
+
+[ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="1_ms88k"]
+
+[node name="DashComponent" type="Node2D"]
+script = ExtResource("1_ms88k")

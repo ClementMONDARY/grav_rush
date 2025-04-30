@@ -4,6 +4,7 @@ extends State
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
 @export var jump_component: JumpComponent
+@export var dash_component: DashComponent
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -38,7 +39,7 @@ func Physics_Update(delta: float) -> void:
 	player.move_and_slide()
 	
 	# Air dash transition
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and dash_component.can_dash:
 		Transitioned.emit(self, "airdash")
 		return
 	
