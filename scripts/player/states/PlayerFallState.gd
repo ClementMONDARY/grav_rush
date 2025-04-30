@@ -38,6 +38,11 @@ func Physics_Update(delta: float) -> void:
 	 
 	player.move_and_slide()
 	
+	# Check for wall grab
+	if player.is_on_wall() and !player.is_on_floor():
+		Transitioned.emit(self, "wallgrab")
+		return
+	
 	# Air dash transition
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "airdash")

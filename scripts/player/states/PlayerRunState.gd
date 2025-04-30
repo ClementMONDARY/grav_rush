@@ -3,9 +3,11 @@ extends State
 @export var animation_manager: AnimationManager
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
+@export var stamina_component: StaminaComponent
 
 func Enter() -> void:
 	animation_manager.play("run")
+	stamina_component.refill_stamina()
 
 func Exit() -> void:
 	pass
