@@ -20,8 +20,7 @@ func Enter() -> void:
 	else:
 		wall_direction = 0
 
-func Physics_Update(delta: float) -> void:
-	# Si le mur n'est plus détecté ou si wall_grab est relâché, tomber
+func Physics_Update(_delta: float) -> void:
 	if not wall_detector.is_colliding() or Input.is_action_just_released("wall_grab"):
 		Transitioned.emit(self, "fall")
 		return
@@ -37,7 +36,11 @@ func Physics_Update(delta: float) -> void:
 	# Wall jump
 	if Input.is_action_just_pressed("jump"):
 		jump_component.jumps_remaining += 1
-		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+		if Input.get_axis("move_left", "move_right") == -wall_direction:
+			player.velocity.x = wall_direction * jump_component.jump_force
+			stamina_component.drain_stamina(200.0)
+		else:
+			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
 		animation_manager.flip_sprite(true, false)
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

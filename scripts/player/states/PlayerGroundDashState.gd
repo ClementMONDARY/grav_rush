@@ -27,6 +27,11 @@ func Update(_delta: float) -> void:
 func Physics_Update(delta: float) -> void:
 	dash_timer -= delta
 	
+	if Input.is_action_just_pressed("jump"):
+		player.velocity.x *= 1.5
+		Transitioned.emit(self, "jump")
+		return
+	
 	if dash_timer <= 0:
 		Transitioned.emit(self, "run")
 		return

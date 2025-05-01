@@ -23,6 +23,10 @@ func Physics_Update(delta: float) -> void:
 		Transitioned.emit(self, "fall")
 		return
 	
+	if player.is_on_floor():
+		Transitioned.emit(self, "idle")
+		return
+	
 	if player.velocity.y > 0:
 		player.velocity.y = min(player.velocity.y + gravity * 0.2 * delta, 200)
 		player.velocity.x = -wall_direction * 2
@@ -34,9 +38,13 @@ func Physics_Update(delta: float) -> void:
 		Transitioned.emit(self, "fall")
 		return
 	
+	# Wall jump
 	if Input.is_action_just_pressed("jump"):
 		jump_component.jumps_remaining += 1
-		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+		if Input.get_axis("move_left", "move_right") != 0:
+			player.velocity.x = wall_direction * jump_component.jump_force
+		else:
+			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
 		animation_manager.flip_sprite(true, false)
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

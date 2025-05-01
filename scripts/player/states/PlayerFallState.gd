@@ -78,7 +78,4 @@ func Physics_Update(delta: float) -> void:
 	if player.is_on_floor():
 		jump_component.jumps_remaining = jump_component.max_jumps
 		dash_component.remaining_dashs = dash_component.max_dash
-		if input_dir == 0:
-			Transitioned.emit(self, "idle")
-		else:
-			Transitioned.emit(self, "run")
+		Transitioned.emit(self, "idle")
