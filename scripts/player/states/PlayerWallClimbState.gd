@@ -7,45 +7,56 @@ extends State
 @export var climb_speed: float = 100.0
 @export var wall_detector: RayCast2D
 
-var wall_direction: int = 0
 const CLIMB_STAMINA_MULTIPLIER := 1.5
-var current_animation_state := ""
+
+var wall_direction: int = 0
+var current_animation_state: String = ""
+var input_dir = Input.get_axis("move_up", "move_down")
 
 func Enter() -> void:
+	_start_wall_climb()
+
+func Physics_Update(_delta: float) -> void:
+	_handle_climb_movement()
+	_handle_stamina()
+	_handle_climb_animation()
+	_handle_wall_jump()
+	_check_wall_climb_conditions()
+
+	player.move_and_slide()
+
+# --- Logic split below ---
+
+func _start_wall_climb() -> void:
 	player.velocity = Vector2.ZERO
 	current_animation_state = ""
+	_update_wall_direction()
 
-	# Déterminer la direction du mur via le RayCast
+func _update_wall_direction() -> void:
 	if wall_detector.is_colliding():
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 	else:
 		wall_direction = 0
 
-func Physics_Update(_delta: float) -> void:
-	# Sortir si le mur n'est plus détecté ou si on relâche l'action
-	if not wall_detector.is_colliding() or Input.is_action_just_released("wall_grab"):
-		Transitioned.emit(self, "fall")
-		return
-
-	var input_dir = Input.get_axis("move_up", "move_down")
+func _handle_climb_movement() -> void:
+	input_dir = Input.get_axis("move_up", "move_down")
 	player.velocity.y = input_dir * climb_speed
 	player.velocity.x = -wall_direction * 2
 
-	# Gérer la stamina
-	if input_dir < 0:  # Monter
+func _handle_stamina() -> void:
+	if input_dir < 0:
 		stamina_component.drain_stamina(stamina_component.stamina_drain_value * CLIMB_STAMINA_MULTIPLIER)
-	elif input_dir > 0:  # Descendre
+	elif input_dir > 0:
 		stamina_component.drain_stamina(0.0)
-	else:
+	else:  # Ne bouge pas
 		Transitioned.emit(self, "wallgrab")
 		return
 
 	if stamina_component.stamina <= 0:
 		Transitioned.emit(self, "wallgrab")
-		return
 
-	# Animation selon direction
+func _handle_climb_animation() -> void:
 	var new_animation_state = ""
 	if input_dir < 0:
 		new_animation_state = "wall_climb"
@@ -59,13 +70,14 @@ func Physics_Update(_delta: float) -> void:
 		elif input_dir > 0:
 			animation_manager.play("wall_climb", true)
 
-	# Wall jump
+func _handle_wall_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump_component.jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
 		animation_manager.flip_sprite(true, false)
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
-		return
-	
-	player.move_and_slide()
+
+func _check_wall_climb_conditions() -> void:
+	if not wall_detector.is_colliding() or Input.is_action_just_released("wall_grab"):
+		Transitioned.emit(self, "fall")
