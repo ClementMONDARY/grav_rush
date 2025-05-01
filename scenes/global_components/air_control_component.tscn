@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccxkhw6vr6jh2"]
+
+[ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="1_c2fvy"]
+
+[node name="AirControlComponent" type="Node2D"]
+script = ExtResource("1_c2fvy")

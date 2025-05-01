@@ -9,7 +9,7 @@ var dash_direction: float = 0.0
 
 func Enter() -> void:
 	dash_component.use_dash()
-	animation_manager.play("air_dash")
+	animation_manager.play("ground_dash")
 	dash_timer = dash_component.dash_duration
 	
 	# Get dash direction from input
@@ -17,7 +17,6 @@ func Enter() -> void:
 	
 	# Set initial dash velocity
 	player.velocity.x = dash_direction * dash_component.dash_speed
-	player.velocity.y = 0  # Cancel vertical momentum
 
 func Exit() -> void:
 	pass
@@ -28,8 +27,13 @@ func Update(_delta: float) -> void:
 func Physics_Update(delta: float) -> void:
 	dash_timer -= delta
 	
+	if Input.is_action_just_pressed("jump"):
+		player.velocity.x *= 1.5
+		Transitioned.emit(self, "jump")
+		return
+	
 	if dash_timer <= 0:
-		Transitioned.emit(self, "fall")
+		Transitioned.emit(self, "run")
 		return
 	
 	player.move_and_slide()

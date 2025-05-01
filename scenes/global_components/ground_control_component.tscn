@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://camhoce365cig"]
+
+[ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="1_8m6e0"]
+
+[node name="GroundControlComponent" type="Node2D"]
+script = ExtResource("1_8m6e0")
