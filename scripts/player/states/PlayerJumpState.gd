@@ -24,10 +24,8 @@ func Physics_Update(delta: float) -> void:
 	
 	# Double jump check
 	if Input.is_action_just_pressed("jump") and jump_component.jumps_remaining > 0:
-		animation_manager.play("double_jump")
-		player.velocity.y = -jump_component.jump_force
-		jump_component.jumps_remaining -= 1
-		dash_component.add_dash()
+		Transitioned.emit(self, "jump")
+		return
 	
 	# Horizontal movement
 	var input_dir = Input.get_axis("move_left", "move_right")

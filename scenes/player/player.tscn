@@ -302,7 +302,7 @@ script = ExtResource("1_gx1jg")
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
-frame_progress = 0.280924
+frame_progress = 0.191983
 
 [node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
 position = Vector2(0, -15)
@@ -370,18 +370,20 @@ animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
 
-[node name="WallGrab" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "jump_component", "stamina_component")]
+[node name="WallGrab" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "jump_component", "stamina_component", "wall_detector")]
 script = ExtResource("10_fcs02")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 jump_component = NodePath("../../Components/JumpComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
+wall_detector = NodePath("../../WallDetector")
 
-[node name="WallClimb" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "stamina_component")]
+[node name="WallClimb" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "stamina_component", "wall_detector")]
 script = ExtResource("11_myrg7")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
+wall_detector = NodePath("../../WallDetector")
 
 [node name="AnimationManager" type="Node" parent="." node_paths=PackedStringArray("animated_sprite", "animation_player", "audio_container")]
 script = ExtResource("5_p47bc")
