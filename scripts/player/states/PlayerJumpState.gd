@@ -5,6 +5,7 @@ extends State
 @export var speed_component: SpeedComponent
 @export var jump_component: JumpComponent
 @export var dash_component: DashComponent
+@export var wall_detector: RayCast2D
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -38,6 +39,11 @@ func Physics_Update(delta: float) -> void:
 		animation_manager.flip_sprite(true)
 	
 	player.move_and_slide()
+	
+	# Check for wall grab using raycasts
+	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
+		Transitioned.emit(self, "wallgrab")
+		return
 	
 	# Air dash transition
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:

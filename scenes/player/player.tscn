@@ -1,8 +1,9 @@
-[gd_scene load_steps=51 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=52 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
+[ext_resource type="Script" uid="uid://cckyylklns8uk" path="res://scripts/player/wall_detector.gd" id="2_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://cchym1vahs3w4" path="res://scripts/AudioContainer.gd" id="4_p47bc"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
@@ -300,7 +301,14 @@ script = ExtResource("1_gx1jg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"air_dash"
+animation = &"idle"
+frame_progress = 0.280924
+
+[node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
+position = Vector2(0, -15)
+target_position = Vector2(10, 0)
+script = ExtResource("2_uf5tr")
+animation_manager = NodePath("../AnimationManager")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -315,36 +323,40 @@ shape = SubResource("CapsuleShape2D_0owmy")
 script = ExtResource("2_gmlin")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "dash_component", "player")]
+[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "dash_component", "player", "wall_detector")]
 script = ExtResource("4_75vfm")
 animation_manager = NodePath("../../AnimationManager")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
 player = NodePath("../..")
+wall_detector = NodePath("../../WallDetector")
 
-[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component", "dash_component")]
+[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component", "dash_component", "wall_detector")]
 script = ExtResource("5_0owmy")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
+wall_detector = NodePath("../../WallDetector")
 
-[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component")]
+[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "wall_detector")]
 script = ExtResource("6_qek5x")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
+wall_detector = NodePath("../../WallDetector")
 
-[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component")]
+[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "wall_detector")]
 script = ExtResource("7_5gtgg")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
+wall_detector = NodePath("../../WallDetector")
 
 [node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
 script = ExtResource("9_kvlxm")

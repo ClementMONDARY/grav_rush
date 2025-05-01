@@ -14,19 +14,11 @@ func Enter() -> void:
 	wall_direction = sign(player.get_wall_normal().x)
 
 func Physics_Update(delta: float) -> void:
-	if not player.is_on_wall():
-		Transitioned.emit(self, "fall")
-		return
-	
-	if player.is_on_floor():
-		Transitioned.emit(self, "idle")
-		return
-	
 	# Drain stamina
 	stamina_component.drain_stamina()
 	if stamina_component.stamina <= 0:
 		player.velocity.y += gravity * 0.3 * delta
-		player.velocity.x = -wall_direction * 50
+		player.velocity.x = -wall_direction * 2
 	else:
 		player.velocity = Vector2.ZERO
 	
@@ -48,3 +40,7 @@ func Physics_Update(delta: float) -> void:
 		return
 		
 	player.move_and_slide()
+	
+	if Input.is_action_just_released("wall_grab"):
+		Transitioned.emit(self, "fall")
+		return

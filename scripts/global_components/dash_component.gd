@@ -9,7 +9,8 @@ var remaining_dashs := max_dash
 
 func refill_dash(amount: int = max_dash)-> void:
 	if remaining_dashs < max_dash:
-		remaining_dashs = max_dash
+		remaining_dashs = amount
+		remaining_dashs = mini(remaining_dashs, max_dash)
 
 func add_dash(amount: int = 1) -> void:
 	remaining_dashs = mini(remaining_dashs + amount, max_dash)

@@ -15,17 +15,13 @@ func Enter() -> void:
 	current_animation_state = ""  # Reset animation state
 
 func Physics_Update(_delta: float) -> void:
-	if not player.is_on_wall():
+	if not player.is_on_wall() or Input.is_action_just_released("wall_grab"):
 		Transitioned.emit(self, "fall")
-		return
-	
-	if player.is_on_floor():
-		Transitioned.emit(self, "idle")
 		return
 	
 	var input_dir = Input.get_axis("move_up", "move_down")
 	player.velocity.y = input_dir * climb_speed
-	player.velocity.x = -wall_direction * 50
+	player.velocity.x = -wall_direction * 2
 	
 	# Handle stamina drain
 	if input_dir < 0:  # Moving up
