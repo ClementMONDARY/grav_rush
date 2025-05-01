@@ -37,9 +37,9 @@ func Physics_Update(delta: float) -> void:
 
 	# Flip sprite based on direction
 	if input_dir > 0:
-		animation_manager.flip_sprite(false)
+		animation_manager.animated_sprite.flip_h = false
 	elif input_dir < 0:
-		animation_manager.flip_sprite(true)
+		animation_manager.animated_sprite.flip_h = true
 
 	player.move_and_slide()
 
@@ -59,7 +59,7 @@ func Physics_Update(delta: float) -> void:
 			wall_direction = sign(player.global_position.x - collision_pos.x)
 			jump_component.jumps_remaining += 1
 			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-			animation_manager.flip_sprite(false if wall_direction == 1 else true)
+			animation_manager.flip_sprite(true, false)
 			player.move_and_slide()
 			Transitioned.emit(self, "jump")
 			return

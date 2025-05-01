@@ -35,9 +35,9 @@ func Physics_Update(delta: float) -> void:
 		# Contrôle actif
 		player.velocity.x = input_dir * speed_component.speed
 		if input_dir > 0:
-			animation_manager.flip_sprite(false)
+			animation_manager.animated_sprite.flip_h = false
 		elif input_dir < 0:
-			animation_manager.flip_sprite(true)
+			animation_manager.animated_sprite.flip_h = true
 
 	player.move_and_slide()
 

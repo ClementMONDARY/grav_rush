@@ -38,15 +38,20 @@ func Physics_Update(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump_component.jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		animation_manager.flip_sprite(false if wall_direction == 1 else true)
+		animation_manager.flip_sprite(true, false)
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 		return
 	
 	# Let go of wall
 	if Input.get_axis("move_left", "move_right") == wall_direction:
-		Transitioned.emit(self, "fall")
-		return
+		animation_manager.play_sprite_animation("wall_slide")
+		if Input.is_action_just_pressed("dash"):
+			animation_manager.flip_sprite(true, false)
+			Transitioned.emit(self, "airdash")
+			return
+	else:
+		animation_manager.play_sprite_animation("wall_grab")
 	
 	# Wall climb
 	var vertical_input = Input.get_axis("move_up", "move_down")

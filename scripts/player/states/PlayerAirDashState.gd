@@ -18,9 +18,6 @@ func Enter() -> void:
 	# Set initial dash velocity
 	player.velocity.x = dash_direction * dash_component.dash_speed
 	player.velocity.y = 0  # Cancel vertical momentum
-	
-	# Flip sprite based on dash direction
-	animation_manager.flip_sprite(dash_direction < 0)
 
 func Exit() -> void:
 	pass

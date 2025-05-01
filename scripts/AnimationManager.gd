@@ -47,7 +47,7 @@ func play_audio(audio_name: String) -> void:
 	if audio_container and audio_container.audios.has(audio_name):
 		audio_container.audios.get(audio_name).play()
 
-func flip_sprite(flip_h: bool = false, flip_v: bool = false) -> void:
+func flip_sprite(flip_h: bool = true, flip_v: bool = true) -> void:
 	if animated_sprite:
-		animated_sprite.flip_h = flip_h
-		animated_sprite.flip_v = flip_v
+		animated_sprite.flip_h = !animated_sprite.flip_h if flip_h else animated_sprite.flip_h
+		animated_sprite.flip_v = !animated_sprite.flip_v if flip_v else animated_sprite.flip_v
