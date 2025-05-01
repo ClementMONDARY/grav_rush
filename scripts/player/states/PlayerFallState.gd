@@ -6,7 +6,10 @@ extends State
 @export var jump_component: JumpComponent
 @export var dash_component: DashComponent
 @export var air_control_component: AirControlComponent
+@export var stamina_component: StaminaComponent
 @export var wall_detector: RayCast2D
+
+var wall_direction: int = 0
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -20,11 +23,6 @@ func Update(_delta: float) -> void:
 	pass
 
 func Physics_Update(delta: float) -> void:
-	# Double jump check
-	if Input.is_action_just_pressed("jump") and jump_component.jumps_remaining > 0:
-		Transitioned.emit(self, "jump")
-		return
-
 	# Apply gravity
 	player.velocity.y += gravity * delta
 
@@ -45,9 +43,30 @@ func Physics_Update(delta: float) -> void:
 
 	player.move_and_slide()
 
-	# Check for wall grab
-	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
-		Transitioned.emit(self, "wallgrab")
+	# Check for wall
+	if wall_detector.is_colliding():
+		# Grab if pressed and stamina up
+		if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
+			Transitioned.emit(self, "wallgrab")
+			return
+		# Else slide
+		elif input_dir != 0:
+			Transitioned.emit(self, "wallslide")
+			return
+		# Else jump if pressed
+		elif Input.is_action_just_pressed("jump"):
+			var collision_pos = wall_detector.get_collision_point()
+			wall_direction = sign(player.global_position.x - collision_pos.x)
+			jump_component.jumps_remaining += 1
+			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+			animation_manager.flip_sprite(false if wall_direction == 1 else true)
+			player.move_and_slide()
+			Transitioned.emit(self, "jump")
+			return
+	
+	# Double jump check
+	if Input.is_action_just_pressed("jump") and jump_component.jumps_remaining > 0:
+		Transitioned.emit(self, "jump")
 		return
 
 	# Air dash transition

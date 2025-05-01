@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=55 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="11_je7p5"]
 [ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/PlayerWallClimbState.gd" id="11_myrg7"]
 [ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="12_fm80t"]
+[ext_resource type="Script" uid="uid://bwuu7f0cf7fn6" path="res://scripts/player/states/PlayerWallSlideState.gd" id="14_3j4b4"]
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
@@ -137,11 +138,11 @@ region = Rect2(300, 407, 50, 37)
 atlas = ExtResource("1_dovo2")
 region = Rect2(0, 444, 50, 37)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(100, 407, 50, 37)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tffgl"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(150, 407, 50, 37)
 
@@ -276,14 +277,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_007i1")
+"texture": SubResource("AtlasTexture_iqsei")
+}],
+"loop": false,
+"name": &"wall_grab",
+"speed": 1.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6cv16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tffgl")
 }],
 "loop": true,
-"name": &"wall_grab",
-"speed": 6.0
+"name": &"wall_slide",
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
@@ -303,8 +312,7 @@ script = ExtResource("1_gx1jg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"idle"
-frame_progress = 0.559094
+animation = &"wall_grab"
 
 [node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
 position = Vector2(0, -15)
@@ -318,6 +326,7 @@ animation_manager = NodePath("../AnimationManager")
 script = ExtResource("4_p47bc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_0owmy")
 
@@ -344,17 +353,18 @@ dash_component = NodePath("../../Components/DashComponent")
 wall_detector = NodePath("../../WallDetector")
 ground_control_component = NodePath("../../Components/GroundControlComponent")
 
-[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "wall_detector")]
+[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "stamina_component", "air_control_component", "wall_detector")]
 script = ExtResource("6_qek5x")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
+stamina_component = NodePath("../../Components/StaminaComponent")
 air_control_component = NodePath("../../Components/AirControlComponent")
 wall_detector = NodePath("../../WallDetector")
 
-[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "wall_detector")]
+[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "stamina_component", "wall_detector")]
 script = ExtResource("7_5gtgg")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
@@ -362,6 +372,7 @@ speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
 air_control_component = NodePath("../../Components/AirControlComponent")
+stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../WallDetector")
 
 [node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
@@ -375,6 +386,14 @@ script = ExtResource("8_h17s1")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
+
+[node name="WallSlide" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "stamina_component", "jump_component", "wall_detector")]
+script = ExtResource("14_3j4b4")
+animation_manager = NodePath("../../AnimationManager")
+player = NodePath("../..")
+stamina_component = NodePath("../../Components/StaminaComponent")
+jump_component = NodePath("../../Components/JumpComponent")
+wall_detector = NodePath("../../WallDetector")
 
 [node name="WallGrab" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "jump_component", "stamina_component", "wall_detector")]
 script = ExtResource("10_fcs02")
