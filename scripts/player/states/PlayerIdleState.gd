@@ -5,42 +5,40 @@ extends State
 @export var dash_component: DashComponent
 @export var player: CharacterBody2D
 @export var wall_detector: RayCast2D
+@export var ground_control_component: GroundControlComponent
 
 func Enter() -> void:
 	animation_manager.play("idle")
-	player.velocity = Vector2(0, 0)
 	stamina_component.refill_stamina()
 	dash_component.refill_dash()
 
-func Exit() -> void:
-	pass
-
-func Update(_delta: float) -> void:
-	pass
-
-func Physics_Update(_delta: float) -> void:
-	# Fall transition
+func Physics_Update(delta: float) -> void:
 	if not player.is_on_floor():
 		Transitioned.emit(self, "fall")
 		return
-		
-	# Run transition
+
 	var input_dir = Input.get_axis("move_left", "move_right")
-	if input_dir != 0:
+	
+	# Appliquer le glissement naturel
+	if input_dir == 0:
+		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.slide_friction * delta)
+	else:
 		Transitioned.emit(self, "run")
 		return
-		
-	# Jump transition
-	if Input.is_action_just_pressed("jump") and player.is_on_floor():
+	
+	# Saut
+	if Input.is_action_just_pressed("jump"):
 		Transitioned.emit(self, "jump")
 		return
-	
-	# Air dash transition
+
+	# Dash au sol
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "grounddash")
 		return
-	
-	# Check for wall grab using raycasts
+
+	# Wall grab
 	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
 		Transitioned.emit(self, "wallgrab")
 		return
+
+	player.move_and_slide()

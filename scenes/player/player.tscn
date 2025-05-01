@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=54 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -18,6 +18,8 @@
 [ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/PlayerWallClimbState.gd" id="11_myrg7"]
 [ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="12_fm80t"]
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
+[ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
+[ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -302,7 +304,7 @@ script = ExtResource("1_gx1jg")
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
-frame_progress = 0.191983
+frame_progress = 0.559094
 
 [node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
 position = Vector2(0, -15)
@@ -323,15 +325,16 @@ shape = SubResource("CapsuleShape2D_0owmy")
 script = ExtResource("2_gmlin")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "dash_component", "player", "wall_detector")]
+[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "dash_component", "player", "wall_detector", "ground_control_component")]
 script = ExtResource("4_75vfm")
 animation_manager = NodePath("../../AnimationManager")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
 player = NodePath("../..")
 wall_detector = NodePath("../../WallDetector")
+ground_control_component = NodePath("../../Components/GroundControlComponent")
 
-[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component", "dash_component", "wall_detector")]
+[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component")]
 script = ExtResource("5_0owmy")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
@@ -339,23 +342,26 @@ speed_component = NodePath("../../Components/SpeedComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
 wall_detector = NodePath("../../WallDetector")
+ground_control_component = NodePath("../../Components/GroundControlComponent")
 
-[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "wall_detector")]
+[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "wall_detector")]
 script = ExtResource("6_qek5x")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
+air_control_component = NodePath("../../Components/AirControlComponent")
 wall_detector = NodePath("../../WallDetector")
 
-[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "wall_detector")]
+[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "wall_detector")]
 script = ExtResource("7_5gtgg")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
+air_control_component = NodePath("../../Components/AirControlComponent")
 wall_detector = NodePath("../../WallDetector")
 
 [node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
@@ -378,9 +384,10 @@ jump_component = NodePath("../../Components/JumpComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../WallDetector")
 
-[node name="WallClimb" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "stamina_component", "wall_detector")]
+[node name="WallClimb" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "jump_component", "player", "stamina_component", "wall_detector")]
 script = ExtResource("11_myrg7")
 animation_manager = NodePath("../../AnimationManager")
+jump_component = NodePath("../../Components/JumpComponent")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../WallDetector")
@@ -409,3 +416,11 @@ metadata/_custom_type_script = "uid://6gg02mmjhjfr"
 [node name="StaminaComponent" type="Node2D" parent="Components"]
 script = ExtResource("14_ugbui")
 metadata/_custom_type_script = "uid://b2hnxvhtnid6u"
+
+[node name="AirControlComponent" type="Node2D" parent="Components"]
+script = ExtResource("19_lgqa7")
+metadata/_custom_type_script = "uid://5qiyj46vs7r6"
+
+[node name="GroundControlComponent" type="Node2D" parent="Components"]
+script = ExtResource("20_8ydkj")
+metadata/_custom_type_script = "uid://7yqoxs3p6wpt"

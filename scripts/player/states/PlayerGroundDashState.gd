@@ -28,10 +28,7 @@ func Physics_Update(delta: float) -> void:
 	dash_timer -= delta
 	
 	if dash_timer <= 0:
-		if dash_direction != 0:
-			Transitioned.emit(self, "run")
-		else:
-			Transitioned.emit(self, "idle")
+		Transitioned.emit(self, "run")
 		return
 	
 	player.move_and_slide()

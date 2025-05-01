@@ -1,6 +1,7 @@
 extends State
 
 @export var animation_manager: AnimationManager
+@export var jump_component: JumpComponent
 @export var player: CharacterBody2D
 @export var stamina_component: StaminaComponent
 @export var climb_speed: float = 100.0
@@ -53,10 +54,17 @@ func Physics_Update(_delta: float) -> void:
 
 	if new_animation_state != current_animation_state:
 		current_animation_state = new_animation_state
-		animation_manager.play(new_animation_state)
+		if input_dir < 0:
+			animation_manager.play("wall_climb")
+		elif input_dir > 0:
+			animation_manager.play("wall_climb", true)
 
-	# Saut
+	# Wall jump
 	if Input.is_action_just_pressed("jump"):
+		jump_component.jumps_remaining += 1
+		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+		animation_manager.flip_sprite(false if wall_direction == 1 else true)
+		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 		return
 	
