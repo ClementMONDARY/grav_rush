@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=51 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -11,9 +11,10 @@
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://buunmo3lt81li" path="res://scripts/player/states/PlayerAirDashState.gd" id="8_h17s1"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
-[ext_resource type="Script" uid="uid://duv8qfbxhvh0s" path="res://scripts/player/states/WallGrabState.gd" id="10_fcs02"]
+[ext_resource type="Script" uid="uid://cmnwgvkdr3ivi" path="res://scripts/player/states/PlayerGroundDashState.gd" id="9_kvlxm"]
+[ext_resource type="Script" uid="uid://duv8qfbxhvh0s" path="res://scripts/player/states/PlayerWallGrabState.gd" id="10_fcs02"]
 [ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="11_je7p5"]
-[ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/WallClimbState.gd" id="11_myrg7"]
+[ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/PlayerWallClimbState.gd" id="11_myrg7"]
 [ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="12_fm80t"]
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
 
@@ -56,6 +57,22 @@ region = Rect2(50, 111, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(100, 111, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mf0n"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(300, 259, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hvnv"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(0, 296, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbmj2"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(50, 296, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxw46"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(100, 296, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
 atlas = ExtResource("1_dovo2")
@@ -174,6 +191,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_5mf0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hvnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbmj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxw46")
+}],
+"loop": false,
+"name": &"ground_dash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lvxji")
 }, {
 "duration": 1.0,
@@ -266,8 +300,7 @@ script = ExtResource("1_gx1jg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"wall_climb"
-frame_progress = 0.931689
+animation = &"air_dash"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -282,18 +315,20 @@ shape = SubResource("CapsuleShape2D_0owmy")
 script = ExtResource("2_gmlin")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "player")]
+[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "dash_component", "player")]
 script = ExtResource("4_75vfm")
 animation_manager = NodePath("../../AnimationManager")
 stamina_component = NodePath("../../Components/StaminaComponent")
+dash_component = NodePath("../../Components/DashComponent")
 player = NodePath("../..")
 
-[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component")]
+[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component", "dash_component")]
 script = ExtResource("5_0owmy")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
+dash_component = NodePath("../../Components/DashComponent")
 
 [node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component")]
 script = ExtResource("6_qek5x")
@@ -311,11 +346,16 @@ speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
 
-[node name="AirDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "dash_component")]
+[node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
+script = ExtResource("9_kvlxm")
+animation_manager = NodePath("../../AnimationManager")
+player = NodePath("../..")
+dash_component = NodePath("../../Components/DashComponent")
+
+[node name="AirDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
 script = ExtResource("8_h17s1")
 animation_manager = NodePath("../../AnimationManager")
 player = NodePath("../..")
-speed_component = NodePath("../../Components/SpeedComponent")
 dash_component = NodePath("../../Components/DashComponent")
 
 [node name="WallGrab" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "jump_component", "stamina_component")]
