@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=58 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://cchym1vahs3w4" path="res://scripts/AudioContainer.gd" id="4_p47bc"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
 [ext_resource type="Script" uid="uid://cugqo0bdw51ja" path="res://scripts/AnimationManager.gd" id="5_p47bc"]
+[ext_resource type="AudioStream" uid="uid://bodpnacrhivbx" path="res://audio/player/Player_Dash_0.wav" id="5_yj68g"]
+[ext_resource type="AudioStream" uid="uid://bmvxxob7fv273" path="res://audio/player/Player_Dash_1.wav" id="6_ioxgp"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://buunmo3lt81li" path="res://scripts/player/states/PlayerAirDashState.gd" id="8_h17s1"]
@@ -295,6 +297,12 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_007i1"]
+playback_mode = 1
+streams_count = 2
+stream_0/stream = ExtResource("5_yj68g")
+stream_1/stream = ExtResource("6_ioxgp")
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
 radius = 7.0
 
@@ -324,6 +332,16 @@ animation_manager = NodePath("../AnimationManager")
 
 [node name="AudioContainer" type="Node" parent="."]
 script = ExtResource("4_p47bc")
+
+[node name="air_dash" type="AudioStreamPlayer2D" parent="AudioContainer"]
+stream = SubResource("AudioStreamRandomizer_007i1")
+volume_db = -10.895
+pitch_scale = 1.53
+
+[node name="ground_dash" type="AudioStreamPlayer2D" parent="AudioContainer"]
+stream = SubResource("AudioStreamRandomizer_007i1")
+volume_db = -16.838
+pitch_scale = 1.53
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
