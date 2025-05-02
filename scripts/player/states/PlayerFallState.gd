@@ -59,7 +59,7 @@ func _handle_wall_interaction() -> bool:
 
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
-		animation_manager.play_audio("wall_grab")
+		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")
 		return true
 	elif input_dir != 0:

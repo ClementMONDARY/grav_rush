@@ -24,6 +24,7 @@ func Physics_Update(delta: float) -> void:
 func _start_airdash() -> void:
 	dash_component.use_dash()
 	animation_manager.play("air_dash")
+	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_DASH)
 	dash_timer = dash_component.dash_duration
 	dash_direction = 1 if !animation_manager.animated_sprite.flip_h else -1
 	player.velocity.x = dash_direction * dash_component.dash_speed

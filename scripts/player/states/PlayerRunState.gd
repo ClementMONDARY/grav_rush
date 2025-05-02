@@ -66,7 +66,7 @@ func _flip_sprite() -> void:
 
 func _handle_wall_grab() -> bool:
 	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
-		animation_manager.play_audio("wall_grab")
+		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")
 		return true
 	return false

@@ -50,7 +50,7 @@ func _check_for_fall() -> void:
 	if player.is_on_floor():
 		Transitioned.emit(self, "idle")
 
-func _handle_movement(delta: float) -> void:
+func _handle_movement(_delta: float) -> void:
 	if Input.get_axis("move_left", "move_right") != -wall_direction:
 		Transitioned.emit(self, "fall")
 
@@ -67,5 +67,5 @@ func _handle_wall_jump() -> void:
 
 func _handle_wall_grab() -> void:
 	if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
-		animation_manager.play_audio("wall_grab")
+		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")

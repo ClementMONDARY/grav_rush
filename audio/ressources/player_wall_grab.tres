@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://j71qk05y5kbv"]
+
+[ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_ereje"]
+[ext_resource type="AudioStream" uid="uid://c8gxvk4l3q8ym" path="res://audio/player/Player_Wall_Grab_0.mp3" id="2_l5nm6"]
+
+[resource]
+script = ExtResource("1_ereje")
+limit = 5
+type = 1
+sound_effect = ExtResource("2_l5nm6")
+volume = -5.0
+pitch_scale = 1.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"
