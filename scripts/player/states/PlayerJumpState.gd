@@ -70,6 +70,7 @@ func _flip_sprite() -> void:
 func _handle_wall_interaction() -> bool:
 	if wall_detector.is_colliding():
 		if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
+			animation_manager.play_audio("wall_grab")
 			Transitioned.emit(self, "wallgrab")
 			return true
 		elif Input.is_action_just_pressed("jump"):

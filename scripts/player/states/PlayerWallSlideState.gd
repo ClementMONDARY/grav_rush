@@ -67,4 +67,5 @@ func _handle_wall_jump() -> void:
 
 func _handle_wall_grab() -> void:
 	if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
+		animation_manager.play_audio("wall_grab")
 		Transitioned.emit(self, "wallgrab")

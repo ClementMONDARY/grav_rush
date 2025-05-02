@@ -25,7 +25,7 @@ func Physics_Update(_delta: float) -> void:
 # --- Logic split below ---
 
 func _start_wall_grab() -> void:
-	animation_manager.play("wall_grab")
+	animation_manager.play_sprite_animation("wall_grab")
 	player.velocity = Vector2.ZERO
 	_update_wall_direction()
 
