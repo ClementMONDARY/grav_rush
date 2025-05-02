@@ -26,7 +26,7 @@ func _start_airdash() -> void:
 	animation_manager.play("air_dash")
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_DASH)
 	dash_timer = dash_component.dash_duration
-	dash_direction = 1 if !animation_manager.animated_sprite.flip_h else -1
+	dash_direction = 1 if !animation_manager.sprite.flip_h else -1
 	player.velocity.x = dash_direction * dash_component.dash_speed
 	player.velocity.y = 0  # Cancel vertical momentum
 

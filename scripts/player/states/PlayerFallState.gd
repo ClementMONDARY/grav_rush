@@ -49,9 +49,9 @@ func _apply_air_control(delta: float) -> void:
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir > 0:
-		animation_manager.animated_sprite.flip_h = false
+		animation_manager.sprite.flip_h = false
 	elif input_dir < 0:
-		animation_manager.animated_sprite.flip_h = true
+		animation_manager.sprite.flip_h = true
 
 func _handle_wall_interaction() -> bool:
 	if not wall_detector.is_colliding():
