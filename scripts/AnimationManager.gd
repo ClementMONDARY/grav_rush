@@ -1,13 +1,8 @@
 extends Node2D
 class_name AnimationManager
 
-@onready var sprite: Sprite2D = $Sprite2D
-var animation_players: Array = []
-
-func _ready() -> void:
-	for child in get_children():
-		if child is AnimationPlayer:
-			animation_players.append(child)
+@export var sprite: Sprite2D
+@export var animation_player: AnimationPlayer
 
 func play(animation_name: String, reverse: bool = false) -> void:
 	animation_name.to_lower()
@@ -17,12 +12,11 @@ func play(animation_name: String, reverse: bool = false) -> void:
 func play_animation_player(animation_name: String, reverse: bool = false) -> void:
 	animation_name.to_lower()
 	
-	for animation_player in animation_players:
-		if animation_player and animation_player.has_animation(animation_name):
-			if reverse:
-				animation_player.play_backwards(animation_name)
-			else:
-				animation_player.play(animation_name)
+	if animation_player and animation_player.has_animation(animation_name):
+		if reverse:
+			animation_player.play_backwards(animation_name)
+		else:
+			animation_player.play(animation_name)
 
 func flip_sprite(flip_h: bool = true, flip_v: bool = true) -> void:
 	if sprite:

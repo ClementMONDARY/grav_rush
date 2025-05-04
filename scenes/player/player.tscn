@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=67 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -21,8 +21,8 @@
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
-radius = 7.0
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3j4b4"]
+load_path = "res://.godot/imported/adventurer-v1.5-Sheet.png-afb00c11ec71bd6628fafc01a529c833.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -299,7 +299,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -315,7 +315,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -332,7 +332,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -349,7 +349,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -365,7 +365,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -382,7 +382,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -398,7 +398,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -415,7 +415,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -432,7 +432,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -448,7 +448,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -465,7 +465,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationManager/Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D2:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -490,6 +490,9 @@ _data = {
 &"wall_slide": SubResource("Animation_j4nxn")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
+radius = 7.0
+
 [node name="Player" type="CharacterBody2D"]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -501,9 +504,9 @@ max_value = 500.0
 show_percentage = false
 script = ExtResource("1_gx1jg")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(0, -18)
-texture = ExtResource("1_dovo2")
+texture = SubResource("CompressedTexture2D_3j4b4")
 hframes = 7
 vframes = 16
 region_rect = Rect2(0, 0, 50, 37)
@@ -515,6 +518,12 @@ sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
 frame_progress = 0.126119
 
+[node name="FramesPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3j4b4")
+}
+autoplay = "idle"
+
 [node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
 position = Vector2(0, -15)
 target_position = Vector2(8, 0)
@@ -525,29 +534,10 @@ animation_manager = NodePath("../AnimationManager")
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_0owmy")
 
-[node name="AnimationManager" type="Node2D" parent="."]
+[node name="AnimationManager" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "animation_player")]
 script = ExtResource("5_p47bc")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimationManager"]
-visible = false
-position = Vector2(0, -18)
-sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"idle"
-frame_progress = 0.613211
-
-[node name="Sprite2D" type="Sprite2D" parent="AnimationManager"]
-position = Vector2(0, -18)
-texture = ExtResource("1_dovo2")
-hframes = 7
-vframes = 16
-region_rect = Rect2(0, 0, 50, 37)
-
-[node name="FramesPlayer" type="AnimationPlayer" parent="AnimationManager"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_3j4b4")
-}
-autoplay = "idle"
+sprite = NodePath("../Sprite2D2")
+animation_player = NodePath("../FramesPlayer")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gmlin")
