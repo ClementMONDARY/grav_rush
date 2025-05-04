@@ -509,10 +509,10 @@ vframes = 16
 region_rect = Rect2(0, 0, 50, 37)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
-animation = &"double_jump"
+animation = &"idle"
+frame_progress = 0.126119
 
 [node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
 position = Vector2(0, -15)
@@ -530,11 +530,10 @@ autoplay = "idle"
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_0owmy")
 
-[node name="AnimationManager" type="Node" parent="." node_paths=PackedStringArray("sprite", "animation_player")]
+[node name="AnimationManager" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "animation_player")]
 script = ExtResource("5_p47bc")
 sprite = NodePath("../Sprite2D")
 animation_player = NodePath("../AnimationPlayer")
-metadata/_custom_type_script = "uid://cugqo0bdw51ja"
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gmlin")
