@@ -322,6 +322,23 @@ tracks/0/keys = {
 "values": [96, 97, 98, 99]
 }
 
+[sub_resource type="Animation" id="Animation_iqsei"]
+resource_name = "double_jump"
+length = 0.3636
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2727),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21]
+}
+
 [sub_resource type="Animation" id="Animation_cnsyf"]
 resource_name = "fall"
 length = 0.2
@@ -455,23 +472,6 @@ tracks/0/keys = {
 "values": [79, 80]
 }
 
-[sub_resource type="Animation" id="Animation_iqsei"]
-resource_name = "double_jump"
-length = 0.3636
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2727),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [18, 19, 20, 21]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3j4b4"]
 _data = {
 &"RESET": SubResource("Animation_3j4b4"),
@@ -509,6 +509,7 @@ vframes = 16
 region_rect = Rect2(0, 0, 50, 37)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
