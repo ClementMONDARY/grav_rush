@@ -1,6 +1,7 @@
 extends State
 
-@export var animation_manager: AnimationManager
+@export var sprite: AnimatedSprite2D
+@export var anim_tree: AnimationTree
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
 @export var jump_component: JumpComponent
@@ -13,7 +14,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wall_direction: int = 0
 
 func Enter() -> void:
-	animation_manager.play("fall")
+	anim_tree.get("parameters/playback").travel("Fall")
 
 func Physics_Update(delta: float) -> void:
 	_apply_gravity(delta)
@@ -49,9 +50,9 @@ func _apply_air_control(delta: float) -> void:
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir > 0:
-		animation_manager.animated_sprite.flip_h = false
+		sprite.flip_h = false
 	elif input_dir < 0:
-		animation_manager.animated_sprite.flip_h = true
+		sprite.flip_h = true
 
 func _handle_wall_interaction() -> bool:
 	if not wall_detector.is_colliding():
@@ -59,6 +60,7 @@ func _handle_wall_interaction() -> bool:
 
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
+		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")
 		return true
 	elif input_dir != 0:
@@ -69,7 +71,7 @@ func _handle_wall_interaction() -> bool:
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 		jump_component.jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		animation_manager.flip_sprite(true, false)
+		sprite.flip_h = false if sprite.flip_h else true
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 		return true
@@ -83,7 +85,7 @@ func _handle_jump() -> bool:
 
 func _handle_dash() -> bool:
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
-		Transitioned.emit(self, "airdash")
+		Transitioned.emit(self, "dash")
 		return true
 	return false
 

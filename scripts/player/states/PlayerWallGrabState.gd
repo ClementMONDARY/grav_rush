@@ -1,6 +1,7 @@
 extends State
 
-@export var animation_manager: AnimationManager
+@export var sprite: AnimatedSprite2D
+@export var anim_tree: AnimationTree
 @export var player: CharacterBody2D
 @export var jump_component: JumpComponent
 @export var stamina_component: StaminaComponent
@@ -25,9 +26,11 @@ func Physics_Update(_delta: float) -> void:
 # --- Logic split below ---
 
 func _start_wall_grab() -> void:
-	animation_manager.play("wall_grab")
 	player.velocity = Vector2.ZERO
 	_update_wall_direction()
+	_update_animation_blend()
+
+	anim_tree.get("parameters/playback").travel("WallGrab")
 
 func _update_wall_direction() -> void:
 	if wall_detector.is_colliding():
@@ -43,12 +46,12 @@ func _handle_stamina() -> void:
 
 func _handle_wall_release() -> void:
 	if Input.get_axis("move_left", "move_right") == wall_direction:
-		_play_animation("wall_slide")
+		_update_animation_blend()
 		if Input.is_action_just_pressed("dash"):
-			animation_manager.flip_sprite(true, false)
-			Transitioned.emit(self, "airdash")
+			sprite.flip_h = not sprite.flip_h
+			Transitioned.emit(self, "dash")
 	else:
-		_play_animation("wall_grab")
+		_update_animation_blend()
 
 func _handle_wall_climb() -> void:
 	var vertical_input = Input.get_axis("move_up", "move_down")
@@ -63,7 +66,7 @@ func _handle_wall_jump() -> void:
 			stamina_component.drain_stamina(200.0)
 		else:
 			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		animation_manager.flip_sprite(true, false)
+		sprite.flip_h = false if sprite.flip_h else true
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 
@@ -71,7 +74,8 @@ func _check_wall_grab_conditions() -> void:
 	if not wall_detector.is_colliding() or Input.is_action_just_released("wall_grab"):
 		Transitioned.emit(self, "fall")
 
-func _play_animation(anim_name: String) -> void:
-	if current_animation != anim_name:
-		current_animation = anim_name
-		animation_manager.play_sprite_animation(anim_name)
+func _update_animation_blend() -> void:
+	if Input.get_axis("move_left", "move_right") == wall_direction:
+		anim_tree.set("parameters/WallGrab/InputDir/blend_position", -1.0)
+	else:
+		anim_tree.set("parameters/WallGrab/InputDir/blend_position", 1.0)

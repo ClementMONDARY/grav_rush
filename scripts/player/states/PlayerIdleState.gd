@@ -1,14 +1,14 @@
 extends State
 
-@export var animation_manager: AnimationManager
 @export var stamina_component: StaminaComponent
 @export var dash_component: DashComponent
 @export var player: CharacterBody2D
 @export var wall_detector: RayCast2D
 @export var ground_control_component: GroundControlComponent
+@export var anim_tree: AnimationTree
 
 func Enter() -> void:
-	animation_manager.play("idle")
+	anim_tree.get("parameters/playback").travel("Idle")
 	stamina_component.refill_stamina()
 	dash_component.refill_dash()
 
@@ -38,8 +38,7 @@ func _handle_airborne() -> bool:
 	return false
 
 func _apply_slide(delta: float) -> void:
-	var input_dir = Input.get_axis("move_left", "move_right")
-	if input_dir == 0:
+	if Input.get_axis("move_left", "move_right") == 0:
 		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.slide_friction * delta)
 
 func _handle_run() -> bool:
@@ -56,12 +55,13 @@ func _handle_jump() -> bool:
 
 func _handle_dash() -> bool:
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
-		Transitioned.emit(self, "grounddash")
+		Transitioned.emit(self, "dash")
 		return true
 	return false
 
 func _handle_wall_grab() -> bool:
 	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
+		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")
 		return true
 	return false

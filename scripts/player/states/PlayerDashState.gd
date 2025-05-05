@@ -1,6 +1,7 @@
 extends State
 
-@export var animation_manager: AnimationManager
+@export var sprite: AnimatedSprite2D
+@export var anim_tree: AnimationTree
 @export var player: CharacterBody2D
 @export var dash_component: DashComponent
 
@@ -11,7 +12,6 @@ func Enter() -> void:
 	_start_dash()
 
 func Exit() -> void:
-	# Nothing to clean up for now
 	pass
 
 func Physics_Update(delta: float) -> void:
@@ -24,21 +24,30 @@ func Physics_Update(delta: float) -> void:
 
 func _start_dash() -> void:
 	dash_component.use_dash()
-	animation_manager.play("ground_dash")
+	if player.is_on_floor():
+		anim_tree.set("parameters/Dash/FloorContext/blend_position", -1.0)
+	else:
+		anim_tree.set("parameters/Dash/FloorContext/blend_position", 1.0)
+	anim_tree.get("parameters/playback").travel("Dash")
+	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_DASH)
 	dash_timer = dash_component.dash_duration
-	dash_direction = 1 if !animation_manager.animated_sprite.flip_h else -1
+	dash_direction = 1 if !sprite.flip_h else -1
 	player.velocity.x = dash_direction * dash_component.dash_speed
+	player.velocity.y = 0
 
 func _update_dash_timer(delta: float) -> void:
 	dash_timer -= delta
 
 func _check_for_jump() -> void:
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") && player.is_on_floor():
 		player.velocity.x *= 1.5
 		Transitioned.emit(self, "jump")
 		return
 
 func _check_for_dash_end() -> void:
 	if dash_timer <= 0:
-		Transitioned.emit(self, "run")
+		if player.is_on_floor():
+			Transitioned.emit(self, "run")
+		else:
+			Transitioned.emit(self, "fall")
 		return
