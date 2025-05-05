@@ -1,7 +1,7 @@
 extends Node2D
 class_name AnimationManager
 
-@export var sprite: Sprite2D
+@export var sprite: AnimatedSprite2D
 @export var animation_player: AnimationPlayer
 
 func play(animation_name: String, reverse: bool = false) -> void:
