@@ -2,7 +2,6 @@ extends State
 
 @export var sprite: AnimatedSprite2D
 @export var anim_tree: AnimationTree
-@export var animation_manager: AnimationManager
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
 @export var jump_component: JumpComponent
@@ -89,7 +88,7 @@ func _handle_wall_jump() -> void:
 	wall_direction = sign(player.global_position.x - collision_pos.x)
 	jump_component.jumps_remaining += 1
 	player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-	animation_manager.flip_sprite(true)
+	sprite.flip_h = false if sprite.flip_h else true
 	player.move_and_slide()
 	Transitioned.emit(self, "jump")
 

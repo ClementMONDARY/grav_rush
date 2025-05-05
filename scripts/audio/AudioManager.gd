@@ -18,7 +18,6 @@ func _ready() -> void:
 	for sound_effect: SoundEffect in sound_effects:
 		sound_effect_dict[sound_effect.type] = sound_effect
 		playing_sounds[sound_effect.type] = []  # Initialize an empty list for each sound type
-	print("Initialized sound_effect_dict:", sound_effect_dict)
 
 
 ## Creates a sound effect at a specific location, stopping the oldest sound if the limit is reached.

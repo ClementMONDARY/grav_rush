@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=91 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -295,80 +295,6 @@ animations = [{
 "name": &"wall_slide",
 "speed": 8.0
 }]
-
-[sub_resource type="Animation" id="Animation_uf5tr"]
-resource_name = "low_stamina"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(0.996259, 0.00735216, 2.31028e-06, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_lgqa7"]
-resource_name = "RESET"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgqa7"]
-_data = {
-&"RESET": SubResource("Animation_lgqa7"),
-&"low_stamina": SubResource("Animation_uf5tr")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uf5tr"]
-animation = &"low_stamina"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lgqa7"]
-graph_offset = Vector2(-336, 57)
-nodes/LowStamina/node = SubResource("AnimationNodeAnimation_uf5tr")
-nodes/LowStamina/position = Vector2(0, 160)
-nodes/output/position = Vector2(300, 160)
-node_connections = [&"output", 0, &"LowStamina"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lgqa7"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ydkj"]
-graph_offset = Vector2(-192, -46)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_lgqa7")
-nodes/Animation/position = Vector2(140, 80)
-nodes/output/position = Vector2(500, 80)
-node_connections = [&"output", 0, &"Animation"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
-states/LowStamina/node = SubResource("AnimationNodeBlendTree_lgqa7")
-states/LowStamina/position = Vector2(642, 100)
-states/RESET/node = SubResource("AnimationNodeBlendTree_8ydkj")
-states/RESET/position = Vector2(409, 100)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7")]
-graph_offset = Vector2(-160, -38)
 
 [sub_resource type="Animation" id="Animation_3j4b4"]
 length = 0.001
@@ -812,13 +738,11 @@ nodes/WallSlide/node = SubResource("AnimationNodeAnimation_6cv16")
 nodes/WallSlide/position = Vector2(-20, 120)
 node_connections = [&"output", 0, &"WallSlide"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3j4b4"]
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iqsei"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8ydkj"]
 states/Dash/node = SubResource("AnimationNodeBlendTree_bbmj2")
 states/Dash/position = Vector2(677, 215)
-states/End/position = Vector2(827, 151)
 states/Fall/node = SubResource("AnimationNodeBlendTree_3j4b4")
 states/Fall/position = Vector2(574, 151)
 states/Idle/node = SubResource("AnimationNodeBlendTree_007i1")
@@ -827,15 +751,15 @@ states/Jump/node = SubResource("AnimationNodeBlendTree_j4nxn")
 states/Jump/position = Vector2(677, 151)
 states/Run/node = SubResource("AnimationNodeBlendTree_uniwh")
 states/Run/position = Vector2(476, 151)
-states/Start/position = Vector2(221, 151)
+states/Start/position = Vector2(166, 87)
 states/WallClimb/node = SubResource("AnimationNodeBlendTree_6cv16")
 states/WallClimb/position = Vector2(661, 87)
 states/WallGrab/node = SubResource("AnimationNodeBlendTree_28m0y")
 states/WallGrab/position = Vector2(388, 87)
 states/WallSlide/node = SubResource("AnimationNodeBlendTree_iqsei")
 states/WallSlide/position = Vector2(522, 87)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_3j4b4")]
-graph_offset = Vector2(-103, 20)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_iqsei")]
+graph_offset = Vector2(30, 19)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
 radius = 7.0
@@ -862,26 +786,15 @@ position = Vector2(0, 3)
 target_position = Vector2(8, 0)
 script = ExtResource("2_uf5tr")
 
-[node name="AnimationPlayerLowStamina" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_lgqa7")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayerLowStamina"]
-root_node = NodePath("../..")
-tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
-anim_player = NodePath("..")
-
-[node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_3j4b4")
 }
 autoplay = "idle"
 
-[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayerSprite"]
-root_node = NodePath("../..")
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_8ydkj")
-anim_player = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
 parameters/Dash/FloorContext/blend_position = 0
 parameters/Jump/FloorContext/blend_position = 0.0
 parameters/WallClimb/InputDir/blend_position = 0
@@ -902,7 +815,7 @@ dash_component = NodePath("../../Components/DashComponent")
 player = NodePath("../..")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 ground_control_component = NodePath("../../Components/GroundControlComponent")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 
 [node name="Run" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "player", "speed_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component", "anim_tree")]
 script = ExtResource("5_0owmy")
@@ -913,12 +826,13 @@ stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 ground_control_component = NodePath("../../Components/GroundControlComponent")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 
-[node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "speed_component", "jump_component", "dash_component", "stamina_component", "air_control_component", "wall_detector")]
+[node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "animation_manager", "player", "speed_component", "jump_component", "dash_component", "stamina_component", "air_control_component", "wall_detector")]
 script = ExtResource("6_qek5x")
 sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
+animation_manager = NodePath("")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
@@ -930,7 +844,7 @@ wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 [node name="Fall" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "stamina_component", "wall_detector")]
 script = ExtResource("7_5gtgg")
 sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
@@ -942,14 +856,14 @@ wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 [node name="Dash" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
 script = ExtResource("11_3j4b4")
 sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
 
 [node name="WallSlide" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "stamina_component", "jump_component", "wall_detector")]
 script = ExtResource("14_3j4b4")
 sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
 jump_component = NodePath("../../Components/JumpComponent")
@@ -958,7 +872,7 @@ wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 [node name="WallGrab" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "jump_component", "stamina_component", "wall_detector")]
 script = ExtResource("10_fcs02")
 sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 jump_component = NodePath("../../Components/JumpComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
@@ -967,7 +881,7 @@ wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 [node name="WallClimb" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "jump_component", "player", "stamina_component", "wall_detector")]
 script = ExtResource("11_myrg7")
 sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
+anim_tree = NodePath("../../AnimationTree")
 jump_component = NodePath("../../Components/JumpComponent")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
@@ -987,9 +901,8 @@ metadata/_custom_type_script = "uid://dllf1u7papfbf"
 script = ExtResource("12_fm80t")
 metadata/_custom_type_script = "uid://6gg02mmjhjfr"
 
-[node name="StaminaComponent" type="Node2D" parent="Components" node_paths=PackedStringArray("anim_tree")]
+[node name="StaminaComponent" type="Node2D" parent="Components"]
 script = ExtResource("14_ugbui")
-anim_tree = NodePath("../../AnimationPlayerLowStamina/AnimationTree")
 metadata/_custom_type_script = "uid://b2hnxvhtnid6u"
 
 [node name="AirControlComponent" type="Node2D" parent="Components"]
