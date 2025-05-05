@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=97 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -6,13 +6,13 @@
 [ext_resource type="Script" uid="uid://cckyylklns8uk" path="res://scripts/player/wall_detector.gd" id="2_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
-[ext_resource type="Script" uid="uid://cugqo0bdw51ja" path="res://scripts/AnimationManager.gd" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://buunmo3lt81li" path="res://scripts/player/states/PlayerAirDashState.gd" id="8_h17s1"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
 [ext_resource type="Script" uid="uid://cmnwgvkdr3ivi" path="res://scripts/player/states/PlayerGroundDashState.gd" id="9_kvlxm"]
 [ext_resource type="Script" uid="uid://duv8qfbxhvh0s" path="res://scripts/player/states/PlayerWallGrabState.gd" id="10_fcs02"]
+[ext_resource type="Script" uid="uid://kp6mxnfyk2qt" path="res://scripts/player/states/dash.gd" id="11_3j4b4"]
 [ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="11_je7p5"]
 [ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/PlayerWallClimbState.gd" id="11_myrg7"]
 [ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="12_fm80t"]
@@ -20,9 +20,6 @@
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3j4b4"]
-load_path = "res://.godot/imported/adventurer-v1.5-Sheet.png-afb00c11ec71bd6628fafc01a529c833.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -123,6 +120,10 @@ region = Rect2(250, 37, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(300, 37, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(0, 444, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4nxn"]
 atlas = ExtResource("1_dovo2")
@@ -262,6 +263,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_007i1")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_j4nxn")
 }, {
 "duration": 1.0,
@@ -299,34 +303,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -339,34 +331,22 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [96, 97, 98, 99]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"air_dash"]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -380,34 +360,22 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2727),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [18, 19, 20, 21]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"double_jump"]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2727),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -417,38 +385,25 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_cnsyf"]
 resource_name = "fall"
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [22, 23]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"fall"]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -461,34 +416,22 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [55, 56, 57, 58]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"ground_dash"]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
@@ -502,34 +445,22 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1667, 0.3333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -542,34 +473,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [16]
+"update": 1,
+"values": [&"jump"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"jump"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -583,34 +502,22 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2727, 0.3636, 0.4545),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [8, 9, 10, 11, 12, 13]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0909, 0.1818, 0.266667, 0.3636, 0.4545),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -619,43 +526,31 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_uniwh"]
 resource_name = "wall_climb"
-length = 0.375
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [81, 82, 83]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"wall_climb"]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_28m0y"]
@@ -664,34 +559,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [84]
+"update": 1,
+"values": [&"wall_grab"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"wall_grab"]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -705,34 +588,22 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [79, 80]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"wall_slide"]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.125),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -754,7 +625,166 @@ _data = {
 &"wall_slide": SubResource("Animation_j4nxn")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_007i1"]
+animation = &"air_dash"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ydkj"]
+graph_offset = Vector2(-153, 78)
+nodes/AirDash/node = SubResource("AnimationNodeAnimation_007i1")
+nodes/AirDash/position = Vector2(566.9, 244.798)
+nodes/output/position = Vector2(800, 300)
+node_connections = [&"output", 0, &"AirDash"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pk8ii"]
+animation = &"ground_dash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5mf0n"]
+animation = &"air_dash"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_4hvnv"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_pk8ii")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_5mf0n")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bbmj2"]
+graph_offset = Vector2(-424.975, -8.3719)
+nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_4hvnv")
+nodes/FloorContext/position = Vector2(40, 120)
+node_connections = [&"output", 0, &"FloorContext"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ydkj"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3j4b4"]
+graph_offset = Vector2(-497, 15)
+nodes/Fall/node = SubResource("AnimationNodeAnimation_8ydkj")
+nodes/Fall/position = Vector2(20, 140)
+node_connections = [&"output", 0, &"Fall"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj68g"]
+animation = &"ground_dash"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ioxgp"]
+graph_offset = Vector2(-413, -29)
+nodes/GroundDash/node = SubResource("AnimationNodeAnimation_yj68g")
+nodes/GroundDash/position = Vector2(40, 100)
+node_connections = [&"output", 0, &"GroundDash"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cnsyf"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_007i1"]
+graph_offset = Vector2(-128.143, 34.3596)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_cnsyf")
+nodes/Idle/position = Vector2(340, 100)
+nodes/output/position = Vector2(680, 140)
+node_connections = [&"output", 0, &"Idle"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3j4b4"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ioxgp"]
+animation = &"double_jump"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_cnsyf"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_3j4b4")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_ioxgp")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j4nxn"]
+graph_offset = Vector2(-334.664, -49.4645)
+nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_cnsyf")
+nodes/FloorContext/position = Vector2(540, 20)
+nodes/output/position = Vector2(920, 100)
+node_connections = [&"output", 0, &"FloorContext"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28m0y"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uniwh"]
+graph_offset = Vector2(-399, 35)
+nodes/Run/node = SubResource("AnimationNodeAnimation_28m0y")
+nodes/Run/position = Vector2(0, 80)
+node_connections = [&"output", 0, &"Run"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iqsei"]
+animation = &"wall_climb"
+play_mode = 1
+advance_on_start = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tffgl"]
+animation = &"wall_climb"
+advance_on_start = true
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_pk8ii"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_iqsei")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_tffgl")
+blend_point_1/pos = -1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6cv16"]
+graph_offset = Vector2(-388.438, 47.6777)
+nodes/InputDir/node = SubResource("AnimationNodeBlendSpace1D_pk8ii")
+nodes/InputDir/position = Vector2(0, 140)
+node_connections = [&"output", 0, &"InputDir"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j4nxn"]
+animation = &"wall_slide"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uniwh"]
+animation = &"wall_grab"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_iqsei"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_j4nxn")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_uniwh")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_28m0y"]
+graph_offset = Vector2(-256, 53)
+nodes/InputDir/node = SubResource("AnimationNodeBlendSpace1D_iqsei")
+nodes/InputDir/position = Vector2(-60, 120)
+node_connections = [&"output", 0, &"InputDir"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6cv16"]
+animation = &"wall_slide"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iqsei"]
+graph_offset = Vector2(-268, 51)
+nodes/WallSlide/node = SubResource("AnimationNodeAnimation_6cv16")
+nodes/WallSlide/position = Vector2(-20, 120)
+node_connections = [&"output", 0, &"WallSlide"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iqsei"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8ydkj"]
+states/AirDash/node = SubResource("AnimationNodeBlendTree_8ydkj")
+states/AirDash/position = Vector2(548, 219)
+states/Dash/node = SubResource("AnimationNodeBlendTree_bbmj2")
+states/Dash/position = Vector2(677, 219)
+states/Fall/node = SubResource("AnimationNodeBlendTree_3j4b4")
+states/Fall/position = Vector2(574, 151)
+states/GroundDash/node = SubResource("AnimationNodeBlendTree_ioxgp")
+states/GroundDash/position = Vector2(398, 219)
+states/Idle/node = SubResource("AnimationNodeBlendTree_007i1")
+states/Idle/position = Vector2(368, 151)
+states/Jump/node = SubResource("AnimationNodeBlendTree_j4nxn")
+states/Jump/position = Vector2(677, 151)
+states/Run/node = SubResource("AnimationNodeBlendTree_uniwh")
+states/Run/position = Vector2(476, 151)
+states/Start/position = Vector2(166, 87)
+states/WallClimb/node = SubResource("AnimationNodeBlendTree_6cv16")
+states/WallClimb/position = Vector2(661, 87)
+states/WallGrab/node = SubResource("AnimationNodeBlendTree_28m0y")
+states/WallGrab/position = Vector2(388, 87)
+states/WallSlide/node = SubResource("AnimationNodeBlendTree_iqsei")
+states/WallSlide/position = Vector2(522, 87)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_iqsei")]
+graph_offset = Vector2(75, -8)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
 radius = 7.0
@@ -770,18 +800,16 @@ max_value = 500.0
 show_percentage = false
 script = ExtResource("1_gx1jg")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -18)
-texture = SubResource("CompressedTexture2D_3j4b4")
-hframes = 7
-vframes = 16
-region_rect = Rect2(0, 0, 50, 37)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
+autoplay = "idle"
+
+[node name="WallDetector" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 3)
+target_position = Vector2(8, 0)
+script = ExtResource("2_uf5tr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -792,102 +820,110 @@ autoplay = "idle"
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_8ydkj")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="WallDetector" type="RayCast2D" parent="." node_paths=PackedStringArray("animation_manager")]
-position = Vector2(0, -15)
-target_position = Vector2(8, 0)
-script = ExtResource("2_uf5tr")
-animation_manager = NodePath("../AnimationManager")
+parameters/Dash/FloorContext/blend_position = 0
+parameters/Jump/FloorContext/blend_position = 0.0
+parameters/WallClimb/InputDir/blend_position = 0
+parameters/WallGrab/InputDir/blend_position = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_0owmy")
 
-[node name="AnimationManager" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "animation_player")]
-script = ExtResource("5_p47bc")
-sprite = NodePath("../AnimatedSprite2D")
-animation_player = NodePath("../AnimationPlayer")
-
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gmlin")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "stamina_component", "dash_component", "player", "wall_detector", "ground_control_component")]
+[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("stamina_component", "dash_component", "player", "wall_detector", "ground_control_component", "anim_tree")]
 script = ExtResource("4_75vfm")
-animation_manager = NodePath("../../AnimationManager")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
 player = NodePath("../..")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 ground_control_component = NodePath("../../Components/GroundControlComponent")
+anim_tree = NodePath("../../AnimationTree")
 
-[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component")]
+[node name="Run" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "player", "speed_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component", "anim_tree")]
 script = ExtResource("5_0owmy")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 ground_control_component = NodePath("../../Components/GroundControlComponent")
+anim_tree = NodePath("../../AnimationTree")
 
-[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "stamina_component", "air_control_component", "wall_detector")]
+[node name="Jump" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "animation_manager", "player", "speed_component", "jump_component", "dash_component", "stamina_component", "air_control_component", "wall_detector")]
 script = ExtResource("6_qek5x")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
+animation_manager = NodePath("")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 air_control_component = NodePath("../../Components/AirControlComponent")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "stamina_component", "wall_detector")]
+[node name="Fall" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "stamina_component", "wall_detector")]
 script = ExtResource("7_5gtgg")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
 jump_component = NodePath("../../Components/JumpComponent")
 dash_component = NodePath("../../Components/DashComponent")
 air_control_component = NodePath("../../Components/AirControlComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
+[node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
 script = ExtResource("9_kvlxm")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
+player = NodePath("../..")
+dash_component = NodePath("../../Components/DashComponent")
+
+[node name="Dash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
+script = ExtResource("11_3j4b4")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
 
 [node name="AirDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
 script = ExtResource("8_h17s1")
-animation_manager = NodePath("../../AnimationManager")
+animation_manager = NodePath("")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
 
-[node name="WallSlide" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "stamina_component", "jump_component", "wall_detector")]
+[node name="WallSlide" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "stamina_component", "jump_component", "wall_detector")]
 script = ExtResource("14_3j4b4")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
 jump_component = NodePath("../../Components/JumpComponent")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="WallGrab" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "jump_component", "stamina_component", "wall_detector")]
+[node name="WallGrab" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "jump_component", "stamina_component", "wall_detector")]
 script = ExtResource("10_fcs02")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
 player = NodePath("../..")
 jump_component = NodePath("../../Components/JumpComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="WallClimb" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "jump_component", "player", "stamina_component", "wall_detector")]
+[node name="WallClimb" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "jump_component", "player", "stamina_component", "wall_detector")]
 script = ExtResource("11_myrg7")
-animation_manager = NodePath("../../AnimationManager")
+sprite = NodePath("../../AnimatedSprite2D")
+anim_tree = NodePath("../../AnimationTree")
 jump_component = NodePath("../../Components/JumpComponent")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
-wall_detector = NodePath("../../WallDetector")
+wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
 [node name="Components" type="Node" parent="."]
 

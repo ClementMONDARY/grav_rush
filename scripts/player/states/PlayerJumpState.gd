@@ -1,5 +1,7 @@
 extends State
 
+@export var sprite: AnimatedSprite2D
+@export var anim_tree: AnimationTree
 @export var animation_manager: AnimationManager
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
@@ -36,9 +38,10 @@ func Physics_Update(delta: float) -> void:
 
 func _play_jump_animation() -> void:
 	if player.is_on_floor():
-		animation_manager.play("jump")
+		anim_tree.set("parameters/Jump/FloorContext/blend_position", -1.0)
 	else:
-		animation_manager.play("double_jump")
+		anim_tree.set("parameters/Jump/FloorContext/blend_position", 1.0)
+	anim_tree.get("parameters/playback").travel("Jump")
 
 func _apply_initial_jump_velocity() -> void:
 	player.velocity.y = -jump_component.jump_force
@@ -63,9 +66,9 @@ func _apply_air_control(delta: float) -> void:
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir > 0:
-		animation_manager.sprite.flip_h = false
+		sprite.flip_h = false
 	elif input_dir < 0:
-		animation_manager.sprite.flip_h = true
+		sprite.flip_h = true
 
 func _handle_wall_interaction() -> bool:
 	if wall_detector.is_colliding():
@@ -92,7 +95,7 @@ func _handle_wall_jump() -> void:
 
 func _handle_air_dash() -> bool:
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
-		Transitioned.emit(self, "airdash")
+		Transitioned.emit(self, "dash")
 		return true
 	return false
 

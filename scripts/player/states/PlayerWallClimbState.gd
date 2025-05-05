@@ -1,6 +1,7 @@
 extends State
 
-@export var animation_manager: AnimationManager
+@export var sprite: AnimatedSprite2D
+@export var anim_tree: AnimationTree
 @export var jump_component: JumpComponent
 @export var player: CharacterBody2D
 @export var stamina_component: StaminaComponent
@@ -19,7 +20,6 @@ func Enter() -> void:
 func Physics_Update(_delta: float) -> void:
 	_handle_climb_movement()
 	_handle_stamina()
-	_handle_climb_animation()
 	_handle_wall_jump()
 	_check_wall_climb_conditions()
 
@@ -29,7 +29,9 @@ func Physics_Update(_delta: float) -> void:
 
 func _start_wall_climb() -> void:
 	player.velocity = Vector2.ZERO
-	current_animation_state = ""
+	input_dir = Input.get_axis("move_up", "move_down")
+	anim_tree.set("parameters/WallClimb/InputDir/blend_position", -1.0 if input_dir < 0 else 1.0)
+	anim_tree.get("parameters/playback").travel("WallClimb")
 	_update_wall_direction()
 
 func _update_wall_direction() -> void:
@@ -56,25 +58,11 @@ func _handle_stamina() -> void:
 	if stamina_component.stamina <= 0:
 		Transitioned.emit(self, "wallgrab")
 
-func _handle_climb_animation() -> void:
-	var new_animation_state = ""
-	if input_dir < 0:
-		new_animation_state = "wall_climb"
-	elif input_dir > 0:
-		new_animation_state = "wall_climb_down"
-
-	if new_animation_state != current_animation_state:
-		current_animation_state = new_animation_state
-		if input_dir < 0:
-			animation_manager.play("wall_climb")
-		elif input_dir > 0:
-			animation_manager.play("wall_climb", true)
-
 func _handle_wall_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump_component.jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		animation_manager.flip_sprite(true, false)
+		sprite.flip_h = false if sprite.flip_h else true
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 
