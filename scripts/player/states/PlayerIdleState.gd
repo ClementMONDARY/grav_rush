@@ -38,8 +38,7 @@ func _handle_airborne() -> bool:
 	return false
 
 func _apply_slide(delta: float) -> void:
-	var input_dir = Input.get_axis("move_left", "move_right")
-	if input_dir == 0:
+	if Input.get_axis("move_left", "move_right") == 0:
 		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.slide_friction * delta)
 
 func _handle_run() -> bool:

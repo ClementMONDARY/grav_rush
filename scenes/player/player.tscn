@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=95 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -8,9 +8,7 @@
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
-[ext_resource type="Script" uid="uid://buunmo3lt81li" path="res://scripts/player/states/PlayerAirDashState.gd" id="8_h17s1"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
-[ext_resource type="Script" uid="uid://cmnwgvkdr3ivi" path="res://scripts/player/states/PlayerGroundDashState.gd" id="9_kvlxm"]
 [ext_resource type="Script" uid="uid://duv8qfbxhvh0s" path="res://scripts/player/states/PlayerWallGrabState.gd" id="10_fcs02"]
 [ext_resource type="Script" uid="uid://kp6mxnfyk2qt" path="res://scripts/player/states/dash.gd" id="11_3j4b4"]
 [ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="11_je7p5"]
@@ -878,23 +876,10 @@ air_control_component = NodePath("../../Components/AirControlComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="GroundDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
-script = ExtResource("9_kvlxm")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationTree")
-player = NodePath("../..")
-dash_component = NodePath("../../Components/DashComponent")
-
 [node name="Dash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
 script = ExtResource("11_3j4b4")
 sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationTree")
-player = NodePath("../..")
-dash_component = NodePath("../../Components/DashComponent")
-
-[node name="AirDash" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("animation_manager", "player", "dash_component")]
-script = ExtResource("8_h17s1")
-animation_manager = NodePath("")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
 
