@@ -31,7 +31,7 @@ func _start_dash() -> void:
 	anim_tree.get("parameters/playback").travel("Dash")
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_DASH)
 	dash_timer = dash_component.dash_duration
-	dash_direction = 1 if !sprite.flip_h else -1
+	dash_direction = sprite.scale.x
 	player.velocity.x = dash_direction * dash_component.dash_speed
 	player.velocity.y = 0
 
@@ -51,3 +51,30 @@ func _check_for_dash_end() -> void:
 		else:
 			Transitioned.emit(self, "fall")
 		return
+
+func instantiate_ghosts() -> void:
+	var ghost_count = 4
+	var interval = dash_component.dash_duration / ghost_count
+
+	for i in range(ghost_count):
+		await get_tree().create_timer(interval).timeout
+		
+		var ghost_sprite = new_ghost_sprite()
+
+		get_tree().current_scene.add_child(ghost_sprite)
+
+		var tween = get_tree().create_tween()
+		tween.tween_property(ghost_sprite, "modulate:a", 0, 0.3)  # Alpha de 0.5 à 0 sur 0.4s
+		tween.tween_callback(Callable(ghost_sprite, "queue_free"))
+		tween.play()
+
+func new_ghost_sprite() -> AnimatedSprite2D:
+	var ghost_sprite = AnimatedSprite2D.new()
+	ghost_sprite.sprite_frames = sprite.sprite_frames
+	ghost_sprite.animation = sprite.animation
+	ghost_sprite.frame = sprite.frame
+	ghost_sprite.position.x = player.global_position.x
+	ghost_sprite.position.y = player.global_position.y - 18.0
+	ghost_sprite.scale = sprite.scale
+	ghost_sprite.modulate = Color(1, 1, 1, 0.3)
+	return ghost_sprite

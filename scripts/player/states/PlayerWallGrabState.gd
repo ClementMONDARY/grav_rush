@@ -48,7 +48,7 @@ func _handle_wall_release() -> void:
 	if Input.get_axis("move_left", "move_right") == wall_direction:
 		_update_animation_blend()
 		if Input.is_action_just_pressed("dash"):
-			sprite.flip_h = not sprite.flip_h
+			sprite.scale.x = -sprite.scale.x
 			Transitioned.emit(self, "dash")
 	else:
 		_update_animation_blend()
@@ -66,7 +66,7 @@ func _handle_wall_jump() -> void:
 			stamina_component.drain_stamina(200.0)
 		else:
 			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		sprite.flip_h = false if sprite.flip_h else true
+		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 
