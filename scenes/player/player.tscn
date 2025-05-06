@@ -1,9 +1,8 @@
-[gd_scene load_steps=102 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=104 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
-[ext_resource type="Script" uid="uid://cckyylklns8uk" path="res://scripts/player/wall_detector.gd" id="2_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
@@ -95,6 +94,10 @@ region = Rect2(150, 0, 50, 37)
 atlas = ExtResource("1_dovo2")
 region = Rect2(100, 74, 50, 37)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(300, 37, 50, 37)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(50, 37, 50, 37)
@@ -114,10 +117,6 @@ region = Rect2(200, 37, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fm80t"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(250, 37, 50, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
-atlas = ExtResource("1_dovo2")
-region = Rect2(300, 37, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
 atlas = ExtResource("1_dovo2")
@@ -238,6 +237,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1jg")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qek5x")
 }, {
 "duration": 1.0,
@@ -251,9 +253,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fm80t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gx1jg")
 }],
 "loop": true,
 "name": &"run",
@@ -296,79 +295,16 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="Animation" id="Animation_lgqa7"]
-resource_name = "RESET"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
+[sub_resource type="Gradient" id="Gradient_uf5tr"]
+interpolation_mode = 2
+colors = PackedColorArray(0.760784, 0.784314, 0.941176, 1, 0.760784, 0.784314, 0.941176, 0)
 
-[sub_resource type="Animation" id="Animation_uf5tr"]
-resource_name = "low_stamina"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(0.996259, 0.00735216, 2.31028e-06, 1), Color(1, 1, 1, 1)]
-}
+[sub_resource type="Gradient" id="Gradient_kvlxm"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0.580392, 1, 1, 0, 0.580392, 1, 0)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgqa7"]
-_data = {
-&"RESET": SubResource("Animation_lgqa7"),
-&"low_stamina": SubResource("Animation_uf5tr")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uf5tr"]
-animation = &"low_stamina"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lgqa7"]
-graph_offset = Vector2(-336, 57)
-nodes/LowStamina/node = SubResource("AnimationNodeAnimation_uf5tr")
-nodes/LowStamina/position = Vector2(0, 160)
-nodes/output/position = Vector2(300, 160)
-node_connections = [&"output", 0, &"LowStamina"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lgqa7"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ydkj"]
-graph_offset = Vector2(-192, -46)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_lgqa7")
-nodes/Animation/position = Vector2(140, 80)
-nodes/output/position = Vector2(500, 80)
-node_connections = [&"output", 0, &"Animation"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
-states/LowStamina/node = SubResource("AnimationNodeBlendTree_lgqa7")
-states/LowStamina/position = Vector2(642, 100)
-states/RESET/node = SubResource("AnimationNodeBlendTree_8ydkj")
-states/RESET/position = Vector2(409, 100)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7")]
-graph_offset = Vector2(-160, -38)
+[sub_resource type="Gradient" id="Gradient_lgqa7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Animation" id="Animation_3j4b4"]
 length = 0.001
@@ -396,6 +332,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"idle"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_6cv16"]
 resource_name = "air_dash"
@@ -403,26 +363,52 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"air_dash"]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerStateMachine/Dash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instantiate_ghosts"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_iqsei"]
@@ -432,54 +418,55 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"double_jump"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2727),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"double_jump"]
+}
 
 [sub_resource type="Animation" id="Animation_cnsyf"]
 resource_name = "fall"
 length = 0.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"fall"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fall"]
 }
 
 [sub_resource type="Animation" id="Animation_007i1"]
@@ -488,26 +475,52 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"ground_dash"]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerStateMachine/Dash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instantiate_ghosts"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_8ydkj"]
@@ -545,26 +558,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"jump"]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [&"jump"]
 }
 
 [sub_resource type="Animation" id="Animation_yj68g"]
@@ -578,7 +591,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.266667, 0.3636, 0.4545),
+"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2667, 0.3636, 0.4545),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
@@ -595,6 +608,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"run"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
 
 [sub_resource type="Animation" id="Animation_uniwh"]
 resource_name = "wall_climb"
@@ -603,26 +628,26 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"wall_climb"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"wall_climb"]
 }
 
 [sub_resource type="Animation" id="Animation_28m0y"]
@@ -631,26 +656,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"wall_grab"]
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [&"wall_grab"]
 }
 
 [sub_resource type="Animation" id="Animation_j4nxn"]
@@ -660,26 +685,26 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"wall_slide"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.125),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"wall_slide"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3j4b4"]
@@ -837,6 +862,104 @@ states/WallSlide/position = Vector2(522, 87)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_3j4b4")]
 graph_offset = Vector2(-103, 20)
 
+[sub_resource type="Animation" id="Animation_lgqa7"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_uf5tr"]
+resource_name = "low_stamina"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 0.407317, 0.338033, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgqa7"]
+_data = {
+&"RESET": SubResource("Animation_lgqa7"),
+&"low_stamina": SubResource("Animation_uf5tr")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uf5tr"]
+animation = &"low_stamina"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lgqa7"]
+graph_offset = Vector2(-336, 57)
+nodes/LowStamina/node = SubResource("AnimationNodeAnimation_uf5tr")
+nodes/LowStamina/position = Vector2(0, 160)
+nodes/output/position = Vector2(300, 160)
+node_connections = [&"output", 0, &"LowStamina"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lgqa7"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ydkj"]
+graph_offset = Vector2(-192, -46)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_lgqa7")
+nodes/Animation/position = Vector2(140, 80)
+nodes/output/position = Vector2(500, 80)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uf5tr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
+states/LowStamina/node = SubResource("AnimationNodeBlendTree_lgqa7")
+states/LowStamina/position = Vector2(642, 100)
+states/RESET/node = SubResource("AnimationNodeBlendTree_8ydkj")
+states/RESET/position = Vector2(409, 100)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7")]
+graph_offset = Vector2(-160, -38)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
 radius = 7.0
 
@@ -860,17 +983,54 @@ autoplay = "idle"
 [node name="WallDetector" type="RayCast2D" parent="AnimatedSprite2D"]
 position = Vector2(0, 3)
 target_position = Vector2(8, 0)
-script = ExtResource("2_uf5tr")
 
-[node name="AnimationPlayerLowStamina" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_lgqa7")
-}
+[node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+z_index = -1
+position = Vector2(0, 3)
+emitting = false
+amount = 10
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.2
+emission_shape = 3
+emission_rect_extents = Vector2(0, 6.845)
+direction = Vector2(-1, 0.2)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 13.05
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_uf5tr")
 
-[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayerLowStamina"]
-root_node = NodePath("../..")
-tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
-anim_player = NodePath("..")
+[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+position = Vector2(0, -6)
+emitting = false
+amount = 4
+lifetime = 0.5
+explosiveness = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2.345, 2.395)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_max = 30.7
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_kvlxm")
+
+[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 18)
+emitting = false
+amount = 3
+lifetime = 0.27
+explosiveness = 0.8
+randomness = 0.8
+direction = Vector2(-1, -0.635)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+scale_amount_min = 2.0
+scale_amount_max = 2.5
+color_ramp = SubResource("Gradient_lgqa7")
 
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
 libraries = {
@@ -886,6 +1046,16 @@ parameters/Dash/FloorContext/blend_position = 0
 parameters/Jump/FloorContext/blend_position = 0.0
 parameters/WallClimb/InputDir/blend_position = 0
 parameters/WallGrab/InputDir/blend_position = 0
+
+[node name="AnimationPlayerLowStamina" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lgqa7")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayerLowStamina"]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
+anim_player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
@@ -939,12 +1109,13 @@ air_control_component = NodePath("../../Components/AirControlComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="Dash" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
+[node name="Dash" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component", "stamina_component")]
 script = ExtResource("11_3j4b4")
 sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
+stamina_component = NodePath("../../Components/StaminaComponent")
 
 [node name="WallSlide" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "stamina_component", "jump_component", "wall_detector")]
 script = ExtResource("14_3j4b4")

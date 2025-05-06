@@ -50,9 +50,9 @@ func _apply_air_control(delta: float) -> void:
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir > 0:
-		sprite.flip_h = false
+		sprite.scale.x = 1.0
 	elif input_dir < 0:
-		sprite.flip_h = true
+		sprite.scale.x = -1.0
 
 func _handle_wall_interaction() -> bool:
 	if not wall_detector.is_colliding():
@@ -71,7 +71,7 @@ func _handle_wall_interaction() -> bool:
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 		jump_component.jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		sprite.flip_h = false if sprite.flip_h else true
+		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 		return true

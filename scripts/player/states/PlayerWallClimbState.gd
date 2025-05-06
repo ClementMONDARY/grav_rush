@@ -62,7 +62,7 @@ func _handle_wall_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump_component.jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
-		sprite.flip_h = false if sprite.flip_h else true
+		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 
