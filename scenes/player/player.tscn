@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=104 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -94,6 +94,10 @@ region = Rect2(150, 0, 50, 37)
 atlas = ExtResource("1_dovo2")
 region = Rect2(100, 74, 50, 37)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+atlas = ExtResource("1_dovo2")
+region = Rect2(300, 37, 50, 37)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(50, 37, 50, 37)
@@ -113,10 +117,6 @@ region = Rect2(200, 37, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fm80t"]
 atlas = ExtResource("1_dovo2")
 region = Rect2(250, 37, 50, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
-atlas = ExtResource("1_dovo2")
-region = Rect2(300, 37, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
 atlas = ExtResource("1_dovo2")
@@ -237,6 +237,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gx1jg")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qek5x")
 }, {
 "duration": 1.0,
@@ -250,9 +253,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fm80t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gx1jg")
 }],
 "loop": true,
 "name": &"run",
@@ -299,6 +299,13 @@ animations = [{
 interpolation_mode = 2
 colors = PackedColorArray(0.760784, 0.784314, 0.941176, 1, 0.760784, 0.784314, 0.941176, 0)
 
+[sub_resource type="Gradient" id="Gradient_kvlxm"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0.580392, 1, 1, 0, 0.580392, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_lgqa7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [sub_resource type="Animation" id="Animation_3j4b4"]
 length = 0.001
 tracks/0/type = "value"
@@ -328,10 +335,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D/DASHCPUParticles2D:emitting")
+tracks/2/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -382,7 +401,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D/DASHCPUParticles2D:emitting")
+tracks/3/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -494,7 +513,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D/DASHCPUParticles2D:emitting")
+tracks/3/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -572,7 +591,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.266667, 0.3636, 0.4545),
+"times": PackedFloat32Array(0, 0.0909, 0.1818, 0.2667, 0.3636, 0.4545),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
@@ -588,6 +607,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"run"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_uniwh"]
@@ -846,6 +877,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_uf5tr"]
 resource_name = "low_stamina"
@@ -861,7 +904,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Color(0.996259, 0.00735216, 2.31028e-06, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 0.407317, 0.338033, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lgqa7"]
@@ -929,7 +984,7 @@ autoplay = "idle"
 position = Vector2(0, 3)
 target_position = Vector2(8, 0)
 
-[node name="DASHCPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+[node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
 z_index = -1
 position = Vector2(0, 3)
 emitting = false
@@ -945,6 +1000,37 @@ gravity = Vector2(0, 0)
 initial_velocity_max = 13.05
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_uf5tr")
+
+[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+position = Vector2(0, -6)
+emitting = false
+amount = 4
+lifetime = 0.5
+explosiveness = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2.345, 2.395)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_max = 30.7
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_kvlxm")
+
+[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 18)
+emitting = false
+amount = 3
+lifetime = 0.27
+explosiveness = 0.8
+randomness = 0.8
+direction = Vector2(-1, -0.635)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+scale_amount_min = 2.0
+scale_amount_max = 2.5
+color_ramp = SubResource("Gradient_lgqa7")
 
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1023,12 +1109,13 @@ air_control_component = NodePath("../../Components/AirControlComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="Dash" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component")]
+[node name="Dash" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component", "stamina_component")]
 script = ExtResource("11_3j4b4")
 sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 player = NodePath("../..")
 dash_component = NodePath("../../Components/DashComponent")
+stamina_component = NodePath("../../Components/StaminaComponent")
 
 [node name="WallSlide" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "stamina_component", "jump_component", "wall_detector")]
 script = ExtResource("14_3j4b4")

@@ -4,6 +4,7 @@ extends State
 @export var anim_tree: AnimationTree
 @export var player: CharacterBody2D
 @export var dash_component: DashComponent
+@export var stamina_component: StaminaComponent
 
 var dash_timer: float = 0.0
 var dash_direction: float = 0.0
@@ -77,4 +78,6 @@ func new_ghost_sprite() -> AnimatedSprite2D:
 	ghost_sprite.position.y = player.global_position.y - 18.0
 	ghost_sprite.scale = sprite.scale
 	ghost_sprite.modulate = Color(1, 1, 1, 0.3)
+	if stamina_component.stamina <= stamina_component.low_stamina_threshold:
+		ghost_sprite.modulate = Color(1.0, 0.407843, 0.337254, 0.3)  # Color(ff6856) with alpha 0.3
 	return ghost_sprite
