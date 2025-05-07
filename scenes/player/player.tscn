@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=111 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -897,6 +897,23 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_kvlxm"]
+resource_name = "empty_stamina"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("AnimatedSprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -922,8 +939,18 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lgqa7"]
 _data = {
 &"RESET": SubResource("Animation_lgqa7"),
+&"empty_stamina": SubResource("Animation_kvlxm"),
 &"low_stamina": SubResource("Animation_uf5tr")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvlxm"]
+animation = &"empty_stamina"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_uf5tr"]
+graph_offset = Vector2(-278.096, 6.04049)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kvlxm")
+nodes/Animation/position = Vector2(60, 140)
+node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uf5tr"]
 animation = &"low_stamina"
@@ -952,13 +979,23 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioxgp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cnsyf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_007i1"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
+states/EmptyStamina/node = SubResource("AnimationNodeBlendTree_uf5tr")
+states/EmptyStamina/position = Vector2(520, -8)
 states/LowStamina/node = SubResource("AnimationNodeBlendTree_lgqa7")
-states/LowStamina/position = Vector2(642, 100)
+states/LowStamina/position = Vector2(635, 100)
 states/RESET/node = SubResource("AnimationNodeBlendTree_8ydkj")
 states/RESET/position = Vector2(409, 100)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7")]
-graph_offset = Vector2(-160, -38)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "EmptyStamina", "LowStamina", SubResource("AnimationNodeStateMachineTransition_yj68g"), "LowStamina", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "EmptyStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "RESET", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_007i1")]
+graph_offset = Vector2(-184, -83)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
 radius = 7.0
