@@ -997,7 +997,7 @@ states/RESET/position = Vector2(409, 100)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "EmptyStamina", "LowStamina", SubResource("AnimationNodeStateMachineTransition_yj68g"), "LowStamina", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "EmptyStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "RESET", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_007i1")]
 graph_offset = Vector2(-184, -83)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -1096,7 +1096,7 @@ anim_player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
-shape = SubResource("CapsuleShape2D_0owmy")
+shape = SubResource("CapsuleShape2D_kvlxm")
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gmlin")
@@ -1205,3 +1205,4 @@ script = ExtResource("20_8ydkj")
 metadata/_custom_type_script = "uid://7yqoxs3p6wpt"
 
 [node name="JumpComponent2" parent="Components" instance=ExtResource("17_kvlxm")]
+max_db_jumps = 0

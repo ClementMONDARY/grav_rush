@@ -35,7 +35,7 @@ func Physics_Update(delta: float) -> void:
 
 func _handle_airborne() -> bool:
 	if not player.is_on_floor():
-		Transitioned.emit(self, "jump")
+		Transitioned.emit(self, "fall")
 		return true
 	return false
 

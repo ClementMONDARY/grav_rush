@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dukxupiaj3qnt"]
+[gd_scene load_steps=7 format=3 uid="uid://dukxupiaj3qnt"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_nnsk1"]
 
@@ -12,6 +12,9 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4wyf3"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnsk1"]
+size = Vector2(194, 55)
 
 [node name="World" type="Node2D"]
 
@@ -39,3 +42,14 @@ shape = SubResource("WorldBoundaryShape2D_rwgxs")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(480, -128)
 shape = SubResource("WorldBoundaryShape2D_4wyf3")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(97, -27.5)
+shape = SubResource("RectangleShape2D_nnsk1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = -55.0
+offset_right = 40.0
+offset_bottom = -15.0
+scale = Vector2(4.85231, 1.37444)
+color = Color(0.183991, 0.000135717, 0.246784, 1)

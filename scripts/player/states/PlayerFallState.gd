@@ -69,7 +69,7 @@ func _handle_wall_interaction() -> bool:
 	elif Input.is_action_just_pressed("jump"):
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
-		jump_component.jumps_remaining += 1
+		jump_component.db_jumps_remaining += 1
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
@@ -78,7 +78,7 @@ func _handle_wall_interaction() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if (Input.is_action_just_pressed("jump") or jump_component.has_buffered_jump()) and jump_component.jumps_remaining > 0:
+	if (Input.is_action_just_pressed("jump") or jump_component.has_buffered_jump()) and jump_component.db_jumps_remaining > 0:
 		jump_component.consume_jump_buffer()
 		Transitioned.emit(self, "jump")
 		return true
@@ -93,8 +93,8 @@ func _handle_dash() -> bool:
 
 func _handle_landing() -> bool:
 	if player.is_on_floor():
-		jump_component.jumps_remaining = jump_component.max_jumps
-		dash_component.remaining_dashs = dash_component.max_dash
+		jump_component.db_jumps_remaining = jump_component.max_db_jumps
+		dash_component.refill_dash()
 		Transitioned.emit(self, "idle")
 		return true
 	return false

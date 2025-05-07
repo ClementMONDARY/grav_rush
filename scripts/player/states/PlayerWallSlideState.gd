@@ -57,7 +57,7 @@ func _handle_movement(_delta: float) -> void:
 
 func _handle_wall_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
-		jump_component.jumps_remaining += 1
+		jump_component.db_jumps_remaining += 1
 		if Input.get_axis("move_left", "move_right") != 0:
 			player.velocity.x = wall_direction * jump_component.jump_force
 		else:

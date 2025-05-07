@@ -60,7 +60,7 @@ func _handle_wall_climb() -> void:
 
 func _handle_wall_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
-		jump_component.jumps_remaining += 1
+		jump_component.db_jumps_remaining += 1
 		if Input.get_axis("move_left", "move_right") == -wall_direction:
 			player.velocity.x = wall_direction * jump_component.jump_force
 			stamina_component.drain_stamina(200.0)
