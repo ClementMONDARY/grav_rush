@@ -37,7 +37,7 @@ func Physics_Update(delta: float) -> void:
 # --- Logic split below ---
 
 func _apply_gravity(delta: float) -> void:
-	player.velocity.y += gravity * delta
+	player.velocity.y = min(player.velocity.y + gravity * delta, 400)
 
 func _apply_air_control(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
@@ -78,10 +78,12 @@ func _handle_wall_interaction() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if Input.is_action_just_pressed("jump") and jump_component.jumps_remaining > 0:
+	if (Input.is_action_just_pressed("jump") or jump_component.has_buffered_jump()) and jump_component.jumps_remaining > 0:
+		jump_component.consume_jump_buffer()
 		Transitioned.emit(self, "jump")
 		return true
 	return false
+
 
 func _handle_dash() -> bool:
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:

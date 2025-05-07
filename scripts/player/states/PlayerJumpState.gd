@@ -20,9 +20,9 @@ func Enter() -> void:
 	dash_component.add_dash()
 
 func Physics_Update(delta: float) -> void:
+	_apply_variable_jump_height()
 	_apply_gravity(delta)
-	if _handle_double_jump():
-		return
+	_handle_double_jump()
 	_apply_air_control(delta)
 	_flip_sprite()
 	player.move_and_slide()
@@ -45,14 +45,17 @@ func _play_jump_animation() -> void:
 func _apply_initial_jump_velocity() -> void:
 	player.velocity.y = -jump_component.jump_force
 
+func _apply_variable_jump_height() -> void:
+	if !Input.is_action_pressed("jump"):
+		player.velocity.y *= 0.8
+
 func _apply_gravity(delta: float) -> void:
 	player.velocity.y += gravity * delta
 
-func _handle_double_jump() -> bool:
+func _handle_double_jump() -> void:
 	if Input.is_action_just_pressed("jump") and jump_component.jumps_remaining > 0:
 		Transitioned.emit(self, "jump")
-		return true
-	return false
+		return
 
 func _apply_air_control(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")

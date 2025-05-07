@@ -42,7 +42,7 @@ func _update_wall_collision() -> void:
 
 func _apply_gravity(delta: float) -> void:
 	if player.velocity.y > 0:
-		player.velocity.y = min(player.velocity.y + gravity * 0.1 * delta, 200)
+		player.velocity.y += min(gravity * 0.1 * delta, 200)
 	else:
 		player.velocity.y += gravity * delta
 	player.velocity.x = -wall_direction * 2

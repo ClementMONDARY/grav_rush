@@ -10,11 +10,11 @@
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
 [ext_resource type="Script" uid="uid://duv8qfbxhvh0s" path="res://scripts/player/states/PlayerWallGrabState.gd" id="10_fcs02"]
 [ext_resource type="Script" uid="uid://kp6mxnfyk2qt" path="res://scripts/player/states/PlayerDashState.gd" id="11_3j4b4"]
-[ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="11_je7p5"]
 [ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/PlayerWallClimbState.gd" id="11_myrg7"]
 [ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="12_fm80t"]
 [ext_resource type="Script" uid="uid://bwuu7f0cf7fn6" path="res://scripts/player/states/PlayerWallSlideState.gd" id="14_3j4b4"]
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
+[ext_resource type="PackedScene" uid="uid://dc1sh8pfn7fty" path="res://scenes/global_components/jump_component.tscn" id="17_kvlxm"]
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
 
@@ -890,23 +890,6 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_uf5tr"]
-resource_name = "low_stamina"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_kvlxm"]
 resource_name = "empty_stamina"
 length = 0.2
@@ -930,6 +913,23 @@ tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting"
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_uf5tr"]
+resource_name = "low_stamina"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1128,7 +1128,7 @@ sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
-jump_component = NodePath("../../Components/JumpComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 dash_component = NodePath("../../Components/DashComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
 air_control_component = NodePath("../../Components/AirControlComponent")
@@ -1140,7 +1140,7 @@ sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
-jump_component = NodePath("../../Components/JumpComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 dash_component = NodePath("../../Components/DashComponent")
 air_control_component = NodePath("../../Components/AirControlComponent")
 stamina_component = NodePath("../../Components/StaminaComponent")
@@ -1160,7 +1160,7 @@ sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
-jump_component = NodePath("../../Components/JumpComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
 [node name="WallGrab" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "jump_component", "stamina_component", "wall_detector")]
@@ -1168,7 +1168,7 @@ script = ExtResource("10_fcs02")
 sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 player = NodePath("../..")
-jump_component = NodePath("../../Components/JumpComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
@@ -1176,7 +1176,7 @@ wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 script = ExtResource("11_myrg7")
 sprite = NodePath("../../AnimatedSprite2D")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-jump_component = NodePath("../../Components/JumpComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 player = NodePath("../..")
 stamina_component = NodePath("../../Components/StaminaComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
@@ -1186,10 +1186,6 @@ wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 [node name="SpeedComponent" type="Node2D" parent="Components"]
 script = ExtResource("8_qek5x")
 metadata/_custom_type_script = "uid://ck58qp1xub6f1"
-
-[node name="JumpComponent" type="Node2D" parent="Components"]
-script = ExtResource("11_je7p5")
-metadata/_custom_type_script = "uid://dllf1u7papfbf"
 
 [node name="DashComponent" type="Node2D" parent="Components"]
 script = ExtResource("12_fm80t")
@@ -1207,3 +1203,5 @@ metadata/_custom_type_script = "uid://5qiyj46vs7r6"
 [node name="GroundControlComponent" type="Node2D" parent="Components"]
 script = ExtResource("20_8ydkj")
 metadata/_custom_type_script = "uid://7yqoxs3p6wpt"
+
+[node name="JumpComponent2" parent="Components" instance=ExtResource("17_kvlxm")]
