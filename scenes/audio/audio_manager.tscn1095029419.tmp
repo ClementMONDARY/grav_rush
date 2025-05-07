@@ -1,11 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://co1ba1frb83ms"]
+[gd_scene load_steps=5 format=3 uid="uid://co1ba1frb83ms"]
 
 [ext_resource type="Script" uid="uid://de8uhiahpm1n4" path="res://scripts/audio/AudioManager.gd" id="1_f113j"]
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="2_2ccwd"]
 [ext_resource type="Resource" uid="uid://cu33jvdd832lp" path="res://audio/ressources/player_dash.tres" id="3_cfl81"]
 [ext_resource type="Resource" uid="uid://j71qk05y5kbv" path="res://audio/ressources/player_wall_grab.tres" id="4_85pnb"]
-[ext_resource type="Resource" uid="uid://bh6q2el7d3ohl" path="res://audio/ressources/player_dash_sfx.tres" id="4_cfl81"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_f113j")
-sound_effects = Array[ExtResource("2_2ccwd")]([ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb")])
+sound_effects = Array[ExtResource("2_2ccwd")]([ExtResource("3_cfl81"), null, ExtResource("4_85pnb")])
