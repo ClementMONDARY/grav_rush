@@ -1,11 +1,14 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var player: CharacterBody2D
-@export var stamina_component: StaminaComponent
-@export var jump_component: JumpComponent
-@export var wall_detector: RayCast2D
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var wall_control_component: WallControlComponent = %WallControlComponent
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wall_direction: int = 0
@@ -42,7 +45,7 @@ func _update_wall_collision() -> void:
 
 func _apply_gravity(delta: float) -> void:
 	if player.velocity.y > 0:
-		player.velocity.y += min(gravity * 0.1 * delta, 200)
+		player.velocity.y += min(gravity * wall_control_component.slide_factor * delta, 200)
 	else:
 		player.velocity.y += gravity * delta
 	player.velocity.x = -wall_direction * 2
@@ -56,7 +59,7 @@ func _handle_movement(_delta: float) -> void:
 		Transitioned.emit(self, "fall")
 
 func _handle_wall_jump() -> void:
-	if Input.is_action_just_pressed("jump"):
+	if jump_component.has_buffered_jump():
 		jump_component.refill_bonus_jumps(1)
 		if Input.get_axis("move_left", "move_right") != 0:
 			player.velocity.x = wall_direction * jump_component.jump_force

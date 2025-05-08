@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=114 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
 [ext_resource type="PackedScene" uid="uid://dc1sh8pfn7fty" path="res://scenes/global_components/jump_component.tscn" id="17_kvlxm"]
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
+[ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
@@ -313,7 +314,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -325,7 +326,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -337,7 +338,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -349,7 +350,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -365,7 +366,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -377,7 +378,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -403,7 +404,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -420,7 +421,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -432,7 +433,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -449,7 +450,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -461,7 +462,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -477,7 +478,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -489,7 +490,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -515,7 +516,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -532,7 +533,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -544,7 +545,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -560,7 +561,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -572,7 +573,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -589,7 +590,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -601,7 +602,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -613,7 +614,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -630,7 +631,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -642,7 +643,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -658,7 +659,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -670,7 +671,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -687,7 +688,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -699,7 +700,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -870,7 +871,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -882,7 +883,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -899,7 +900,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -911,7 +912,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -928,7 +929,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1013,17 +1014,19 @@ max_value = 500.0
 show_percentage = false
 script = ExtResource("1_gx1jg")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -18)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="WallDetector" type="RayCast2D" parent="AnimatedSprite2D"]
+[node name="WallDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D"]
+unique_name_in_owner = true
 position = Vector2(0, 3)
 target_position = Vector2(8, 0)
 
-[node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+[node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
 position = Vector2(0, 3)
 emitting = false
@@ -1040,7 +1043,7 @@ initial_velocity_max = 13.05
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_uf5tr")
 
-[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 position = Vector2(0, -6)
 emitting = false
 amount = 4
@@ -1055,7 +1058,7 @@ initial_velocity_max = 30.7
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_kvlxm")
 
-[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 position = Vector2(0, 18)
 emitting = false
 amount = 3
@@ -1071,7 +1074,7 @@ scale_amount_min = 2.0
 scale_amount_max = 2.5
 color_ramp = SubResource("Gradient_lgqa7")
 
-[node name="Trail" parent="AnimatedSprite2D" instance=ExtResource("3_uf5tr")]
+[node name="Trail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
 top_level = true
 z_index = -1
 width = 2.0
@@ -1079,7 +1082,7 @@ script = ExtResource("4_lgqa7")
 fade_duration = 0.2
 MAX_LENGTH = 30
 
-[node name="TrailDurationTimer" type="Timer" parent="AnimatedSprite2D/Trail"]
+[node name="TrailDurationTimer" type="Timer" parent="PlayerAnimatedSprite2D/Trail"]
 wait_time = 0.15
 one_shot = true
 
@@ -1089,8 +1092,9 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="AnimationTree" type="AnimationTree" parent="AnimationPlayerSprite"]
-root_node = NodePath("../..")
+[node name="AnimationTreeSprite" type="AnimationTree" parent="AnimationPlayerSprite"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTreeSprite/../..")
 tree_root = SubResource("AnimationNodeStateMachine_8ydkj")
 anim_player = NodePath("..")
 parameters/Dash/FloorContext/blend_position = 0
@@ -1116,112 +1120,64 @@ shape = SubResource("CapsuleShape2D_kvlxm")
 script = ExtResource("2_gmlin")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("stamina_component", "dash_component", "jump_component", "player", "wall_detector", "ground_control_component", "anim_tree")]
+[node name="Idle" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("4_75vfm")
-stamina_component = NodePath("../../Components/StaminaComponent")
-dash_component = NodePath("../../Components/DashComponent")
-jump_component = NodePath("../../Components/JumpComponent2")
-player = NodePath("../..")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
-ground_control_component = NodePath("../../Components/GroundControlComponent")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 
-[node name="Run" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "player", "speed_component", "jump_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component", "anim_tree")]
+[node name="Run" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("5_0owmy")
-sprite = NodePath("../../AnimatedSprite2D")
-player = NodePath("../..")
-speed_component = NodePath("../../Components/SpeedComponent")
-jump_component = NodePath("../../Components/JumpComponent2")
-stamina_component = NodePath("../../Components/StaminaComponent")
-dash_component = NodePath("../../Components/DashComponent")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
-ground_control_component = NodePath("../../Components/GroundControlComponent")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 
-[node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "speed_component", "jump_component", "dash_component", "stamina_component", "air_control_component", "wall_detector")]
+[node name="Jump" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_qek5x")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-player = NodePath("../..")
-speed_component = NodePath("../../Components/SpeedComponent")
-jump_component = NodePath("../../Components/JumpComponent2")
-dash_component = NodePath("../../Components/DashComponent")
-stamina_component = NodePath("../../Components/StaminaComponent")
-air_control_component = NodePath("../../Components/AirControlComponent")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="Fall" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "speed_component", "jump_component", "dash_component", "air_control_component", "stamina_component", "wall_detector")]
+[node name="Fall" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("7_5gtgg")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-player = NodePath("../..")
-speed_component = NodePath("../../Components/SpeedComponent")
-jump_component = NodePath("../../Components/JumpComponent2")
-dash_component = NodePath("../../Components/DashComponent")
-air_control_component = NodePath("../../Components/AirControlComponent")
-stamina_component = NodePath("../../Components/StaminaComponent")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="Dash" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "dash_component", "stamina_component")]
+[node name="Dash" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_3j4b4")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-player = NodePath("../..")
-dash_component = NodePath("../../Components/DashComponent")
-stamina_component = NodePath("../../Components/StaminaComponent")
 
-[node name="WallSlide" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "stamina_component", "jump_component", "wall_detector")]
+[node name="WallSlide" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("14_3j4b4")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-player = NodePath("../..")
-stamina_component = NodePath("../../Components/StaminaComponent")
-jump_component = NodePath("../../Components/JumpComponent2")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="WallGrab" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "player", "jump_component", "stamina_component", "wall_detector")]
+[node name="WallGrab" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_fcs02")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-player = NodePath("../..")
-jump_component = NodePath("../../Components/JumpComponent2")
-stamina_component = NodePath("../../Components/StaminaComponent")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
-[node name="WallClimb" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "anim_tree", "jump_component", "player", "stamina_component", "wall_detector")]
+[node name="WallClimb" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_myrg7")
-sprite = NodePath("../../AnimatedSprite2D")
-anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
-jump_component = NodePath("../../Components/JumpComponent2")
-player = NodePath("../..")
-stamina_component = NodePath("../../Components/StaminaComponent")
-wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 
 [node name="Components" type="Node" parent="."]
 
 [node name="SpeedComponent" type="Node2D" parent="Components"]
+unique_name_in_owner = true
 script = ExtResource("8_qek5x")
 metadata/_custom_type_script = "uid://ck58qp1xub6f1"
 
 [node name="DashComponent" type="Node2D" parent="Components"]
+unique_name_in_owner = true
 script = ExtResource("12_fm80t")
 metadata/_custom_type_script = "uid://6gg02mmjhjfr"
 
 [node name="StaminaComponent" type="Node2D" parent="Components" node_paths=PackedStringArray("anim_tree")]
+unique_name_in_owner = true
 script = ExtResource("14_ugbui")
 anim_tree = NodePath("../../AnimationPlayerLowStamina/AnimationTree")
 metadata/_custom_type_script = "uid://b2hnxvhtnid6u"
 
 [node name="AirControlComponent" type="Node2D" parent="Components"]
+unique_name_in_owner = true
 script = ExtResource("19_lgqa7")
 metadata/_custom_type_script = "uid://5qiyj46vs7r6"
 
 [node name="GroundControlComponent" type="Node2D" parent="Components"]
+unique_name_in_owner = true
 script = ExtResource("20_8ydkj")
 metadata/_custom_type_script = "uid://7yqoxs3p6wpt"
 
-[node name="JumpComponent2" parent="Components" instance=ExtResource("17_kvlxm")]
+[node name="JumpComponent" parent="Components" instance=ExtResource("17_kvlxm")]
+unique_name_in_owner = true
 jump_buffer_time = 0.15
 
-[connection signal="timeout" from="AnimatedSprite2D/Trail/TrailDurationTimer" to="AnimatedSprite2D/Trail" method="_on_TrailDurationTimer_timeout"]
-[connection signal="state_changed" from="PlayerStateMachine" to="AnimatedSprite2D/Trail" method="_on_player_dash"]
+[node name="WallControlComponent" parent="Components" instance=ExtResource("20_3j4b4")]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="PlayerAnimatedSprite2D/Trail/TrailDurationTimer" to="PlayerAnimatedSprite2D/Trail" method="_on_TrailDurationTimer_timeout"]
+[connection signal="state_changed" from="PlayerStateMachine" to="PlayerAnimatedSprite2D/Trail" method="_on_player_dash"]

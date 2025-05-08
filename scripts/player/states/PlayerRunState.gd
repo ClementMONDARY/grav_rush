@@ -1,14 +1,16 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var player: CharacterBody2D
-@export var speed_component: SpeedComponent
-@export var jump_component: JumpComponent
-@export var stamina_component: StaminaComponent
-@export var dash_component: DashComponent
-@export var wall_detector: RayCast2D
-@export var ground_control_component: GroundControlComponent
-@export var anim_tree: AnimationTree
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var dash_component: DashComponent = %DashComponent
+@onready var speed_component: SpeedComponent = %SpeedComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Run")
@@ -41,7 +43,7 @@ func _handle_airborne() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if Input.is_action_just_pressed("jump") or jump_component.has_buffered_jump():
+	if jump_component.has_buffered_jump():
 		Transitioned.emit(self, "jump")
 		return true
 	return false

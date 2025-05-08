@@ -1,14 +1,16 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var player: CharacterBody2D
-@export var speed_component: SpeedComponent
-@export var jump_component: JumpComponent
-@export var dash_component: DashComponent
-@export var air_control_component: AirControlComponent
-@export var stamina_component: StaminaComponent
-@export var wall_detector: RayCast2D
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var dash_component: DashComponent = %DashComponent
+@onready var speed_component: SpeedComponent = %SpeedComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var air_control_component: AirControlComponent = %AirControlComponent
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wall_direction: int = 0
@@ -66,7 +68,7 @@ func _handle_wall_interaction() -> bool:
 	elif input_dir != 0:
 		Transitioned.emit(self, "wallslide")
 		return true
-	elif Input.is_action_just_pressed("jump"):
+	elif jump_component.has_buffered_jump():
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 		jump_component.refill_bonus_jumps(1)

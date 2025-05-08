@@ -1,11 +1,13 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var player: CharacterBody2D
-@export var jump_component: JumpComponent
-@export var stamina_component: StaminaComponent
-@export var wall_detector: RayCast2D
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wall_direction: int = 0
@@ -59,7 +61,7 @@ func _handle_wall_climb() -> void:
 		Transitioned.emit(self, "wallclimb")
 
 func _handle_wall_jump() -> void:
-	if Input.is_action_just_pressed("jump"):
+	if jump_component.has_buffered_jump():
 		jump_component.refill_bonus_jumps(1)
 		if Input.get_axis("move_left", "move_right") == -wall_direction:
 			player.velocity.x = wall_direction * jump_component.jump_force

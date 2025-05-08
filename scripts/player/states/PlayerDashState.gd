@@ -1,10 +1,13 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var player: CharacterBody2D
-@export var dash_component: DashComponent
-@export var stamina_component: StaminaComponent
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var dash_component: DashComponent = %DashComponent
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
 
 var dash_timer: float = 0.0
 var dash_direction: float = 0.0
@@ -40,7 +43,7 @@ func _update_dash_timer(delta: float) -> void:
 	dash_timer -= delta
 
 func _check_for_jump() -> void:
-	if Input.is_action_just_pressed("jump") && player.is_on_floor():
+	if jump_component.has_buffered_jump() && player.is_on_floor():
 		player.velocity.x *= 1.5
 		Transitioned.emit(self, "jump")
 		return
