@@ -60,7 +60,7 @@ func _handle_stamina() -> void:
 
 func _handle_wall_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
-		jump_component.db_jumps_remaining += 1
+		jump_component.refill_bonus_jumps(1)
 		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()

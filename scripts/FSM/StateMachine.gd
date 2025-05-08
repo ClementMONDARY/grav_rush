@@ -1,6 +1,8 @@
 extends Node
 class_name FiniteStateMachine
 
+signal state_changed(new_state_name: String)
+
 @export var initial_state: State
 
 var current_state: State
@@ -38,5 +40,6 @@ func change_state(source_state: State, new_state_name: String) -> void:
 	
 	print("Entered new state: " + new_state_name)
 	new_state.Enter()
-	
 	current_state = new_state
+	
+	state_changed.emit(new_state_name)

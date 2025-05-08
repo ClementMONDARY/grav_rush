@@ -3,6 +3,7 @@ extends State
 @export var sprite: AnimatedSprite2D
 @export var player: CharacterBody2D
 @export var speed_component: SpeedComponent
+@export var jump_component: JumpComponent
 @export var stamina_component: StaminaComponent
 @export var dash_component: DashComponent
 @export var wall_detector: RayCast2D
@@ -40,7 +41,7 @@ func _handle_airborne() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") or jump_component.has_buffered_jump():
 		Transitioned.emit(self, "jump")
 		return true
 	return false

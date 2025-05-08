@@ -6,7 +6,7 @@ class_name JumpComponent
 @export var jump_buffer_time: float = 0.2
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 
-var db_jumps_remaining: int = max_db_jumps
+var remaining_bonus_jumps: int = max_db_jumps
 
 func _ready() -> void:
 	jump_buffer_timer.one_shot = true
@@ -16,8 +16,17 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_timer.start()
 
+func refill_bonus_jumps(value: int = max_db_jumps) -> void:
+	remaining_bonus_jumps = mini(remaining_bonus_jumps + value, max_db_jumps)
+
+func use_bonus_jumps(value: int = 1) -> void:
+	remaining_bonus_jumps = maxi(remaining_bonus_jumps - value, 0)
+
 func has_buffered_jump() -> bool:
 	return jump_buffer_timer.time_left > 0.0 and Input.is_action_pressed("jump")
 
 func consume_jump_buffer() -> void:
 	jump_buffer_timer.stop()
+
+func canDoubleJump() -> bool:
+	return remaining_bonus_jumps > 0

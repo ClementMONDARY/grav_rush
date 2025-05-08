@@ -2,6 +2,7 @@ extends State
 
 @export var stamina_component: StaminaComponent
 @export var dash_component: DashComponent
+@export var jump_component: JumpComponent
 @export var player: CharacterBody2D
 @export var wall_detector: RayCast2D
 @export var ground_control_component: GroundControlComponent
@@ -48,7 +49,7 @@ func _handle_run() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") or jump_component.has_buffered_jump():
 		Transitioned.emit(self, "jump")
 		return true
 	return false

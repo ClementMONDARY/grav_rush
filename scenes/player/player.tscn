@@ -1,9 +1,11 @@
-[gd_scene load_steps=111 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=113 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
+[ext_resource type="PackedScene" uid="uid://cb0m6h4sxnbkg" path="res://trail.tscn" id="3_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
+[ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
@@ -1069,6 +1071,18 @@ scale_amount_min = 2.0
 scale_amount_max = 2.5
 color_ramp = SubResource("Gradient_lgqa7")
 
+[node name="Trail" parent="AnimatedSprite2D" instance=ExtResource("3_uf5tr")]
+top_level = true
+z_index = -1
+width = 2.0
+script = ExtResource("4_lgqa7")
+fade_duration = 0.2
+MAX_LENGTH = 30
+
+[node name="TrailDurationTimer" type="Timer" parent="AnimatedSprite2D/Trail"]
+wait_time = 0.15
+one_shot = true
+
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_3j4b4")
@@ -1102,20 +1116,22 @@ shape = SubResource("CapsuleShape2D_kvlxm")
 script = ExtResource("2_gmlin")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("stamina_component", "dash_component", "player", "wall_detector", "ground_control_component", "anim_tree")]
+[node name="Idle" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("stamina_component", "dash_component", "jump_component", "player", "wall_detector", "ground_control_component", "anim_tree")]
 script = ExtResource("4_75vfm")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 player = NodePath("../..")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
 ground_control_component = NodePath("../../Components/GroundControlComponent")
 anim_tree = NodePath("../../AnimationPlayerSprite/AnimationTree")
 
-[node name="Run" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "player", "speed_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component", "anim_tree")]
+[node name="Run" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("sprite", "player", "speed_component", "jump_component", "stamina_component", "dash_component", "wall_detector", "ground_control_component", "anim_tree")]
 script = ExtResource("5_0owmy")
 sprite = NodePath("../../AnimatedSprite2D")
 player = NodePath("../..")
 speed_component = NodePath("../../Components/SpeedComponent")
+jump_component = NodePath("../../Components/JumpComponent2")
 stamina_component = NodePath("../../Components/StaminaComponent")
 dash_component = NodePath("../../Components/DashComponent")
 wall_detector = NodePath("../../AnimatedSprite2D/WallDetector")
@@ -1205,4 +1221,7 @@ script = ExtResource("20_8ydkj")
 metadata/_custom_type_script = "uid://7yqoxs3p6wpt"
 
 [node name="JumpComponent2" parent="Components" instance=ExtResource("17_kvlxm")]
-max_db_jumps = 0
+jump_buffer_time = 0.15
+
+[connection signal="timeout" from="AnimatedSprite2D/Trail/TrailDurationTimer" to="AnimatedSprite2D/Trail" method="_on_TrailDurationTimer_timeout"]
+[connection signal="state_changed" from="PlayerStateMachine" to="AnimatedSprite2D/Trail" method="_on_player_dash"]
