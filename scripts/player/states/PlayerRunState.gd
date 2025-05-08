@@ -56,10 +56,24 @@ func _handle_dash() -> bool:
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
+	
 	if input_dir == 0:
-		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.SLIDE_FRICTION * 3.0 * delta)
+		# Décélération
+		player.velocity.x = move_toward(
+			player.velocity.x, 
+			0, 
+			ground_control_component.SLIDE_FRICTION * delta
+		)
 	else:
-		player.velocity.x = input_dir * speed_component.x_speed
+		# Calcul de la vitesse cible
+		var target_speed = input_dir * ground_control_component.max_speed
+		
+		# Accélération progressive
+		player.velocity.x = move_toward(
+			player.velocity.x,
+			target_speed,
+			ground_control_component.acceleration * delta
+		)
 
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")

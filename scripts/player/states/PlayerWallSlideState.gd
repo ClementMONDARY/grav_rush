@@ -52,6 +52,7 @@ func _apply_gravity(delta: float) -> void:
 
 func _check_for_fall() -> void:
 	if player.is_on_floor():
+		jump_component.refill_bonus_jump()
 		Transitioned.emit(self, "run")
 
 func _handle_movement(_delta: float) -> void:

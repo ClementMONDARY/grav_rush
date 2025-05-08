@@ -1,9 +1,10 @@
-[gd_scene load_steps=114 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=115 format=3 uid="uid://cjsayirv07kxw"]
 
+[ext_resource type="Script" uid="uid://bbfntnudfqqa5" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
-[ext_resource type="PackedScene" uid="uid://cb0m6h4sxnbkg" path="res://trail.tscn" id="3_uf5tr"]
+[ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
@@ -1004,6 +1005,15 @@ radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -2.0
+offset_top = -54.0
+offset_right = 38.0
+offset_bottom = -31.0
+scale = Vector2(0.323732, 0.317465)
+fit_content = true
+script = ExtResource("1_3j4b4")
+
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -16.0
 offset_top = -44.0
@@ -1080,10 +1090,6 @@ width = 2.0
 script = ExtResource("4_lgqa7")
 fade_duration = 0.2
 MAX_LENGTH = 30
-
-[node name="TrailDurationTimer" type="Timer" parent="PlayerAnimatedSprite2D/Trail"]
-wait_time = 0.15
-one_shot = true
 
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1177,5 +1183,4 @@ unique_name_in_owner = true
 [node name="WallControlComponent" parent="Components" instance=ExtResource("20_3j4b4")]
 unique_name_in_owner = true
 
-[connection signal="timeout" from="PlayerAnimatedSprite2D/Trail/TrailDurationTimer" to="PlayerAnimatedSprite2D/Trail" method="_on_TrailDurationTimer_timeout"]
 [connection signal="state_changed" from="PlayerStateMachine" to="PlayerAnimatedSprite2D/Trail" method="_on_player_dash"]

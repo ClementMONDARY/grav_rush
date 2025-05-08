@@ -3,6 +3,7 @@ class_name Trail
 
 var queue: Array = []
 @export var MAX_LENGTH: int = 10
+@onready var TRAIL_DURATION_TIMER: Timer = $TrailDurationTimer
 
 var emit_points: bool = true
 

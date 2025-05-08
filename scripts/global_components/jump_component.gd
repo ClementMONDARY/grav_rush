@@ -25,9 +25,9 @@ func _process(_delta: float) -> void:
 	
 	if PLAYER.is_on_floor():
 		COYOTE_TIME_TIMER.start()
-	
+
 func refill_bonus_jump(value: int = MAX_DB_JUMPS) -> void:
-	remaining_bonus_jumps = mini(remaining_bonus_jumps + value, MAX_DB_JUMPS + 1)
+	remaining_bonus_jumps = mini(remaining_bonus_jumps + value, MAX_DB_JUMPS)
 
 func use_bonus_jump(value: int = 1) -> void:
 	remaining_bonus_jumps = maxi(remaining_bonus_jumps - value, 0)

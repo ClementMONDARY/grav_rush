@@ -1,12 +1,12 @@
 extends Trail
 
 @onready var body: Node2D = get_parent()
-@onready var trail_timer: Timer = $TrailDurationTimer
 @export var fade_duration: float = 0.2
 
 var emit_duration_active := false
 
 func _ready() -> void:
+	TRAIL_DURATION_TIMER.timeout.connect(_on_TrailDurationTimer_timeout)
 	clear_points()
 	modulate.a = 0.0
 	emit_points = false
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func _on_player_dash(new_state_name: String) -> void:
 	if new_state_name == "dash":
 		emit_duration_active = true
-		trail_timer.start()
+		TRAIL_DURATION_TIMER.start()
 		modulate.a = 1.0  # Assure l'apparition immédiate
 
 func _on_TrailDurationTimer_timeout() -> void:

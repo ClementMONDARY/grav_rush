@@ -62,7 +62,6 @@ func _handle_stamina() -> void:
 
 func _handle_wall_jump() -> void:
 	if jump_component.has_buffered_jump():
-		jump_component.refill_bonus_jump(1)
 		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()

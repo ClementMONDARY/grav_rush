@@ -59,7 +59,7 @@ func _flip_sprite() -> void:
 func _handle_wall_interaction() -> bool:
 	if not wall_detector.is_colliding():
 		return false
-
+	
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if Input.is_action_pressed("wall_grab") and stamina_component.stamina > 0:
 		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
@@ -71,7 +71,6 @@ func _handle_wall_interaction() -> bool:
 	elif jump_component.has_buffered_jump():
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
-		jump_component.refill_bonus_jump(1)
 		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
@@ -81,10 +80,10 @@ func _handle_wall_interaction() -> bool:
 
 func _handle_jump() -> bool:
 	if jump_component.has_coyote_time() and jump_component.has_buffered_jump():
-		jump_component.refill_bonus_jump(1)
 		Transitioned.emit(self, "jump")
 		return true
 	if jump_component.can_double_jump() and jump_component.has_buffered_jump():
+		jump_component.use_bonus_jump()
 		Transitioned.emit(self, "jump")
 		return true
 	return false
@@ -97,6 +96,7 @@ func _handle_dash() -> bool:
 
 func _handle_landing() -> bool:
 	if player.is_on_floor():
+		jump_component.refill_bonus_jump()
 		Transitioned.emit(self, "run" if player.velocity.x != 0 else "idle")
 		return true
 	return false

@@ -18,8 +18,6 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 func Enter() -> void:
 	_play_jump_animation()
 	_apply_initial_jump_velocity()
-	if !player.is_on_floor():
-		jump_component.use_bonus_jump()
 	dash_component.add_dash()
 	jump_component.consume_jump_buffer()
 	jump_component.consume_coyote_time()
@@ -59,6 +57,7 @@ func _apply_gravity(delta: float) -> void:
 
 func _handle_double_jump() -> void:
 	if Input.is_action_just_pressed("jump") and jump_component.can_double_jump():
+		jump_component.use_bonus_jump()
 		Transitioned.emit(self, "jump")
 		return
 
@@ -94,7 +93,6 @@ func _handle_wall_interaction() -> bool:
 func _handle_wall_jump() -> void:
 	var collision_pos = wall_detector.get_collision_point()
 	wall_direction = sign(player.global_position.x - collision_pos.x)
-	jump_component.refill_bonus_jump(1)
 	player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 	sprite.scale.x = -sprite.scale.x
 	player.move_and_slide()
