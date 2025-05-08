@@ -64,10 +64,10 @@ func _handle_wall_jump() -> void:
 	if jump_component.has_buffered_jump():
 		jump_component.refill_bonus_jumps(1)
 		if Input.get_axis("move_left", "move_right") == -wall_direction:
-			player.velocity.x = wall_direction * jump_component.jump_force
+			player.velocity.x = wall_direction * jump_component.JUMP_FORCE
 			stamina_component.drain_stamina(200.0)
 		else:
-			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+			player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

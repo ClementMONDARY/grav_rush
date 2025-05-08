@@ -46,7 +46,7 @@ func _play_jump_animation() -> void:
 	anim_tree.get("parameters/playback").travel("Jump")
 
 func _apply_initial_jump_velocity() -> void:
-	player.velocity.y = -jump_component.jump_force
+	player.velocity.y = -jump_component.JUMP_FORCE
 
 func _apply_variable_jump_height() -> void:
 	if !Input.is_action_pressed("jump"):
@@ -63,10 +63,10 @@ func _handle_double_jump() -> void:
 func _apply_air_control(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir != 0:
-		var target_velocity = input_dir * speed_component.speed
-		player.velocity.x = lerp(player.velocity.x, target_velocity, air_control_component.acceleration * delta)
+		var target_velocity = input_dir * speed_component.x_speed
+		player.velocity.x = lerp(player.velocity.x, target_velocity, air_control_component.ACCELERATION * delta)
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, air_control_component.friction * delta)
+		player.velocity.x = move_toward(player.velocity.x, 0, air_control_component.FRICTION * delta)
 
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
@@ -93,7 +93,7 @@ func _handle_wall_jump() -> void:
 	var collision_pos = wall_detector.get_collision_point()
 	wall_direction = sign(player.global_position.x - collision_pos.x)
 	jump_component.refill_bonus_jumps(1)
-	player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+	player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 	sprite.scale.x = -sprite.scale.x
 	player.move_and_slide()
 	Transitioned.emit(self, "jump")

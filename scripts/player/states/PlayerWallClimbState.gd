@@ -45,12 +45,12 @@ func _update_wall_direction() -> void:
 
 func _handle_climb_movement() -> void:
 	input_dir = Input.get_axis("move_up", "move_down")
-	player.velocity.y = input_dir * wall_control_component.climbing_speed
+	player.velocity.y = input_dir * wall_control_component.CLIMBING_SPEED
 	player.velocity.x = -wall_direction * 2
 
 func _handle_stamina() -> void:
 	if input_dir < 0:
-		stamina_component.drain_stamina(stamina_component.stamina_drain_value * CLIMB_STAMINA_MULTIPLIER)
+		stamina_component.drain_stamina(stamina_component.stamina_drain_value * stamina_component.CLIMB_STAMINA_MULTIPLIER)
 	elif input_dir > 0:
 		stamina_component.drain_stamina(0.0)
 	else:  # Ne bouge pas
@@ -63,7 +63,7 @@ func _handle_stamina() -> void:
 func _handle_wall_jump() -> void:
 	if jump_component.has_buffered_jump():
 		jump_component.refill_bonus_jumps(1)
-		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

@@ -1,32 +1,33 @@
 extends Node2D
 class_name JumpComponent
 
-@export var jump_force: float = 400.0
-@export var max_db_jumps: int = 1
-@export var jump_buffer_time: float = 0.2
-@onready var jump_buffer_timer: Timer = $JumpBufferTimer
+@export var JUMP_FORCE: float = 400.0
+@export var MAX_DB_JUMPS: int = 1
+@export var JUMP_BUFFER_TIME: float = 0.2
 
-var remaining_bonus_jumps: int = max_db_jumps
+@onready var JUMP_BUFFER_TIMEr: Timer = $JumpBufferTimer
+
+var remaining_bonus_jumps: int = MAX_DB_JUMPS
 
 func _ready() -> void:
-	jump_buffer_timer.one_shot = true
-	jump_buffer_timer.wait_time = jump_buffer_time
+	JUMP_BUFFER_TIMEr.one_shot = true
+	JUMP_BUFFER_TIMEr.wait_time = JUMP_BUFFER_TIME
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
-		jump_buffer_timer.start()
+		JUMP_BUFFER_TIMEr.start()
 
-func refill_bonus_jumps(value: int = max_db_jumps) -> void:
-	remaining_bonus_jumps = mini(remaining_bonus_jumps + value, max_db_jumps)
+func refill_bonus_jumps(value: int = MAX_DB_JUMPS) -> void:
+	remaining_bonus_jumps = mini(remaining_bonus_jumps + value, MAX_DB_JUMPS)
 
 func use_bonus_jumps(value: int = 1) -> void:
 	remaining_bonus_jumps = maxi(remaining_bonus_jumps - value, 0)
 
 func has_buffered_jump() -> bool:
-	return jump_buffer_timer.time_left > 0.0 and Input.is_action_pressed("jump")
+	return JUMP_BUFFER_TIMEr.time_left > 0.0 and Input.is_action_pressed("jump")
 
 func consume_jump_buffer() -> void:
-	jump_buffer_timer.stop()
+	JUMP_BUFFER_TIMEr.stop()
 
 func canDoubleJump() -> bool:
 	return remaining_bonus_jumps > 0

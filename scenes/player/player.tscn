@@ -1174,7 +1174,6 @@ metadata/_custom_type_script = "uid://7yqoxs3p6wpt"
 
 [node name="JumpComponent" parent="Components" instance=ExtResource("17_kvlxm")]
 unique_name_in_owner = true
-jump_buffer_time = 0.15
 
 [node name="WallControlComponent" parent="Components" instance=ExtResource("20_3j4b4")]
 unique_name_in_owner = true

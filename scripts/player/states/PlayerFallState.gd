@@ -39,15 +39,15 @@ func Physics_Update(delta: float) -> void:
 # --- Logic split below ---
 
 func _apply_gravity(delta: float) -> void:
-	player.velocity.y = min(player.velocity.y + gravity * delta, 400)
+	player.velocity.y = min(player.velocity.y + gravity * delta * air_control_component.GRAVITY_FALL_MULTIPLIER, 400)
 
 func _apply_air_control(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir != 0:
-		var target_velocity = input_dir * speed_component.speed
-		player.velocity.x = lerp(player.velocity.x, target_velocity, air_control_component.acceleration * delta)
+		var target_velocity = input_dir * speed_component.x_speed
+		player.velocity.x = lerp(player.velocity.x, target_velocity, air_control_component.ACCELERATION * delta)
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, air_control_component.friction * delta)
+		player.velocity.x = move_toward(player.velocity.x, 0, air_control_component.FRICTION * delta)
 
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
@@ -72,7 +72,7 @@ func _handle_wall_interaction() -> bool:
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 		jump_component.refill_bonus_jumps(1)
-		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

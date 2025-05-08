@@ -57,9 +57,9 @@ func _handle_dash() -> bool:
 func _handle_horizontal_movement(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir == 0:
-		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.slide_friction * 3.0 * delta)
+		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.SLIDE_FRICTION * 3.0 * delta)
 	else:
-		player.velocity.x = input_dir * speed_component.speed
+		player.velocity.x = input_dir * speed_component.x_speed
 
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
