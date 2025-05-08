@@ -71,7 +71,7 @@ func _handle_wall_interaction() -> bool:
 	elif jump_component.has_buffered_jump():
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
-		jump_component.refill_bonus_jumps(1)
+		jump_component.refill_bonus_jump(1)
 		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
@@ -80,12 +80,14 @@ func _handle_wall_interaction() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if jump_component.has_buffered_jump() and jump_component.canDoubleJump():
-		jump_component.consume_jump_buffer()
+	if jump_component.has_coyote_time() and jump_component.has_buffered_jump():
+		jump_component.refill_bonus_jump(1)
+		Transitioned.emit(self, "jump")
+		return true
+	if jump_component.can_double_jump() and jump_component.has_buffered_jump():
 		Transitioned.emit(self, "jump")
 		return true
 	return false
-
 
 func _handle_dash() -> bool:
 	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
@@ -95,8 +97,6 @@ func _handle_dash() -> bool:
 
 func _handle_landing() -> bool:
 	if player.is_on_floor():
-		jump_component.refill_bonus_jumps()
-		dash_component.refill_dash()
-		Transitioned.emit(self, "idle")
+		Transitioned.emit(self, "run" if player.velocity.x != 0 else "idle")
 		return true
 	return false

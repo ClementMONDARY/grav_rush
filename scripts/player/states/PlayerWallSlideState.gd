@@ -60,7 +60,7 @@ func _handle_movement(_delta: float) -> void:
 
 func _handle_wall_jump() -> void:
 	if jump_component.has_buffered_jump():
-		jump_component.refill_bonus_jumps(1)
+		jump_component.refill_bonus_jump(1)
 		if Input.get_axis("move_left", "move_right") != 0:
 			player.velocity.x = wall_direction * jump_component.JUMP_FORCE
 		else:

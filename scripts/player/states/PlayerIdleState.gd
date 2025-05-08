@@ -12,6 +12,7 @@ extends State
 
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Idle")
+	jump_component.refill_bonus_jump()
 	stamina_component.refill_stamina()
 	dash_component.refill_dash()
 

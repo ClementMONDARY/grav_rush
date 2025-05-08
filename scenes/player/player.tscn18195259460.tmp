@@ -776,6 +776,7 @@ blend_point_1/pos = 1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j4nxn"]
+graph_offset = Vector2(-334.664, -49.4645)
 nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_cnsyf")
 nodes/FloorContext/position = Vector2(540, 20)
 nodes/output/position = Vector2(920, 100)
@@ -1097,7 +1098,7 @@ root_node = NodePath("%AnimationTreeSprite/../..")
 tree_root = SubResource("AnimationNodeStateMachine_8ydkj")
 anim_player = NodePath("..")
 parameters/Dash/FloorContext/blend_position = 0
-parameters/Jump/FloorContext/blend_position = -0.00597012
+parameters/Jump/FloorContext/blend_position = 0.0
 parameters/WallClimb/InputDir/blend_position = 0
 parameters/WallGrab/InputDir/blend_position = 0
 
@@ -1173,6 +1174,7 @@ metadata/_custom_type_script = "uid://7yqoxs3p6wpt"
 
 [node name="JumpComponent" parent="Components" instance=ExtResource("17_kvlxm")]
 unique_name_in_owner = true
+COYOTE_TIME_TIME = 1.0
 
 [node name="WallControlComponent" parent="Components" instance=ExtResource("20_3j4b4")]
 unique_name_in_owner = true
