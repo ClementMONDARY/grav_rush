@@ -7,17 +7,19 @@ enum STAMINA_STATE {
 	EMPTY
 }
 
+@export var MAX_STAMINA: float = 500.0
+@export var CLIMB_STAMINA_MULTIPLIER: float = 1.5
+@export var STAMINA_DRAIN_PER_SECOND: float = 100.0
+
 @export var anim_tree: AnimationTree
-@export var max_stamina: float = 500.0
-@export var stamina_drain_per_second: float = 100.0
 var stamina_drain_value: float:
 	get:
-		return stamina_drain_per_second * get_physics_process_delta_time()
+		return STAMINA_DRAIN_PER_SECOND * get_physics_process_delta_time()
 var low_stamina_threshold: float:
 	get:
-		return max_stamina * 0.4
+		return MAX_STAMINA * 0.4
 
-var stamina := max_stamina
+var stamina := MAX_STAMINA
 var current_state: STAMINA_STATE = STAMINA_STATE.NORMAL
 
 func drain_stamina(drain_value := stamina_drain_value) -> void:
@@ -32,7 +34,7 @@ func drain_stamina(drain_value := stamina_drain_value) -> void:
 		_set_state(STAMINA_STATE.NORMAL)
 
 func refill_stamina() -> void:
-	stamina = max_stamina
+	stamina = MAX_STAMINA
 	_set_state(STAMINA_STATE.NORMAL)
 
 func _set_state(new_state: STAMINA_STATE) -> void:

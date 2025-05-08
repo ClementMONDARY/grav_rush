@@ -1,11 +1,14 @@
 extends State
 
-@export var stamina_component: StaminaComponent
-@export var dash_component: DashComponent
-@export var player: CharacterBody2D
-@export var wall_detector: RayCast2D
-@export var ground_control_component: GroundControlComponent
-@export var anim_tree: AnimationTree
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+
+@onready var dash_component: DashComponent = %DashComponent
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Idle")
@@ -38,8 +41,12 @@ func _handle_airborne() -> bool:
 	return false
 
 func _apply_slide(delta: float) -> void:
-	if Input.get_axis("move_left", "move_right") == 0:
-		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.slide_friction * delta)
+	# Décélération progressive vers 0
+	player.velocity.x = move_toward(
+		player.velocity.x,
+		0,
+		ground_control_component.SLIDE_FRICTION * delta
+	)
 
 func _handle_run() -> bool:
 	if Input.get_axis("move_left", "move_right") != 0:
@@ -48,7 +55,7 @@ func _handle_run() -> bool:
 	return false
 
 func _handle_jump() -> bool:
-	if Input.is_action_just_pressed("jump"):
+	if jump_component.has_buffered_jump():
 		Transitioned.emit(self, "jump")
 		return true
 	return false

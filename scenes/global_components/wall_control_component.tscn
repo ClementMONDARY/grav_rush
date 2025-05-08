@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b75uk1srgxn6w"]
+
+[ext_resource type="Script" uid="uid://dqs8d64fdjl77" path="res://scripts/global_components/wall_control_component.gd" id="1_stj2t"]
+
+[node name="WallControlComponent" type="Node2D"]
+script = ExtResource("1_stj2t")

@@ -1,10 +1,13 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var player: CharacterBody2D
-@export var dash_component: DashComponent
-@export var stamina_component: StaminaComponent
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var dash_component: DashComponent = %DashComponent
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
 
 var dash_timer: float = 0.0
 var dash_direction: float = 0.0
@@ -31,16 +34,16 @@ func _start_dash() -> void:
 		anim_tree.set("parameters/Dash/FloorContext/blend_position", 1.0)
 	anim_tree.get("parameters/playback").travel("Dash")
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_DASH)
-	dash_timer = dash_component.dash_duration
+	dash_timer = dash_component.DASH_DURATION
 	dash_direction = sprite.scale.x
-	player.velocity.x = dash_direction * dash_component.dash_speed
+	player.velocity.x = dash_direction * dash_component.DASH_SPEED
 	player.velocity.y = 0
 
 func _update_dash_timer(delta: float) -> void:
 	dash_timer -= delta
 
 func _check_for_jump() -> void:
-	if Input.is_action_just_pressed("jump") && player.is_on_floor():
+	if jump_component.has_buffered_jump() && player.is_on_floor():
 		player.velocity.x *= 1.5
 		Transitioned.emit(self, "jump")
 		return
@@ -55,7 +58,7 @@ func _check_for_dash_end() -> void:
 
 func instantiate_ghosts() -> void:
 	var ghost_count = 4
-	var interval = dash_component.dash_duration / ghost_count
+	var interval = dash_component.DASH_DURATION / ghost_count
 
 	for i in range(ghost_count):
 		await get_tree().create_timer(interval).timeout

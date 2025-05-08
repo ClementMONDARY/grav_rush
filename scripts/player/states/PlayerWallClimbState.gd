@@ -1,12 +1,14 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var jump_component: JumpComponent
-@export var player: CharacterBody2D
-@export var stamina_component: StaminaComponent
-@export var climb_speed: float = 100.0
-@export var wall_detector: RayCast2D
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var wall_control_component: WallControlComponent = %WallControlComponent
 
 const CLIMB_STAMINA_MULTIPLIER := 1.5
 
@@ -43,12 +45,12 @@ func _update_wall_direction() -> void:
 
 func _handle_climb_movement() -> void:
 	input_dir = Input.get_axis("move_up", "move_down")
-	player.velocity.y = input_dir * climb_speed
+	player.velocity.y = input_dir * wall_control_component.CLIMBING_SPEED
 	player.velocity.x = -wall_direction * 2
 
 func _handle_stamina() -> void:
 	if input_dir < 0:
-		stamina_component.drain_stamina(stamina_component.stamina_drain_value * CLIMB_STAMINA_MULTIPLIER)
+		stamina_component.drain_stamina(stamina_component.stamina_drain_value * stamina_component.CLIMB_STAMINA_MULTIPLIER)
 	elif input_dir > 0:
 		stamina_component.drain_stamina(0.0)
 	else:  # Ne bouge pas
@@ -59,9 +61,8 @@ func _handle_stamina() -> void:
 		Transitioned.emit(self, "wallgrab")
 
 func _handle_wall_jump() -> void:
-	if Input.is_action_just_pressed("jump"):
-		jump_component.jumps_remaining += 1
-		player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+	if jump_component.has_buffered_jump():
+		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

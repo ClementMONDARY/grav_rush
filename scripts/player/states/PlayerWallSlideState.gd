@@ -1,11 +1,14 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var anim_tree: AnimationTree
-@export var player: CharacterBody2D
-@export var stamina_component: StaminaComponent
-@export var jump_component: JumpComponent
-@export var wall_detector: RayCast2D
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var wall_control_component: WallControlComponent = %WallControlComponent
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wall_direction: int = 0
@@ -42,13 +45,14 @@ func _update_wall_collision() -> void:
 
 func _apply_gravity(delta: float) -> void:
 	if player.velocity.y > 0:
-		player.velocity.y = min(player.velocity.y + gravity * 0.1 * delta, 200)
+		player.velocity.y += min(gravity * wall_control_component.SLIDE_FACTOR * delta, 200)
 	else:
 		player.velocity.y += gravity * delta
 	player.velocity.x = -wall_direction * 2
 
 func _check_for_fall() -> void:
 	if player.is_on_floor():
+		jump_component.refill_bonus_jump()
 		Transitioned.emit(self, "run")
 
 func _handle_movement(_delta: float) -> void:
@@ -56,12 +60,12 @@ func _handle_movement(_delta: float) -> void:
 		Transitioned.emit(self, "fall")
 
 func _handle_wall_jump() -> void:
-	if Input.is_action_just_pressed("jump"):
-		jump_component.jumps_remaining += 1
+	if jump_component.has_buffered_jump():
+		jump_component.refill_bonus_jump(1)
 		if Input.get_axis("move_left", "move_right") != 0:
-			player.velocity.x = wall_direction * jump_component.jump_force
+			player.velocity.x = wall_direction * jump_component.JUMP_FORCE
 		else:
-			player.velocity.x = wall_direction * jump_component.jump_force / 2.0
+			player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

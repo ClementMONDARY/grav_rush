@@ -1,13 +1,16 @@
 extends State
 
-@export var sprite: AnimatedSprite2D
-@export var player: CharacterBody2D
-@export var speed_component: SpeedComponent
-@export var stamina_component: StaminaComponent
-@export var dash_component: DashComponent
-@export var wall_detector: RayCast2D
-@export var ground_control_component: GroundControlComponent
-@export var anim_tree: AnimationTree
+@onready var player: CharacterBody2D = $"../.."
+
+@onready var wall_detector: RayCast2D = %WallDetector
+@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+
+@onready var jump_component: JumpComponent = %JumpComponent
+@onready var dash_component: DashComponent = %DashComponent
+@onready var speed_component: SpeedComponent = %SpeedComponent
+@onready var stamina_component: StaminaComponent = %StaminaComponent
+@onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Run")
@@ -35,12 +38,12 @@ func Physics_Update(delta: float) -> void:
 
 func _handle_airborne() -> bool:
 	if not player.is_on_floor():
-		Transitioned.emit(self, "jump")
+		Transitioned.emit(self, "fall")
 		return true
 	return false
 
 func _handle_jump() -> bool:
-	if Input.is_action_just_pressed("jump"):
+	if jump_component.has_buffered_jump():
 		Transitioned.emit(self, "jump")
 		return true
 	return false
@@ -53,10 +56,24 @@ func _handle_dash() -> bool:
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")
+	
 	if input_dir == 0:
-		player.velocity.x = move_toward(player.velocity.x, 0, ground_control_component.slide_friction * 3.0 * delta)
+		# Décélération
+		player.velocity.x = move_toward(
+			player.velocity.x, 
+			0, 
+			ground_control_component.SLIDE_FRICTION * delta
+		)
 	else:
-		player.velocity.x = input_dir * speed_component.speed
+		# Calcul de la vitesse cible
+		var target_speed = input_dir * ground_control_component.max_speed
+		
+		# Accélération progressive
+		player.velocity.x = move_toward(
+			player.velocity.x,
+			target_speed,
+			ground_control_component.acceleration * delta
+		)
 
 func _flip_sprite() -> void:
 	var input_dir = Input.get_axis("move_left", "move_right")

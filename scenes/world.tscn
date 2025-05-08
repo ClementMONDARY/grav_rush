@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dukxupiaj3qnt"]
+[gd_scene load_steps=8 format=3 uid="uid://dukxupiaj3qnt"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_nnsk1"]
 
@@ -12,6 +12,12 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4wyf3"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnsk1"]
+size = Vector2(183.851, 64.6763)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwgxs"]
+size = Vector2(79.7018, 74.3526)
 
 [node name="World" type="Node2D"]
 
@@ -39,3 +45,28 @@ shape = SubResource("WorldBoundaryShape2D_rwgxs")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(480, -128)
 shape = SubResource("WorldBoundaryShape2D_4wyf3")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(92, -32)
+shape = SubResource("RectangleShape2D_nnsk1")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D5"]
+offset_left = -92.0
+offset_top = -32.0
+offset_right = -54.0
+offset_bottom = 11.0
+scale = Vector2(4.84108, 1.48475)
+color = Color(0.183991, 0.000135717, 0.246784, 1)
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(34.4437, -191.554)
+scale = Vector2(0.86714, 2.11301)
+shape = SubResource("RectangleShape2D_rwgxs")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D6"]
+offset_left = -41.0
+offset_top = -37.0
+offset_right = -24.0
+offset_bottom = 16.0
+scale = Vector2(4.75236, 1.3959)
+color = Color(0.183991, 0.000135717, 0.246784, 1)
