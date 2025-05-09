@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=118 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://bbfntnudfqqa5" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
+[ext_resource type="Texture2D" uid="uid://blqjig4wo7jsx" path="res://graphics/player/landing/landing.png" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
@@ -301,14 +302,25 @@ animations = [{
 
 [sub_resource type="Gradient" id="Gradient_uf5tr"]
 interpolation_mode = 2
-colors = PackedColorArray(0.760784, 0.784314, 0.941176, 1, 0.760784, 0.784314, 0.941176, 0)
+offsets = PackedFloat32Array(0, 0.00666667, 0.593333, 1)
+colors = PackedColorArray(0.760784, 0.784314, 0.941176, 0.447059, 0.826742, 0.844752, 0.958367, 0.807843, 0.851841, 0.867508, 0.964614, 0.607843, 0.760784, 0.784314, 0.941176, 0)
 
 [sub_resource type="Gradient" id="Gradient_kvlxm"]
 interpolation_mode = 2
 colors = PackedColorArray(0, 0.580392, 1, 1, 0, 0.580392, 1, 0)
 
+[sub_resource type="Curve" id="Curve_3j4b4"]
+_data = [Vector2(0, 0), 0.0, 4.4824, 0, 0, Vector2(0.494318, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.7241, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Gradient" id="Gradient_lgqa7"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ioxgp"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="Animation" id="Animation_3j4b4"]
 length = 0.001
@@ -1007,37 +1019,37 @@ radius = 7.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = -2.0
-offset_top = -54.0
+offset_top = -53.5
 offset_right = 38.0
-offset_bottom = -31.0
+offset_bottom = -30.5
 scale = Vector2(0.323732, 0.317465)
 fit_content = true
 script = ExtResource("1_3j4b4")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -16.0
-offset_top = -44.0
+offset_top = -43.5
 offset_right = 17.0
-offset_bottom = -35.0
+offset_bottom = -34.5
 max_value = 500.0
 show_percentage = false
 script = ExtResource("1_gx1jg")
 
 [node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -18)
+position = Vector2(0, -17.5)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="WallDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D"]
 unique_name_in_owner = true
-position = Vector2(0, 3)
+position = Vector2(0, 2.5)
 target_position = Vector2(8, 0)
 
 [node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
-position = Vector2(0, 3)
+position = Vector2(0, 2.5)
 emitting = false
 amount = 10
 lifetime = 0.4
@@ -1068,10 +1080,11 @@ scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_kvlxm")
 
 [node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
-position = Vector2(0, 18)
+z_index = -1
+position = Vector2(0, 17.5)
 emitting = false
 amount = 3
-lifetime = 0.27
+lifetime = 0.3
 explosiveness = 0.8
 randomness = 0.8
 direction = Vector2(-1, -0.635)
@@ -1081,7 +1094,23 @@ initial_velocity_min = 50.0
 initial_velocity_max = 70.0
 scale_amount_min = 2.0
 scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
+
+[node name="LANDING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+unique_name_in_owner = true
+z_index = -1
+material = SubResource("CanvasItemMaterial_ioxgp")
+position = Vector2(0, 1.5)
+emitting = false
+amount = 1
+texture = ExtResource("4_yj68g")
+lifetime = 0.4
+one_shot = true
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_uf5tr")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="Trail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
 top_level = true

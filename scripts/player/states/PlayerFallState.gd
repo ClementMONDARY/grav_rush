@@ -3,6 +3,7 @@ extends State
 @onready var player: CharacterBody2D = $"../.."
 
 @onready var wall_detector: RayCast2D = %WallDetector
+@onready var landing_particules: CPUParticles2D = %LANDING_CPUParticles2D
 @onready var anim_tree: AnimationTree = %AnimationTreeSprite
 @onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 
@@ -96,6 +97,7 @@ func _handle_dash() -> bool:
 
 func _handle_landing() -> bool:
 	if player.is_on_floor():
+		landing_particules.emitting = true
 		jump_component.refill_bonus_jump()
 		Transitioned.emit(self, "run" if player.velocity.x != 0 else "idle")
 		return true

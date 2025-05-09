@@ -23,6 +23,14 @@ AudioManager="*res://scenes/audio/audio_manager.tscn"
 
 window/stretch/mode="canvas_items"
 
+[file_customization]
+
+folder_colors={
+"res://graphics/": "red",
+"res://scenes/": "yellow",
+"res://scripts/": "purple"
+}
+
 [input]
 
 jump={
