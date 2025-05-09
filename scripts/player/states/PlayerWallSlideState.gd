@@ -30,6 +30,7 @@ func Physics_Update(delta: float) -> void:
 
 func _start_wall_slide() -> void:
 	anim_tree.get("parameters/playback").travel("WallSlide")
+	player.velocity /= 2.0
 	_update_wall_direction()
 
 func _update_wall_direction() -> void:

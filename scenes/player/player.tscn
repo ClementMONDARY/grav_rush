@@ -1,13 +1,12 @@
-[gd_scene load_steps=118 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=116 format=3 uid="uid://cjsayirv07kxw"]
 
-[ext_resource type="Script" uid="uid://bbfntnudfqqa5" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
+[ext_resource type="Script" uid="uid://bbfntnudfqqa5" path="res://scripts/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
+[ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scripts/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
-[ext_resource type="Texture2D" uid="uid://blqjig4wo7jsx" path="res://graphics/player/landing/landing.png" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
@@ -315,12 +314,6 @@ point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_lgqa7"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ioxgp"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
 
 [sub_resource type="Animation" id="Animation_3j4b4"]
 length = 0.001
@@ -1096,21 +1089,6 @@ scale_amount_min = 2.0
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
-
-[node name="LANDING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
-unique_name_in_owner = true
-z_index = -1
-material = SubResource("CanvasItemMaterial_ioxgp")
-position = Vector2(0, 1.5)
-emitting = false
-amount = 1
-texture = ExtResource("4_yj68g")
-lifetime = 0.4
-one_shot = true
-gravity = Vector2(0, 0)
-color_ramp = SubResource("Gradient_uf5tr")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
 
 [node name="Trail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
 top_level = true
