@@ -1,9 +1,10 @@
-[gd_scene load_steps=138 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=140 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://bbfntnudfqqa5" path="res://scripts/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
 [ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scripts/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
+[ext_resource type="Shader" uid="uid://4ehlwihqd2va" path="res://shaders/outline2D_outer.gdshader" id="3_ioxgp"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
@@ -22,6 +23,11 @@
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cnsyf"]
+shader = ExtResource("3_ioxgp")
+shader_parameter/line_color = Color(0.205117, 0.205117, 0.205117, 1)
+shader_parameter/line_thickness = 0.6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -1164,6 +1170,7 @@ script = ExtResource("1_gx1jg")
 
 [node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_cnsyf")
 position = Vector2(0, -17.5)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"

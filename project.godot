@@ -30,7 +30,8 @@ folder_colors={
 "res://audio/": "green",
 "res://graphics/": "red",
 "res://scenes/": "yellow",
-"res://scripts/": "purple"
+"res://scripts/": "purple",
+"res://shaders/": "teal"
 }
 
 [input]
@@ -77,6 +78,10 @@ wall_grab={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Ground"
 
 [rendering]
 
