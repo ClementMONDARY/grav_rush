@@ -1,8 +1,8 @@
 [gd_scene load_steps=140 format=3 uid="uid://cjsayirv07kxw"]
 
-[ext_resource type="Script" uid="uid://bs6ob7vh7ygh" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
+[ext_resource type="Script" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
+[ext_resource type="Script" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
 [ext_resource type="Shader" uid="uid://4ehlwihqd2va" path="res://shaders/outline2D_outer.gdshader" id="3_ioxgp"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
@@ -1149,6 +1149,7 @@ graph_offset = Vector2(-184, -83)
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
+floor_snap_length = 5.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = -2.0
