@@ -1,14 +1,12 @@
 extends CPUParticles2D
 
 func wall_jump(parent_node_path: NodePath) -> void:
-	print("wall")
 	emission_rect_extents = Vector2(0.0, 2.0)
 	direction = Vector2(0.25, 1.0)
 	explosiveness = 1.0
 	_play(parent_node_path)
 
 func ground_jump(parent_node_path: NodePath) -> void:
-	print("ground")
 	emission_rect_extents = Vector2(2.0, 0.0)
 	direction = Vector2(0.0, -1.0)
 	explosiveness = 0.95

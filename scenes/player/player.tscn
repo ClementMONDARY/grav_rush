@@ -1,8 +1,8 @@
-[gd_scene load_steps=140 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=141 format=3 uid="uid://cjsayirv07kxw"]
 
-[ext_resource type="Script" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
+[ext_resource type="Script" uid="uid://bs6ob7vh7ygh" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
-[ext_resource type="Script" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
+[ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
 [ext_resource type="Shader" uid="uid://4ehlwihqd2va" path="res://shaders/outline2D_outer.gdshader" id="3_ioxgp"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
 [ext_resource type="Script" uid="uid://do4cnh2ys466y" path="res://scripts/player/particules/jumping_cpu_particles_2d.gd" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
+[ext_resource type="Script" uid="uid://md2rhldrj7qk" path="res://scripts/player/particules/footsteps_cpu_particles_2d.gd" id="5_cnsyf"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
@@ -344,7 +345,7 @@ func play(parent_node_path: NodePath) -> void:
 		push_error(\"play(): Invalid parent_node_path\")
 		return
 
-	var p = self.duplicate()
+	var p = self.duplicate(DUPLICATE_USE_INSTANTIATION)
 	parent_node.add_child(p)
 	p.emitting = true
 
@@ -488,18 +489,6 @@ tracks/2/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -757,17 +746,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"run"]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
+"values": [{
+"args": [NodePath("..")],
+"method": &"play"
+}, {
+"args": [NodePath("..")],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_uniwh"]
@@ -1149,7 +1143,7 @@ graph_offset = Vector2(-184, -83)
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
-floor_snap_length = 5.0
+floor_snap_length = 6.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = -2.0
@@ -1171,6 +1165,7 @@ script = ExtResource("1_gx1jg")
 
 [node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+z_index = 1
 material = SubResource("ShaderMaterial_cnsyf")
 position = Vector2(0, -17.5)
 sprite_frames = SubResource("SpriteFrames_qek5x")
@@ -1220,6 +1215,7 @@ position = Vector2(0, 17.5)
 emitting = false
 amount = 3
 lifetime = 0.3
+one_shot = true
 explosiveness = 0.8
 randomness = 0.8
 direction = Vector2(-1, -0.635)
@@ -1231,6 +1227,7 @@ scale_amount_min = 2.0
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
+script = ExtResource("5_cnsyf")
 
 [node name="LANDING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
@@ -1282,7 +1279,6 @@ script = ExtResource("4_yj68g")
 
 [node name="Trail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
 top_level = true
-z_index = -1
 width = 2.0
 script = ExtResource("4_lgqa7")
 fade_duration = 0.2
@@ -1326,6 +1322,7 @@ tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
 anim_player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_kvlxm")
 

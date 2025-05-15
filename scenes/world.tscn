@@ -21,10 +21,6 @@ size = Vector2(79.7018, 74.3526)
 
 [node name="World" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(240, -135)
-zoom = Vector2(2.4, 2.4)
-
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 position = Vector2(287, 0)
 
@@ -70,3 +66,7 @@ offset_right = -24.0
 offset_bottom = 16.0
 scale = Vector2(4.75236, 1.3959)
 color = Color(0.183991, 0.000135717, 0.246784, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(240, -135)
+zoom = Vector2(2.4, 2.4)
