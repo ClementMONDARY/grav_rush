@@ -99,6 +99,7 @@ func _handle_landing() -> bool:
 	if player.is_on_floor():
 		anim_tree_particules.get("parameters/playback").travel("Land")
 		jump_component.refill_bonus_jump()
+		AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
 		Transitioned.emit(self, "run" if player.velocity.x != 0 else "idle")
 		return true
 	return false

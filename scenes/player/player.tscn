@@ -1279,7 +1279,6 @@ color_ramp = SubResource("Gradient_cnsyf")
 script = SubResource("GDScript_007i1")
 
 [node name="JUMPING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
-z_index = 1
 position = Vector2(0, 17.5)
 emitting = false
 amount = 5
