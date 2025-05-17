@@ -6,7 +6,6 @@ extends Resource
 enum SOUND_EFFECT_TYPE {
 	ON_PLAYER_DASH,
 	ON_PLAYER_WALL_GRAB,
-	ON_PLAYER_WALL_SLIDE
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
@@ -15,6 +14,7 @@ enum SOUND_EFFECT_TYPE {
 @export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].
 @export_range(0.0, 4.0,.01) var pitch_scale: float = 1.0 ## The pitch scale of the [member sound_effect].
 @export_range(0.0, 1.0,.01) var pitch_randomness: float = 0.0 ## The pitch randomness setting of the [member sound_effect].
+@export var bus: StringName = &"Master" ## The audio bus to use for this sound effect.
 
 var audio_count: int = 0 ## The instances of this [AudioStreamMP3] currently playing.
 

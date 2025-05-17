@@ -13,6 +13,7 @@ config_version=5
 config/name="Gravity Switch"
 run/main_scene="uid://dukxupiaj3qnt"
 config/features=PackedStringArray("4.4", "Mobile")
+run/max_fps=60
 config/icon="uid://ytmptpppqhws"
 
 [autoload]
@@ -21,7 +22,18 @@ AudioManager="*res://scenes/audio/audio_manager.tscn"
 
 [display]
 
+window/size/mode=2
 window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://audio/": "green",
+"res://graphics/": "red",
+"res://scenes/": "yellow",
+"res://scripts/": "purple",
+"res://shaders/": "teal"
+}
 
 [input]
 
@@ -67,6 +79,10 @@ wall_grab={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Ground"
 
 [rendering]
 

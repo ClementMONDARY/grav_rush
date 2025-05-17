@@ -41,6 +41,7 @@ func create_2d_audio_at_location_with_culling(location: Vector2, type: SoundEffe
 				new_2D_audio.position = location
 				new_2D_audio.stream = sound.sound_effect
 				new_2D_audio.volume_db = sound.volume
+				new_2D_audio.bus = sound.bus
 				new_2D_audio.pitch_scale = sound.pitch_scale
 				new_2D_audio.pitch_scale += randf_range(-sound.pitch_randomness, sound.pitch_randomness)
 				new_2D_audio.finished.connect(self._on_audio_finished.bind(new_2D_audio, type))
@@ -71,6 +72,7 @@ func create_2d_audio_at_location(location: Vector2, type: SoundEffect.SOUND_EFFE
 					new_2D_audio.position = location
 					new_2D_audio.stream = sound.sound_effect
 					new_2D_audio.volume_db = sound.volume
+					new_2D_audio.bus = sound.bus
 					new_2D_audio.pitch_scale = sound.pitch_scale
 					new_2D_audio.pitch_scale += randf_range(-sound.pitch_randomness, sound.pitch_randomness)
 					if loop:
@@ -95,6 +97,7 @@ func create_audio(type: SoundEffect.SOUND_EFFECT_TYPE) -> void:
 					add_child(new_audio)
 					new_audio.stream = sound.sound_effect
 					new_audio.volume_db = sound.volume
+					new_audio.bus = sound.bus
 					new_audio.pitch_scale = sound.pitch_scale
 					new_audio.pitch_scale += randf_range(-sound.pitch_randomness, sound.pitch_randomness)
 					new_audio.finished.connect(sound.on_audio_finished)

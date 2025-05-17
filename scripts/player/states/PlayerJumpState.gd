@@ -3,7 +3,8 @@ extends State
 @onready var player: CharacterBody2D = $"../.."
 
 @onready var wall_detector: RayCast2D = %WallDetector
-@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var anim_tree_sprite: AnimationTree = %AnimationTreeSprite
+@onready var anim_tree_particules: AnimationTree = %AnimationTreeParticules
 @onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 
 @onready var jump_component: JumpComponent = %JumpComponent
@@ -16,7 +17,7 @@ var wall_direction: int = 0
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func Enter() -> void:
-	_play_jump_animation()
+	_play_jump_animations()
 	_apply_initial_jump_velocity()
 	dash_component.add_dash()
 	jump_component.consume_jump_buffer()
@@ -38,12 +39,13 @@ func Physics_Update(delta: float) -> void:
 
 # --- Logic split below ---
 
-func _play_jump_animation() -> void:
+func _play_jump_animations() -> void:
 	if player.is_on_floor() or jump_component.has_coyote_time():
-		anim_tree.set("parameters/Jump/FloorContext/blend_position", -1.0)
+		anim_tree_sprite.set("parameters/Jump/FloorContext/blend_position", -1.0)
 	else:
-		anim_tree.set("parameters/Jump/FloorContext/blend_position", 1.0)
-	anim_tree.get("parameters/playback").travel("Jump")
+		anim_tree_sprite.set("parameters/Jump/FloorContext/blend_position", 1.0)
+	anim_tree_sprite.get("parameters/playback").travel("Jump")
+	anim_tree_particules.get("parameters/playback").travel("Jump")
 
 func _apply_initial_jump_velocity() -> void:
 	player.velocity.y = -jump_component.JUMP_FORCE

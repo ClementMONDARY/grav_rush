@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://byn113xx8i0qu"]
+
+[ext_resource type="Texture2D" uid="uid://cj6giggoqavaw" path="res://graphics/world/torch_c.png" id="1_28ni6"]
+
+[sub_resource type="Curve" id="Curve_15p82"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.267045, 0.921348), 0.534467, 0.534467, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_2bxqd"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.72, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.737255, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_vodrf"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.571068, 0.508893, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kld5w"]
+atlas = ExtResource("1_28ni6")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj8br"]
+atlas = ExtResource("1_28ni6")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a77es"]
+atlas = ExtResource("1_28ni6")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cupln"]
+atlas = ExtResource("1_28ni6")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1uiw2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kld5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj8br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a77es")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cupln")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_3l2fg"]
+offsets = PackedFloat32Array(0, 0.714286)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n71f7"]
+gradient = SubResource("Gradient_3l2fg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="TorchCenter_" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -15)
+amount = 15
+lifetime = 0.4
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, -30)
+initial_velocity_max = 10.0
+angular_velocity_max = 100.0
+linear_accel_max = 100.0
+scale_amount_max = 1.8
+scale_amount_curve = SubResource("Curve_15p82")
+color_ramp = SubResource("Gradient_2bxqd")
+color_initial_ramp = SubResource("Gradient_vodrf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.5, -16)
+sprite_frames = SubResource("SpriteFrames_1uiw2")
+autoplay = "default"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+color = Color(1, 0.581762, 0.306634, 1)
+texture = SubResource("GradientTexture2D_n71f7")

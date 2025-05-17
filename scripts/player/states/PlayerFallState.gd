@@ -3,7 +3,8 @@ extends State
 @onready var player: CharacterBody2D = $"../.."
 
 @onready var wall_detector: RayCast2D = %WallDetector
-@onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var anim_tree_sprite: AnimationTree = %AnimationTreeSprite
+@onready var anim_tree_particules: AnimationTree = %AnimationTreeParticules
 @onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 
 @onready var jump_component: JumpComponent = %JumpComponent
@@ -16,7 +17,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var wall_direction: int = 0
 
 func Enter() -> void:
-	anim_tree.get("parameters/playback").travel("Fall")
+	anim_tree_sprite.get("parameters/playback").travel("Fall")
 
 func Physics_Update(delta: float) -> void:
 	_apply_gravity(delta)
@@ -96,6 +97,7 @@ func _handle_dash() -> bool:
 
 func _handle_landing() -> bool:
 	if player.is_on_floor():
+		anim_tree_particules.get("parameters/playback").travel("Land")
 		jump_component.refill_bonus_jump()
 		Transitioned.emit(self, "run" if player.velocity.x != 0 else "idle")
 		return true

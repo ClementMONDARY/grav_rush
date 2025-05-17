@@ -1,13 +1,16 @@
-[gd_scene load_steps=115 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=141 format=3 uid="uid://cjsayirv07kxw"]
 
-[ext_resource type="Script" uid="uid://bbfntnudfqqa5" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
+[ext_resource type="Script" uid="uid://bs6ob7vh7ygh" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://b81uovhkwc7tb" path="res://graphics/player/adventurer-v1.5-Sheet.png" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://dp8siuuee6w7m" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
+[ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
+[ext_resource type="Shader" uid="uid://4ehlwihqd2va" path="res://shaders/outline2D_outer.gdshader" id="3_ioxgp"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
+[ext_resource type="Script" uid="uid://do4cnh2ys466y" path="res://scripts/player/particules/jumping_cpu_particles_2d.gd" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
+[ext_resource type="Script" uid="uid://md2rhldrj7qk" path="res://scripts/player/particules/footsteps_cpu_particles_2d.gd" id="5_cnsyf"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
@@ -21,6 +24,11 @@
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cnsyf"]
+shader = ExtResource("3_ioxgp")
+shader_parameter/line_color = Color(0.205117, 0.205117, 0.205117, 1)
+shader_parameter/line_thickness = 0.6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -301,14 +309,152 @@ animations = [{
 
 [sub_resource type="Gradient" id="Gradient_uf5tr"]
 interpolation_mode = 2
-colors = PackedColorArray(0.760784, 0.784314, 0.941176, 1, 0.760784, 0.784314, 0.941176, 0)
+offsets = PackedFloat32Array(0, 0.00666667, 0.593333, 1)
+colors = PackedColorArray(0.760784, 0.784314, 0.941176, 0.447059, 0.826742, 0.844752, 0.958367, 0.807843, 0.851841, 0.867508, 0.964614, 0.607843, 0.760784, 0.784314, 0.941176, 0)
 
 [sub_resource type="Gradient" id="Gradient_kvlxm"]
 interpolation_mode = 2
 colors = PackedColorArray(0, 0.580392, 1, 1, 0, 0.580392, 1, 0)
 
+[sub_resource type="Curve" id="Curve_3j4b4"]
+_data = [Vector2(0, 0), 0.0, 4.4824, 0, 0, Vector2(0.494318, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.7241, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Gradient" id="Gradient_lgqa7"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_yj68g"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -49.901, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_ioxgp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5625, 0.842697), -0.735824, -0.735824, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_cnsyf"]
+colors = PackedColorArray(0.928743, 0.935693, 0.98251, 1, 0.827451, 0.843137, 0.956863, 0.337255)
+
+[sub_resource type="GDScript" id="GDScript_007i1"]
+script/source = "extends CPUParticles2D
+
+func play(parent_node_path: NodePath) -> void:
+	var parent_node = get_node_or_null(parent_node_path)
+	if parent_node == null:
+		push_error(\"play(): Invalid parent_node_path\")
+		return
+
+	var p = self.duplicate(DUPLICATE_USE_INSTANTIATION)
+	parent_node.add_child(p)
+	p.emitting = true
+
+	await get_tree().create_timer(p.lifetime).timeout
+	p.queue_free()
+"
+
+[sub_resource type="Curve" id="Curve_cnsyf"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 25.45), 0.0, -49.901, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_007i1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5625, 0.842697), -0.735824, -0.735824, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_6cv16"]
+colors = PackedColorArray(0.928743, 0.935693, 0.98251, 1, 0.827451, 0.843137, 0.956863, 0.337255)
+
+[sub_resource type="Animation" id="Animation_pk8ii"]
+resource_name = "ground_jump"
+length = 0.001
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimatedSprite2D/JUMPING_CPUParticles2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [NodePath("..")],
+"method": &"ground_jump"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tffgl"]
+resource_name = "land"
+length = 0.001
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimatedSprite2D/LANDING_CPUParticles2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [NodePath("..")],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pk8ii"]
+_data = {
+&"ground_jump": SubResource("Animation_pk8ii"),
+&"land": SubResource("Animation_tffgl")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yj68g"]
+animation = &"ground_jump"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kxw46"]
+graph_offset = Vector2(-388.257, 68.6642)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_yj68g")
+nodes/Animation/position = Vector2(60, 140)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_007i1"]
+animation = &"land"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tffgl"]
+graph_offset = Vector2(-360, 58)
+nodes/land/node = SubResource("AnimationNodeAnimation_007i1")
+nodes/land/position = Vector2(40, 100)
+node_connections = [&"output", 0, &"land"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yj68g"]
+graph_offset = Vector2(-251, 70)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6cv16"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4nxn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28m0y"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbmj2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kxw46"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pk8ii"]
+states/End/position = Vector2(884, 116)
+states/Jump/node = SubResource("AnimationNodeBlendTree_kxw46")
+states/Jump/position = Vector2(370, -35)
+states/Land/node = SubResource("AnimationNodeBlendTree_tffgl")
+states/Land/position = Vector2(582, 116)
+states/RESET/node = SubResource("AnimationNodeBlendTree_yj68g")
+states/RESET/position = Vector2(370, 116)
+states/Start/position = Vector2(219, 116)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_6cv16"), "RESET", "Land", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "Land", "RESET", SubResource("AnimationNodeStateMachineTransition_28m0y"), "RESET", "Jump", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "Jump", "RESET", SubResource("AnimationNodeStateMachineTransition_kxw46")]
+graph_offset = Vector2(-23, -63)
 
 [sub_resource type="Animation" id="Animation_3j4b4"]
 length = 0.001
@@ -343,18 +489,6 @@ tracks/2/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -612,17 +746,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"run"]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D:emitting")
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
+"values": [{
+"args": [NodePath("..")],
+"method": &"play"
+}, {
+"args": [NodePath("..")],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_uniwh"]
@@ -1004,40 +1143,46 @@ graph_offset = Vector2(-184, -83)
 radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
+floor_snap_length = 6.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 offset_left = -2.0
-offset_top = -54.0
+offset_top = -53.5
 offset_right = 38.0
-offset_bottom = -31.0
+offset_bottom = -30.5
 scale = Vector2(0.323732, 0.317465)
 fit_content = true
 script = ExtResource("1_3j4b4")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -16.0
-offset_top = -44.0
+offset_top = -43.5
 offset_right = 17.0
-offset_bottom = -35.0
+offset_bottom = -34.5
 max_value = 500.0
 show_percentage = false
 script = ExtResource("1_gx1jg")
 
 [node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -18)
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_cnsyf")
+position = Vector2(0, -17.5)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="WallDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D"]
 unique_name_in_owner = true
-position = Vector2(0, 3)
+position = Vector2(0, 2.5)
 target_position = Vector2(8, 0)
 
 [node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
-position = Vector2(0, 3)
+position = Vector2(0, 2.5)
 emitting = false
 amount = 10
 lifetime = 0.4
@@ -1068,10 +1213,12 @@ scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_kvlxm")
 
 [node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
-position = Vector2(0, 18)
+z_index = -1
+position = Vector2(0, 17.5)
 emitting = false
 amount = 3
-lifetime = 0.27
+lifetime = 0.3
+one_shot = true
 explosiveness = 0.8
 randomness = 0.8
 direction = Vector2(-1, -0.635)
@@ -1081,15 +1228,75 @@ initial_velocity_min = 50.0
 initial_velocity_max = 70.0
 scale_amount_min = 2.0
 scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
+script = ExtResource("5_cnsyf")
+
+[node name="LANDING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+z_index = -1
+position = Vector2(0, 17.5)
+emitting = false
+amount = 15
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+emission_shape = 3
+emission_rect_extents = Vector2(4, 0)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 35.0
+damping_min = 5.0
+damping_max = 5.0
+damping_curve = SubResource("Curve_yj68g")
+angle_max = 45.0
+scale_amount_min = 2.0
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_ioxgp")
+color_ramp = SubResource("Gradient_cnsyf")
+script = SubResource("GDScript_007i1")
+
+[node name="JUMPING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+position = Vector2(0, 17.5)
+emitting = false
+amount = 5
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.95
+emission_shape = 3
+emission_rect_extents = Vector2(2, 0)
+direction = Vector2(-0.25, 1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 35.0
+initial_velocity_max = 45.0
+damping_min = 5.0
+damping_max = 5.0
+damping_curve = SubResource("Curve_cnsyf")
+angle_max = 45.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_007i1")
+color_ramp = SubResource("Gradient_6cv16")
+script = ExtResource("4_yj68g")
 
 [node name="Trail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
 top_level = true
-z_index = -1
 width = 2.0
 script = ExtResource("4_lgqa7")
 fade_duration = 0.2
 MAX_LENGTH = 30
+
+[node name="AnimationPlayerParticules" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pk8ii")
+}
+
+[node name="AnimationTreeParticules" type="AnimationTree" parent="AnimationPlayerParticules"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTreeParticules/../..")
+tree_root = SubResource("AnimationNodeStateMachine_pk8ii")
+anim_player = NodePath("..")
 
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1118,6 +1325,7 @@ tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
 anim_player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_kvlxm")
 
