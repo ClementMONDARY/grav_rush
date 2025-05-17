@@ -35,6 +35,10 @@ folder_colors={
 "res://shaders/": "teal"
 }
 
+[global_group]
+
+walkable_tilemaps=""
+
 [input]
 
 jump={

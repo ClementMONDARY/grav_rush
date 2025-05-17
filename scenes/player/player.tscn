@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
 [ext_resource type="Script" uid="uid://do4cnh2ys466y" path="res://scripts/player/particules/jumping_cpu_particles_2d.gd" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
-[ext_resource type="Script" uid="uid://md2rhldrj7qk" path="res://scripts/player/particules/footsteps_cpu_particles_2d.gd" id="5_cnsyf"]
+[ext_resource type="Script" uid="uid://dujmxytldpe57" path="res://scripts/player/player_nodes/footstep_player.gd" id="5_007i1"]
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
@@ -312,16 +312,16 @@ interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.00666667, 0.593333, 1)
 colors = PackedColorArray(0.760784, 0.784314, 0.941176, 0.447059, 0.826742, 0.844752, 0.958367, 0.807843, 0.851841, 0.867508, 0.964614, 0.607843, 0.760784, 0.784314, 0.941176, 0)
 
-[sub_resource type="Gradient" id="Gradient_kvlxm"]
-interpolation_mode = 2
-colors = PackedColorArray(0, 0.580392, 1, 1, 0, 0.580392, 1, 0)
-
 [sub_resource type="Curve" id="Curve_3j4b4"]
 _data = [Vector2(0, 0), 0.0, 4.4824, 0, 0, Vector2(0.494318, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.7241, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_lgqa7"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_kvlxm"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0.580392, 1, 1, 0, 0.580392, 1, 0)
 
 [sub_resource type="Curve" id="Curve_yj68g"]
 _limits = [0.0, 100.0, 0.0, 1.0]
@@ -749,18 +749,35 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerAnimatedSprite2D/FOOTSTEPS_CPUParticles2D")
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/FootstepPlayer")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.266667),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [NodePath("..")],
-"method": &"play"
+"args": [NodePath("../..")],
+"method": &"play_footstep_particles"
 }, {
-"args": [NodePath("..")],
-"method": &"play"
+"args": [NodePath("../..")],
+"method": &"play_footstep_particles"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/FootstepPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep_sound"
+}, {
+"args": [],
+"method": &"play_footstep_sound"
 }]
 }
 
@@ -1197,24 +1214,12 @@ initial_velocity_max = 13.05
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_uf5tr")
 
-[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
-position = Vector2(0, -6)
-emitting = false
-amount = 4
-lifetime = 0.5
-explosiveness = 1.0
-local_coords = true
-emission_shape = 3
-emission_rect_extents = Vector2(2.345, 2.395)
-direction = Vector2(0, -1)
-gravity = Vector2(0, 100)
-initial_velocity_max = 30.7
-scale_amount_max = 2.0
-color_ramp = SubResource("Gradient_kvlxm")
-
-[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+[node name="FootstepPlayer" type="Node2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
 position = Vector2(0, 17.5)
+script = ExtResource("5_007i1")
+
+[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
 emitting = false
 amount = 3
 lifetime = 0.3
@@ -1230,7 +1235,24 @@ scale_amount_min = 2.0
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
-script = ExtResource("5_cnsyf")
+
+[node name="FloorDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
+target_position = Vector2(0, 2)
+
+[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+position = Vector2(0, -6)
+emitting = false
+amount = 4
+lifetime = 0.5
+explosiveness = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2.345, 2.395)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_max = 30.7
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_kvlxm")
 
 [node name="LANDING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
@@ -1257,6 +1279,7 @@ color_ramp = SubResource("Gradient_cnsyf")
 script = SubResource("GDScript_007i1")
 
 [node name="JUMPING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+z_index = 1
 position = Vector2(0, 17.5)
 emitting = false
 amount = 5
@@ -1328,6 +1351,7 @@ anim_player = NodePath("..")
 z_index = 1
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_kvlxm")
+debug_color = Color(0.993162, 0, 0.248346, 0)
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gmlin")
