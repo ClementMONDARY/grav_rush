@@ -17,4 +17,5 @@ sound_effect = SubResource("AudioStreamRandomizer_f2oaq")
 volume = -15.0
 pitch_scale = 1.5
 pitch_randomness = 0.0
+bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
