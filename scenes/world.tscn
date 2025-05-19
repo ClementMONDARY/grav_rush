@@ -1,72 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://dukxupiaj3qnt"]
+[gd_scene load_steps=3 format=3 uid="uid://dukxupiaj3qnt"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_nnsk1"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e5uuo"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nnsk1"]
-normal = Vector2(0, 1)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwgxs"]
-normal = Vector2(1, 0)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4wyf3"]
-normal = Vector2(-1, 0)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnsk1"]
-size = Vector2(183.851, 64.6763)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwgxs"]
-size = Vector2(79.7018, 74.3526)
+[ext_resource type="PackedScene" uid="uid://0adsnuthljsc" path="res://scenes/levels/screen_0_0.tscn" id="2_rwgxs"]
 
 [node name="World" type="Node2D"]
 
+[node name="Screen_0_0" parent="." instance=ExtResource("2_rwgxs")]
+
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-position = Vector2(287, 0)
+position = Vector2(145, -65)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(240, 0)
-shape = SubResource("WorldBoundaryShape2D_e5uuo")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(240, -270)
-shape = SubResource("WorldBoundaryShape2D_nnsk1")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -128)
-shape = SubResource("WorldBoundaryShape2D_rwgxs")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(480, -128)
-shape = SubResource("WorldBoundaryShape2D_4wyf3")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(92, -32)
-shape = SubResource("RectangleShape2D_nnsk1")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D5"]
-offset_left = -92.0
-offset_top = -32.0
-offset_right = -54.0
-offset_bottom = 11.0
-scale = Vector2(4.84108, 1.48475)
-color = Color(0.183991, 0.000135717, 0.246784, 1)
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(34.4437, -191.554)
-scale = Vector2(0.86714, 2.11301)
-shape = SubResource("RectangleShape2D_rwgxs")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D6"]
-offset_left = -41.0
-offset_top = -37.0
-offset_right = -24.0
-offset_bottom = 16.0
-scale = Vector2(4.75236, 1.3959)
-color = Color(0.183991, 0.000135717, 0.246784, 1)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(240, -135)
-zoom = Vector2(2.4, 2.4)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, -55)
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = -1120
+limit_right = 2528
+limit_bottom = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+editor_draw_limits = true

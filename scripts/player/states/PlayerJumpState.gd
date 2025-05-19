@@ -19,6 +19,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 func Enter() -> void:
 	_play_jump_animations()
 	_apply_initial_jump_velocity()
+	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_JUMP)
 	dash_component.add_dash()
 	jump_component.consume_jump_buffer()
 	jump_component.consume_coyote_time()
