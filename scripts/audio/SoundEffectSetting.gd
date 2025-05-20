@@ -6,6 +6,9 @@ extends Resource
 enum SOUND_EFFECT_TYPE {
 	ON_PLAYER_DASH,
 	ON_PLAYER_WALL_GRAB,
+	ON_PLAYER_FOOTSTEP_STONE,
+	ON_PLAYER_LAND_STONE,
+	ON_PLAYER_JUMP
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

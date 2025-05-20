@@ -88,4 +88,5 @@ autoplay = "default"
 position = Vector2(0, -16)
 scale = Vector2(2, 2)
 color = Color(1, 0.581762, 0.306634, 1)
+range_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_n71f7")

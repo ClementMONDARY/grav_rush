@@ -89,4 +89,5 @@ frame_progress = 0.974288
 position = Vector2(8, -8)
 scale = Vector2(2, 2)
 color = Color(1, 0.581762, 0.306634, 1)
+range_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_k5rb2")
