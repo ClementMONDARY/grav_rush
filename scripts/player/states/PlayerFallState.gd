@@ -18,6 +18,12 @@ var wall_direction: int = 0
 
 func Enter() -> void:
 	anim_tree_sprite.get("parameters/playback").travel("Fall")
+	# handle wall ledge climb
+	if player.velocity.y < 0:
+		# handle climb ledge
+		var ledge_position = wall_detector.get_collision_point()
+		player.global_position = Vector2(ledge_position.x + 5, ledge_position.y)
+		Transitioned.emit(self, "idle")
 
 func Physics_Update(delta: float) -> void:
 	_apply_gravity(delta)
@@ -73,7 +79,7 @@ func _handle_wall_interaction() -> bool:
 		var collision_pos = wall_detector.get_collision_point()
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
-		sprite.scale.x = -sprite.scale.x
+		sprite.scale.x = - sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 		return true
