@@ -73,5 +73,6 @@ func _check_wall_climb_conditions() -> void:
 	if input_dir < 0 and not wall_detector.is_colliding():
 		var climb_offset := Vector2(14 * -wall_direction, -12)  # vers le haut et vers le mur
 		player.global_position += climb_offset
+		player.velocity = Vector2.ZERO
 		Transitioned.emit(self, "idle")
 		return
