@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccu8orxn0eq01"]
+
+[ext_resource type="Script" uid="uid://be1bt234n75jd" path="res://scripts/world/player_camera.gd" id="1_7pa0d"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7pa0d"]
+a = Vector2(-162, 0)
+b = Vector2(162, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_eanys"]
+a = Vector2(288, 0)
+b = Vector2(-288, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_tparg"]
+a = Vector2(162, 0)
+b = Vector2(-162, 0)
+
+[node name="PlayerCamera" type="Camera2D"]
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+editor_draw_limits = true
+script = ExtResource("1_7pa0d")
+initial_screen = null
+
+[node name="CameraBorders" type="Node2D" parent="."]
+
+[node name="LeftBorder" type="Area2D" parent="CameraBorders"]
+position = Vector2(-288, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/LeftBorder"]
+rotation = 1.5708
+shape = SubResource("SegmentShape2D_7pa0d")
+
+[node name="TopBorder" type="Area2D" parent="CameraBorders"]
+position = Vector2(0, -162)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder"]
+shape = SubResource("SegmentShape2D_eanys")
+
+[node name="RightBorder" type="Area2D" parent="CameraBorders"]
+position = Vector2(288, 0)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/RightBorder"]
+shape = SubResource("SegmentShape2D_tparg")
+
+[node name="BottomBorder" type="Area2D" parent="CameraBorders"]
+position = Vector2(0, 162)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder"]
+shape = SubResource("SegmentShape2D_eanys")
+
+[connection signal="body_entered" from="CameraBorders/LeftBorder" to="." method="_on_left_border_body_entered"]
+[connection signal="body_entered" from="CameraBorders/TopBorder" to="." method="_on_top_border_body_entered"]
+[connection signal="body_entered" from="CameraBorders/RightBorder" to="." method="_on_right_border_body_entered"]
+[connection signal="body_entered" from="CameraBorders/BottomBorder" to="." method="_on_bottom_border_body_entered"]
