@@ -32,12 +32,12 @@ func set_camera_limits(limits: Vector4) -> void:
 	limit_right = limits.z
 	limit_bottom = limits.w
 
-func set_borders_enabled(enabled: bool) -> void:
+func set_borders_enabled(enabled_value: bool) -> void:
 	for border in $CameraBorders.get_children():
 		if border is Area2D:
-			border.set_deferred("monitoring", enabled)
+			border.set_deferred("monitoring", enabled_value)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$CameraBorders.global_position = get_screen_center_position()
 
 # ---- BORDERS LOGIC ----

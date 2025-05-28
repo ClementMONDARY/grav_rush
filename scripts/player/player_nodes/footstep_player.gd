@@ -20,8 +20,7 @@ func play_footstep_particles(velocity_node_path: NodePath) -> void:
 
 
 func play_footstep_sound() -> void:
-	var material = _get_floor_type()
-	match material:
+	match _get_floor_type():
 		"stone":
 			AudioManager.create_2d_audio_at_location_with_culling(global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_FOOTSTEP_STONE)
 		"wood":
