@@ -88,9 +88,6 @@ func _handle_wall_interaction() -> bool:
 		elif jump_component.has_buffered_jump():
 			_handle_wall_jump()
 			return true
-		elif Input.get_axis("move_left", "move_right") != 0:
-			Transitioned.emit(self, "wallslide")
-			return true
 	return false
 
 func _handle_wall_jump() -> void:

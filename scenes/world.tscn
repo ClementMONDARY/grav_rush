@@ -1,23 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://dukxupiaj3qnt"]
+[gd_scene load_steps=6 format=3 uid="uid://dukxupiaj3qnt"]
 
+[ext_resource type="Script" uid="uid://damgqurqjcehf" path="res://scripts/world/world_controller.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://0adsnuthljsc" path="res://scenes/levels/screen_0_0.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="3_71j4m"]
+[ext_resource type="PackedScene" uid="uid://bwd6upfqo3n6d" path="res://scenes/levels/screen_1_0.tscn" id="4_k0juu"]
 
 [node name="World" type="Node2D"]
-
-[node name="Screen_0_0" parent="." instance=ExtResource("2_rwgxs")]
+script = ExtResource("1_4wyf3")
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-position = Vector2(145, -65)
+position = Vector2(2240, -896)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(1, -55)
-zoom = Vector2(2, 2)
-limit_left = 0
-limit_top = -1120
-limit_right = 2528
-limit_bottom = 0
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 7.0
-editor_draw_limits = true
+[node name="PlayerCamera" parent="Player" instance=ExtResource("3_71j4m")]
+initial_screen = NodePath("../../Screens/Screen_0_0")
+
+[node name="Screens" type="Node" parent="."]
+
+[node name="Screen_0_0" parent="Screens" groups=["screen"] instance=ExtResource("2_rwgxs")]
+
+[node name="Screen_1_0" parent="Screens" groups=["screen"] instance=ExtResource("4_k0juu")]
+position = Vector2(2528, -784)

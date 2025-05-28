@@ -1168,7 +1168,7 @@ graph_offset = Vector2(-184, -83)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 floor_snap_length = 6.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -1179,6 +1179,7 @@ offset_bottom = -30.5
 scale = Vector2(0.323732, 0.317465)
 fit_content = true
 script = ExtResource("1_3j4b4")
+metadata/_edit_use_anchors_ = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -16.0
@@ -1188,6 +1189,7 @@ offset_bottom = -34.5
 max_value = 500.0
 show_percentage = false
 script = ExtResource("1_gx1jg")
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayerAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
