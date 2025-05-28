@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://0adsnuthljsc"]
+[gd_scene load_steps=17 format=4 uid="uid://0adsnuthljsc"]
 
 [ext_resource type="Script" uid="uid://b4ianu4aou7l5" path="res://scripts/world/level/screen_data.gd" id="1_toqj2"]
 [ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="1_ymty1"]
@@ -4052,22 +4052,12 @@ custom_data_layer_0/name = "material"
 custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_osc7o")
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_toqj2"]
-a = Vector2(0, 560)
-b = Vector2(0, -560)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_8evpw"]
-a = Vector2(-1264, 0)
-b = Vector2(1264, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ymty1"]
-a = Vector2(0, 560)
-b = Vector2(0, -560)
-
 [node name="Screen_0_0" type="Node2D"]
 script = ExtResource("1_toqj2")
+local_camera_limit_left = 0.0
 local_camera_limit_top = -1120.0
 local_camera_limit_right = 2528.0
+local_camera_limit_bottom = 0.0
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -4126,34 +4116,3 @@ position = Vector2(2168, -920)
 
 [node name="TorchCenter_9" parent="Lights" instance=ExtResource("5_toqj2")]
 position = Vector2(2440, -920)
-
-[node name="Borders" type="Node" parent="."]
-
-[node name="LeftBorder" type="Area2D" parent="Borders"]
-position = Vector2(0, -560)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LeftBorder"]
-shape = SubResource("SegmentShape2D_toqj2")
-
-[node name="TopBorder" type="Area2D" parent="Borders"]
-position = Vector2(1264, -1120)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/TopBorder"]
-shape = SubResource("SegmentShape2D_8evpw")
-
-[node name="RightBorder" type="Area2D" parent="Borders"]
-position = Vector2(2528, -560)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RightBorder"]
-shape = SubResource("SegmentShape2D_ymty1")
-
-[node name="BottomBorder" type="Area2D" parent="Borders"]
-position = Vector2(1264, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BottomBorder"]
-shape = SubResource("SegmentShape2D_8evpw")
-
-[connection signal="body_entered" from="Borders/LeftBorder" to="." method="_on_left_border_body_entered"]
-[connection signal="body_entered" from="Borders/TopBorder" to="." method="_on_top_border_body_entered"]
-[connection signal="body_entered" from="Borders/RightBorder" to="." method="_on_right_border_body_entered"]
-[connection signal="body_entered" from="Borders/BottomBorder" to="." method="_on_bottom_border_body_entered"]
