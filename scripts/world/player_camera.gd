@@ -71,6 +71,7 @@ func transition_to_screen(direction: Vector2) -> void:
 	var next_x := int(current_coords[0]) + int(direction.x)
 	var next_y := int(current_coords[1]) + int(direction.y)
 	var target_name := "Screen_%d_%d" % [next_x, next_y]
+	print(target_name)
 	
 	var target_screen: ScreenData = level_screens.filter(func(screen: ScreenData) -> bool:
 		return screen.name == target_name

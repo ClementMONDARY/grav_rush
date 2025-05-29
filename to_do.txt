@@ -1,2 +1,1 @@
 Checkpoints: Checkpoints à chaque debut et fin de salle
-Torches: Courte animation pour la lumiere emise + frame aléatoire si possible

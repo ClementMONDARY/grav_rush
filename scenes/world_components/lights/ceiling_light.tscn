@@ -48,6 +48,21 @@ gradient = SubResource("Gradient_3l2fg")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="Animation" id="Animation_l7mnc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 37)]
+}
+
 [sub_resource type="Animation" id="Animation_efuij"]
 resource_name = "idle"
 length = 7.8
@@ -113,21 +128,6 @@ tracks/4/keys = {
 "values": [Vector2(0, 37), Vector2(-1, 37), Vector2(0, 37), Vector2(1, 37), Vector2(0, 37), Vector2(-1, 37), Vector2(0, 37), Vector2(1, 37), Vector2(0, 37), Vector2(-1, 37), Vector2(0, 37), Vector2(1, 37)]
 }
 
-[sub_resource type="Animation" id="Animation_l7mnc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PointLight2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 37)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hamqx"]
 _data = {
 &"RESET": SubResource("Animation_l7mnc"),
@@ -145,7 +145,7 @@ frame = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, 37)
-scale = Vector2(2, 2)
+scale = Vector2(2.85, 2.85)
 color = Color(0.804483, 0.839147, 1, 1)
 energy = 0.91
 range_item_cull_mask = 3
