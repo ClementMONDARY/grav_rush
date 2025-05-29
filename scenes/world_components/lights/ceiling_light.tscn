@@ -1,0 +1,159 @@
+[gd_scene load_steps=13 format=3 uid="uid://bucu6s1d1eckx"]
+
+[ext_resource type="Script" uid="uid://b15lw2tjdmv4j" path="res://scripts/world_components/light_random_frame_start.gd" id="1_uw0a4"]
+[ext_resource type="Texture2D" uid="uid://duwp4vxv2s63u" path="res://graphics/world/light.png" id="2_78bnq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs5pg"]
+atlas = ExtResource("2_78bnq")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1crfx"]
+atlas = ExtResource("2_78bnq")
+region = Rect2(16, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gle1e"]
+atlas = ExtResource("2_78bnq")
+region = Rect2(32, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxpri"]
+atlas = ExtResource("2_78bnq")
+region = Rect2(48, 0, 16, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l7mnc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hs5pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1crfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gle1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxpri")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.5
+}]
+
+[sub_resource type="Gradient" id="Gradient_3l2fg"]
+offsets = PackedFloat32Array(0, 0.714286)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pytaa"]
+gradient = SubResource("Gradient_3l2fg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_efuij"]
+resource_name = "idle"
+length = 7.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3, 1.6, 2.6, 2.9, 3.9, 4.2, 5.2, 5.5, 6.5, 6.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:texture_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3, 1.6, 2.6, 2.9, 3.9, 4.2, 5.2, 5.5, 6.5, 6.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.08, 0.96, 1.1, 1.02, 1.07, 0.97, 1.11, 1.01, 1.06, 0.98, 1.1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3, 1.6, 2.6, 2.9, 3.9, 4.2, 5.2, 5.5, 6.5, 6.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.9, 0.93, 0.88, 0.95, 0.91, 0.92, 0.89, 0.94, 0.9, 0.91, 0.89, 0.93]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.3, 1.6, 2.6, 2.9, 3.9, 4.2, 5.2, 5.5, 6.5, 6.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 37), Vector2(-1, 37), Vector2(0, 37), Vector2(1, 37), Vector2(0, 37), Vector2(-1, 37), Vector2(0, 37), Vector2(1, 37), Vector2(0, 37), Vector2(-1, 37), Vector2(0, 37), Vector2(1, 37)]
+}
+
+[sub_resource type="Animation" id="Animation_l7mnc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 37)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hamqx"]
+_data = {
+&"RESET": SubResource("Animation_l7mnc"),
+&"idle": SubResource("Animation_efuij")
+}
+
+[node name="TorchLeft_" type="Node2D"]
+script = ExtResource("1_uw0a4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 24)
+sprite_frames = SubResource("SpriteFrames_l7mnc")
+animation = &"idle"
+frame = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 37)
+scale = Vector2(2, 2)
+color = Color(0.804483, 0.839147, 1, 1)
+energy = 0.91
+range_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_pytaa")
+texture_scale = 1.04186
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hamqx")
+}
+autoplay = "idle"
