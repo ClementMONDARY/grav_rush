@@ -134,7 +134,7 @@ _data = {
 &"idle": SubResource("Animation_efuij")
 }
 
-[node name="TorchLeft_" type="Node2D"]
+[node name="CeilingLight_" type="Node2D"]
 script = ExtResource("1_uw0a4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
