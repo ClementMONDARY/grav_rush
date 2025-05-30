@@ -1,0 +1,28 @@
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://bdm0b3cpx3tgo"]
+
+[ext_resource type="AudioStream" uid="uid://dvibp3v25g1ix" path="res://audio/music/Fate_intro.wav" id="1_l5cj8"]
+[ext_resource type="AudioStream" uid="uid://d2ti6pknqkg5u" path="res://audio/music/Fate_main.wav" id="2_audhx"]
+
+[resource]
+clip_count = 2
+clip_0/name = &"Intro"
+clip_0/stream = ExtResource("1_l5cj8")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Main"
+clip_1/stream = ExtResource("2_audhx")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 0.0,
+"fade_mode": 4,
+"from_time": 3,
+"to_time": 1
+},
+Vector2i(1, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 3,
+"to_time": 1
+}
+}

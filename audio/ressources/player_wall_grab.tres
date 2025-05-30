@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_ereje")
 limit = 5
-type = 1
+type = 2
 sound_effect = ExtResource("2_l5nm6")
 volume = -5.0
 pitch_scale = 1.0
