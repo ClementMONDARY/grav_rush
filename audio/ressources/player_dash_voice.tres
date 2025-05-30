@@ -14,7 +14,7 @@ stream_2/stream = ExtResource("4_6eeyh")
 [resource]
 script = ExtResource("1_6s1v6")
 limit = 5
-type = 0
+type = 1
 sound_effect = SubResource("AudioStreamRandomizer_hqgb3")
 volume = -10.0
 pitch_scale = 1.0
