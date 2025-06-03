@@ -8,7 +8,7 @@ extends Camera2D
 
 const SCREEN_WIDTH := 576.0
 const SCREEN_HEIGHT := 324.0
-const TRANSITION_DURATION := 0.6
+const TRANSITION_DURATION := 0.15
 
 func _ready() -> void:
 	print(level_screens)
@@ -80,11 +80,19 @@ func transition_to_screen(direction: Vector2) -> void:
 	if target_screen == null:
 		push_warning("Target screen %s not found!" % target_name)
 		return
-	
+		
 	set_borders_enabled(false)
 	update_camera_limits_from_screen(target_screen)
+	
+	var position_smoothing_speed_value = position_smoothing_speed
+	position_smoothing_speed *= 2.5
+	Engine.time_scale = 0.3
 	await get_tree().create_timer(TRANSITION_DURATION).timeout
+	position_smoothing_speed = position_smoothing_speed_value
+	Engine.time_scale = 1.0
+	
 	_on_transition_complete(target_screen)
+	get_tree().root.remove_child(self)
 
 
 func _on_transition_complete(new_screen: ScreenData) -> void:

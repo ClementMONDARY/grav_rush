@@ -1,1 +1,2 @@
 Checkpoints: Checkpoints à chaque debut et fin de salle
+Death Screen: Pas un death screen commun; le temps ralentit jusqu'a s'arreter, appuyer sur rejouer remonte le temps jusqu'au dernier checkpoint.

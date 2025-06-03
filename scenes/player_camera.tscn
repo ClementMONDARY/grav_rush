@@ -15,6 +15,7 @@ a = Vector2(162, 0)
 b = Vector2(-162, 0)
 
 [node name="PlayerCamera" type="Camera2D"]
+process_mode = 3
 zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -23,32 +24,41 @@ editor_draw_limits = true
 script = ExtResource("1_7pa0d")
 
 [node name="CameraBorders" type="Node2D" parent="."]
+process_mode = 3
 
 [node name="LeftBorder" type="Area2D" parent="CameraBorders"]
+process_mode = 3
 position = Vector2(-288, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/LeftBorder"]
+process_mode = 3
 rotation = 1.5708
 shape = SubResource("SegmentShape2D_7pa0d")
 
 [node name="TopBorder" type="Area2D" parent="CameraBorders"]
+process_mode = 3
 position = Vector2(0, -162)
 rotation = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder"]
+process_mode = 3
 shape = SubResource("SegmentShape2D_eanys")
 
 [node name="RightBorder" type="Area2D" parent="CameraBorders"]
+process_mode = 3
 position = Vector2(288, 0)
 rotation = -1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/RightBorder"]
+process_mode = 3
 shape = SubResource("SegmentShape2D_tparg")
 
 [node name="BottomBorder" type="Area2D" parent="CameraBorders"]
+process_mode = 3
 position = Vector2(0, 162)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder"]
+process_mode = 3
 shape = SubResource("SegmentShape2D_eanys")
 
 [connection signal="body_entered" from="CameraBorders/LeftBorder" to="." method="_on_left_border_body_entered"]
