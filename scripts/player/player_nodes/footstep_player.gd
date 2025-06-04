@@ -24,8 +24,9 @@ func play_footstep_sound() -> void:
 	match material:
 		"stone":
 			AudioManager.create_2d_audio_at_location_with_culling(global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_FOOTSTEP_STONE)
+			print("stone")
 		"wood":
-			pass
+			print("wood")
 		null, "":
 			AudioManager.create_2d_audio_at_location_with_culling(global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_FOOTSTEP_STONE)
 
@@ -40,9 +41,14 @@ func _setup_particle_direction(particle: CPUParticles2D, velocity_node: Characte
 func _get_floor_type() -> String:
 	if not floor_detector.is_colliding():
 		return ""
+
 	var collider = floor_detector.get_collider()
-	if collider is TileMap:
-		var tilemap := collider as TileMap
-		var pos = tilemap.local_to_map(floor_detector.get_collision_point())
-		return tilemap.get_custom_data(pos, "material")
+	if collider is TileMapLayer:
+		var tile_map_layer := collider as TileMapLayer
+		var local_point = tile_map_layer.to_local(floor_detector.get_collision_point())
+		var pos = tile_map_layer.local_to_map(local_point)
+		
+		var data = tile_map_layer.get_cell_tile_data(pos)
+		if data:
+			return data.get_custom_data("material")
 	return ""

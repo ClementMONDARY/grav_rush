@@ -1198,7 +1198,7 @@ unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 material = SubResource("ShaderMaterial_cnsyf")
-position = Vector2(0, -17.5)
+position = Vector2(0, -18.2)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
 autoplay = "idle"
@@ -1217,7 +1217,7 @@ target_position = Vector2(8, 0)
 
 [node name="FootstepPlayer" type="Node2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
-position = Vector2(0, 17.5)
+position = Vector2(0, 18.2)
 script = ExtResource("5_007i1")
 
 [node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
@@ -1238,7 +1238,7 @@ scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
 
 [node name="FloorDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
-target_position = Vector2(0, 2)
+target_position = Vector2(0, 1)
 
 [node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
