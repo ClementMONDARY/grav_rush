@@ -6,6 +6,7 @@ class_name JumpComponent
 @export var JUMP_BUFFER_TIME: float = 0.1
 @export var COYOTE_TIME_TIME: float = 0.1
 
+@onready var wall_detector: RayCast2D = %WallDetector
 @onready var PLAYER: CharacterBody2D = $"../.."
 @onready var JUMP_BUFFER_TIMER: Timer = $JumpBufferTimer
 @onready var COYOTE_TIME_TIMER: Timer = $CoyoteTimeTimer
@@ -23,7 +24,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		JUMP_BUFFER_TIMER.start()
 	
-	if PLAYER.is_on_floor():
+	if PLAYER.is_on_floor() or wall_detector.is_colliding():
 		COYOTE_TIME_TIMER.start()
 
 func refill_bonus_jump(value: int = MAX_DB_JUMPS) -> void:
