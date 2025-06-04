@@ -92,7 +92,6 @@ func transition_to_screen(direction: Vector2) -> void:
 	Engine.time_scale = 1.0
 	
 	_on_transition_complete(target_screen)
-	get_tree().root.remove_child(self)
 
 
 func _on_transition_complete(new_screen: ScreenData) -> void:

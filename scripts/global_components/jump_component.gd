@@ -1,7 +1,7 @@
 extends Node2D
 class_name JumpComponent
 
-@export var JUMP_FORCE: float = 400.0
+@export var JUMP_FORCE: float = 405.0
 @export var MAX_DB_JUMPS: int = 1
 @export var JUMP_BUFFER_TIME: float = 0.1
 @export var COYOTE_TIME_TIME: float = 0.1
