@@ -4066,8 +4066,10 @@ sources/1 = SubResource("TileSetAtlasSource_ug0hl")
 
 [node name="Screen_3_0" type="Node2D"]
 script = ExtResource("1_sw2gv")
+local_camera_limit_left = 0
 local_camera_limit_top = -832
 local_camera_limit_right = 592
+local_camera_limit_bottom = 0
 
 [node name="Tiles" type="Node2D" parent="."]
 
