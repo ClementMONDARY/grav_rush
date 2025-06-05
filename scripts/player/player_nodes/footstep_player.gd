@@ -1,7 +1,8 @@
 extends Node2D
 
+@onready var player: CharacterBody2D = $"../.."
+
 @onready var particle_scene: CPUParticles2D = $FOOTSTEPS_CPUParticles2D
-@onready var floor_detector: RayCast2D = $FloorDetector
 
 func play_footstep_particles(velocity_node_path: NodePath) -> void:
 	var velocity_node = get_node_or_null(velocity_node_path)
@@ -39,15 +40,15 @@ func _setup_particle_direction(particle: CPUParticles2D, velocity_node: Characte
 
 
 func _get_floor_type() -> String:
-	if not floor_detector.is_colliding():
+	var last_floor_collision := player.get_last_slide_collision()
+	if last_floor_collision == null:
 		return ""
-
-	var collider = floor_detector.get_collider()
+		
+	var collider = last_floor_collision.get_collider()
 	if collider is TileMapLayer:
 		var tile_map_layer := collider as TileMapLayer
-		var local_point = tile_map_layer.to_local(floor_detector.get_collision_point())
+		var local_point = tile_map_layer.to_local(last_floor_collision.get_position())
 		var pos = tile_map_layer.local_to_map(local_point)
-		
 		var data = tile_map_layer.get_cell_tile_data(pos)
 		if data:
 			return data.get_custom_data("material")
