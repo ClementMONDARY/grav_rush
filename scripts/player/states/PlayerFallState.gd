@@ -3,10 +3,9 @@ extends State
 @onready var player: CharacterBody2D = $"../.."
 
 @onready var wall_detector: RayCast2D = %WallDetector
-@onready var floor_detector: RayCast2D = %FloorDetector
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 @onready var anim_tree_sprite: AnimationTree = %AnimationTreeSprite
 @onready var anim_tree_particules: AnimationTree = %AnimationTreeParticules
-@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 
 @onready var jump_component: JumpComponent = %JumpComponent
 @onready var dash_component: DashComponent = %DashComponent
@@ -111,25 +110,26 @@ func _play_fall_sound() -> void:
 	match material:
 		"stone":
 			print("stone")
-			AudioManager.create_2d_audio_at_location_with_culling(floor_detector.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
 		"wood":
 			print("wood")
-			AudioManager.create_2d_audio_at_location_with_culling(floor_detector.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_WOOD)
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_WOOD)
 		null, "":
 			print("null")
-			AudioManager.create_2d_audio_at_location_with_culling(floor_detector.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
 
 
 func _get_floor_type() -> String:
-	if not floor_detector.is_colliding():
+	var last_floor_collision := player.get_last_slide_collision()
+	if last_floor_collision == null:
 		return ""
-	
-	var collider = floor_detector.get_collider()
+		
+	var collider = last_floor_collision.get_collider()
 	if collider is TileMapLayer:
 		var tile_map_layer := collider as TileMapLayer
-		var local_point = tile_map_layer.to_local(floor_detector.get_collision_point())
+		var local_point = tile_map_layer.to_local(last_floor_collision.get_position())
 		var pos = tile_map_layer.local_to_map(local_point)
-		
+		print(pos)
 		var data = tile_map_layer.get_cell_tile_data(pos)
 		if data:
 			return data.get_custom_data("material")

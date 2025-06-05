@@ -1237,10 +1237,6 @@ scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
 
-[node name="FloorDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
-unique_name_in_owner = true
-target_position = Vector2(0, 6)
-
 [node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
 position = Vector2(0, 2.5)
