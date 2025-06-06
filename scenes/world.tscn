@@ -16,6 +16,7 @@ script = ExtResource("1_qfnet")
 position = Vector2(4528, -1824)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("3_71j4m")]
+position = Vector2(0, -32)
 initial_screen = NodePath("../../Screens/Screen_3_0")
 
 [node name="Screens" type="Node" parent="."]
@@ -32,4 +33,4 @@ position = Vector2(3232, -976)
 position = Vector2(4016, -1136)
 
 [node name="Screen_3_-1" parent="Screens" groups=["screen"] instance=ExtResource("8_4mrxx")]
-position = Vector2(4016, -1968)
+position = Vector2(4000, -1968)
