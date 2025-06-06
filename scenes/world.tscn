@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dukxupiaj3qnt"]
+[gd_scene load_steps=9 format=3 uid="uid://dukxupiaj3qnt"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://bjkra8osevsek" path="res://scripts/world/level_0.gd" id="1_qfnet"]
@@ -7,15 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://pbclld33tdce" path="res://scenes/levels/screen_3_0.tscn" id="4_i7141"]
 [ext_resource type="PackedScene" uid="uid://bwd6upfqo3n6d" path="res://scenes/levels/screen_1_0.tscn" id="4_k0juu"]
 [ext_resource type="PackedScene" uid="uid://bt1k8yu5foe0x" path="res://scenes/levels/screen_2_0.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://dn6qnwn3q2awy" path="res://scenes/levels/screen_3__1.tscn" id="8_4mrxx"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_qfnet")
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-position = Vector2(2816, -912)
+position = Vector2(4528, -1824)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("3_71j4m")]
-initial_screen = NodePath("../../Screens/Screen_1_0")
+initial_screen = NodePath("../../Screens/Screen_3_0")
 
 [node name="Screens" type="Node" parent="."]
 
@@ -29,3 +30,6 @@ position = Vector2(3232, -976)
 
 [node name="Screen_3_0" parent="Screens" groups=["screen"] instance=ExtResource("4_i7141")]
 position = Vector2(4016, -1136)
+
+[node name="Screen_3_-1" parent="Screens" groups=["screen"] instance=ExtResource("8_4mrxx")]
+position = Vector2(4016, -1968)
