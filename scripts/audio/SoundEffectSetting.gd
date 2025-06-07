@@ -4,13 +4,14 @@ extends Resource
 
 ## Stores the different types of sounds effects available to be played to distinguish them from another. Each new SoundEffect resource created should add to this enum, to allow them to be easily instantiated via [method AudioManager.create_2d_audio_at_location()] and [method AudioManager.create_audio()].
 enum SOUND_EFFECT_TYPE {
-	LEVEL_MUSIC,
-	ON_PLAYER_DASH,
-	ON_PLAYER_WALL_GRAB,
-	ON_PLAYER_FOOTSTEP_STONE,
-	ON_PLAYER_LAND_STONE,
-	ON_PLAYER_JUMP,
-	ON_PLAYER_LAND_WOOD
+	LEVEL_MUSIC, # 0
+	ON_PLAYER_DASH, # 1
+	ON_PLAYER_WALL_GRAB, # 2
+	ON_PLAYER_FOOTSTEP_STONE, # 3
+	ON_PLAYER_LAND_STONE, # 4
+	ON_PLAYER_JUMP, # 5
+	ON_PLAYER_LAND_WOOD, # 6
+	ON_DIAMOND_LOOTED # 7
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
