@@ -27,6 +27,7 @@ func play_footstep_sound() -> void:
 			AudioManager.create_2d_audio_at_location_with_culling(global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_FOOTSTEP_STONE)
 			print("stone")
 		"wood":
+			AudioManager.create_2d_audio_at_location_with_culling(global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_FOOTSTEP_WOOD)
 			print("wood")
 		null, "":
 			AudioManager.create_2d_audio_at_location_with_culling(global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_FOOTSTEP_STONE)

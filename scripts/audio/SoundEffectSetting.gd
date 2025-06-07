@@ -11,7 +11,8 @@ enum SOUND_EFFECT_TYPE {
 	ON_PLAYER_LAND_STONE, # 4
 	ON_PLAYER_JUMP, # 5
 	ON_PLAYER_LAND_WOOD, # 6
-	ON_DIAMOND_LOOTED # 7
+	ON_DIAMOND_LOOTED, # 7
+	ON_PLAYER_FOOTSTEP_WOOD # 8
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
