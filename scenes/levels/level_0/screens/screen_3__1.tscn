@@ -4103,3 +4103,5 @@ position = Vector2(32, -86)
 
 [node name="TorchCenter_3" parent="Lights" instance=ExtResource("4_4xaxn")]
 position = Vector2(640, -86)
+
+[node name="Collectables" type="Node2D" parent="."]

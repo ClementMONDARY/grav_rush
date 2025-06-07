@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://dukxupiaj3qnt"]
+
+[ext_resource type="Script" uid="uid://bjkra8osevsek" path="res://scripts/world/level_0.gd" id="1_vgi4p"]
+[ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="2_icq3g"]
+[ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="3_uqyny"]
+[ext_resource type="PackedScene" uid="uid://0adsnuthljsc" path="res://scenes/levels/level_0/screens/screen_0_0.tscn" id="4_u8rab"]
+[ext_resource type="PackedScene" uid="uid://bwd6upfqo3n6d" path="res://scenes/levels/level_0/screens/screen_1_0.tscn" id="5_jgss6"]
+[ext_resource type="PackedScene" uid="uid://bt1k8yu5foe0x" path="res://scenes/levels/level_0/screens/screen_2_0.tscn" id="6_aja5w"]
+[ext_resource type="PackedScene" uid="uid://pbclld33tdce" path="res://scenes/levels/level_0/screens/screen_3_0.tscn" id="7_vv6lh"]
+[ext_resource type="PackedScene" uid="uid://dn6qnwn3q2awy" path="res://scenes/levels/level_0/screens/screen_3__1.tscn" id="8_qi6d7"]
+
+[node name="Level_0" type="Node2D"]
+script = ExtResource("1_vgi4p")
+
+[node name="Player" parent="." instance=ExtResource("2_icq3g")]
+position = Vector2(4528, -1824)
+
+[node name="PlayerCamera" parent="Player" instance=ExtResource("3_uqyny")]
+position = Vector2(0, -32)
+initial_screen = NodePath("../../Screens/Screen_3_0")
+
+[node name="Screens" type="Node" parent="."]
+
+[node name="Screen_0_0" parent="Screens" groups=["screen"] instance=ExtResource("4_u8rab")]
+
+[node name="Screen_1_0" parent="Screens" groups=["screen"] instance=ExtResource("5_jgss6")]
+position = Vector2(2528, -784)
+
+[node name="Screen_2_0" parent="Screens" groups=["screen"] instance=ExtResource("6_aja5w")]
+position = Vector2(3232, -976)
+
+[node name="Screen_3_0" parent="Screens" groups=["screen"] instance=ExtResource("7_vv6lh")]
+position = Vector2(4016, -1136)
+
+[node name="Screen_3_-1" parent="Screens" groups=["screen"] instance=ExtResource("8_qi6d7")]
+position = Vector2(4000, -1968)

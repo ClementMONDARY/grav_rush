@@ -1172,7 +1172,6 @@ radius = 7.0
 floor_snap_length = 6.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
 offset_left = -2.0
 offset_top = -53.5
 offset_right = 38.0

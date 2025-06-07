@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcclb17enh7by"]
+[gd_scene load_steps=16 format=3 uid="uid://bcclb17enh7by"]
 
 [ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://graphics/collectables/diamond.png" id="1_4wtd7"]
 [ext_resource type="Script" uid="uid://ceve54135b2i1" path="res://scripts/global/AudioLink.gd" id="1_dkg4u"]
+[ext_resource type="Script" uid="uid://cme0prll1o5k" path="res://scripts/world/collectables/DiamondCollectable.gd" id="1_ggbm7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dkg4u"]
 atlas = ExtResource("1_4wtd7")
@@ -139,9 +140,11 @@ _data = {
 &"loot": SubResource("Animation_2jx7n")
 }
 
-[node name="Diamond" type="StaticBody2D" node_paths=PackedStringArray("audio_player_node")]
-script = ExtResource("1_dkg4u")
-audio_player_node = NodePath(".")
+[sub_resource type="CircleShape2D" id="CircleShape2D_dkg4u"]
+radius = 8.0
+
+[node name="Diamond" type="Area2D"]
+script = ExtResource("1_ggbm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1w06b")
@@ -163,5 +166,13 @@ color_ramp = SubResource("Gradient_dkg4u")
 libraries = {
 &"": SubResource("AnimationLibrary_bwgbd")
 }
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dkg4u")
+
+[node name="AudioLink" type="Node" parent="." node_paths=PackedStringArray("audio_player_node")]
+script = ExtResource("1_dkg4u")
+audio_player_node = NodePath("..")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
