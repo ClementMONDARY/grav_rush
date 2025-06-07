@@ -19,6 +19,7 @@ config/icon="uid://ytmptpppqhws"
 [autoload]
 
 AudioManager="*res://scenes/audio/audio_manager.tscn"
+DiamondManager="*res://scripts/global/DiamondManager.gd"
 
 [display]
 
@@ -34,6 +35,10 @@ folder_colors={
 "res://scripts/": "purple",
 "res://shaders/": "teal"
 }
+
+[global_group]
+
+player=""
 
 [input]
 
