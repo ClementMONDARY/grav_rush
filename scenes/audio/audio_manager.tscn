@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://co1ba1frb83ms"]
+[gd_scene load_steps=26 format=3 uid="uid://co1ba1frb83ms"]
 
 [ext_resource type="Script" uid="uid://de8uhiahpm1n4" path="res://scripts/audio/AudioManager.gd" id="1_f113j"]
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="2_2ccwd"]
@@ -13,6 +13,10 @@
 [ext_resource type="AudioStream" uid="uid://l2tw0mrrspsf" path="res://audio/player/Land_Stone_1.wav" id="10_2c6c2"]
 [ext_resource type="AudioStream" uid="uid://cr3hbpvkt1c4x" path="res://audio/player/Player_Jump.wav" id="11_i0hgu"]
 [ext_resource type="AudioStream" uid="uid://fhsdqmbo0di5" path="res://audio/player/Land_Wood_0.wav" id="13_ryw36"]
+[ext_resource type="AudioStream" uid="uid://baxjqgx48wmi1" path="res://audio/player/Footstep_Wood_0.wav" id="14_7bp0g"]
+[ext_resource type="AudioStream" uid="uid://cwupcinflocdm" path="res://audio/player/Footstep_Wood_1.wav" id="15_kpp2c"]
+[ext_resource type="AudioStream" uid="uid://et5bm14ol2hk" path="res://audio/player/Footstep_Wood_2.wav" id="16_k26wb"]
+[ext_resource type="AudioStream" uid="uid://c2wmt6hputdp1" path="res://audio/player/Footstep_Wood_3.wav" id="17_0qag5"]
 
 [sub_resource type="Resource" id="Resource_ryw36"]
 script = ExtResource("2_2ccwd")
@@ -76,6 +80,24 @@ pitch_randomness = 0.15
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fjnme"]
+streams_count = 4
+stream_0/stream = ExtResource("14_7bp0g")
+stream_1/stream = ExtResource("15_kpp2c")
+stream_2/stream = ExtResource("16_k26wb")
+stream_3/stream = ExtResource("17_0qag5")
+
+[sub_resource type="Resource" id="Resource_28alx"]
+script = ExtResource("2_2ccwd")
+limit = 5
+type = 8
+sound_effect = SubResource("AudioStreamRandomizer_fjnme")
+volume = -10.0
+pitch_scale = 1.2
+pitch_randomness = 0.0
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"
+
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_f113j")
-sound_effects = Array[ExtResource("2_2ccwd")]([SubResource("Resource_ryw36"), ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044")])
+sound_effects = Array[ExtResource("2_2ccwd")]([SubResource("Resource_ryw36"), ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044"), SubResource("Resource_28alx")])
