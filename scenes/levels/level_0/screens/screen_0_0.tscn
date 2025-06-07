@@ -4124,3 +4124,5 @@ position = Vector2(2168, -920)
 
 [node name="TorchCenter_9" parent="Lights" instance=ExtResource("5_toqj2")]
 position = Vector2(2440, -920)
+
+[node name="Collectables" type="Node2D" parent="."]
