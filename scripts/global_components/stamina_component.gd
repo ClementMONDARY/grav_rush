@@ -7,7 +7,7 @@ enum STAMINA_STATE {
 	EMPTY
 }
 
-@export var MAX_STAMINA: float = 500.0
+@export var MAX_STAMINA: float = 600.0
 @export var CLIMB_STAMINA_MULTIPLIER: float = 1.5
 @export var STAMINA_DRAIN_PER_SECOND: float = 100.0
 
