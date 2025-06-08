@@ -44,10 +44,11 @@ func _update_wall_collision() -> void:
 		Transitioned.emit(self, "fall")
 
 func _apply_gravity(delta: float) -> void:
-	if player.velocity.y > 0:
-		player.velocity.y += min(gravity * wall_control_component.SLIDE_FACTOR * delta, 200)
+	if player.velocity.y > 0 and player.velocity.y < 50:
+		player.velocity.y += min(gravity * wall_control_component.SLIDE_FACTOR * delta, 10)
 	else:
 		player.velocity.y += gravity * delta
+	player.velocity.y = min(player.velocity.y, 100)
 	player.velocity.x = -wall_direction * 2
 
 func _check_for_fall() -> void:
@@ -63,9 +64,9 @@ func _handle_wall_jump() -> void:
 	if jump_component.has_buffered_jump():
 		jump_component.refill_bonus_jump(1)
 		if Input.get_axis("move_left", "move_right") != 0:
-			player.velocity.x = wall_direction * jump_component.JUMP_FORCE
-		else:
 			player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
+		else:
+			player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 4.0
 		sprite.scale.x = -sprite.scale.x
 		player.move_and_slide()
 		Transitioned.emit(self, "jump")

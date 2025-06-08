@@ -63,7 +63,7 @@ func _handle_wall_climb() -> void:
 func _handle_wall_jump() -> void:
 	if jump_component.has_buffered_jump():
 		if Input.get_axis("move_left", "move_right") == -wall_direction:
-			player.velocity.x = wall_direction * jump_component.JUMP_FORCE
+			player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2
 			stamina_component.drain_stamina(200.0)
 		else:
 			player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
