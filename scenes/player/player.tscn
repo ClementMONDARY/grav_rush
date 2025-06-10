@@ -28,7 +28,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cnsyf"]
 shader = ExtResource("3_ioxgp")
 shader_parameter/line_color = Color(0.205117, 0.205117, 0.205117, 1)
-shader_parameter/line_thickness = 0.6
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
 atlas = ExtResource("1_dovo2")
@@ -1166,7 +1166,7 @@ transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransitio
 graph_offset = Vector2(-184, -83)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
-radius = 7.0
+radius = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 floor_snap_length = 6.0
@@ -1197,7 +1197,7 @@ unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 material = SubResource("ShaderMaterial_cnsyf")
-position = Vector2(0, -18.2)
+position = Vector2(0, -18.5)
 sprite_frames = SubResource("SpriteFrames_qek5x")
 animation = &"idle"
 autoplay = "idle"
@@ -1212,7 +1212,7 @@ texture = SubResource("GradientTexture2D_6cv16")
 [node name="WallDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D"]
 unique_name_in_owner = true
 position = Vector2(0, 2.5)
-target_position = Vector2(8, 0)
+target_position = Vector2(9, 0)
 
 [node name="FootstepPlayer" type="Node2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1

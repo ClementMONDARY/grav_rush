@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dukxupiaj3qnt"]
+[gd_scene load_steps=11 format=3 uid="uid://dukxupiaj3qnt"]
 
 [ext_resource type="Script" uid="uid://bjkra8osevsek" path="res://scripts/world/level_0.gd" id="1_vgi4p"]
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="2_icq3g"]
@@ -8,16 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://bt1k8yu5foe0x" path="res://scenes/levels/level_0/screens/screen_2_0.tscn" id="6_aja5w"]
 [ext_resource type="PackedScene" uid="uid://pbclld33tdce" path="res://scenes/levels/level_0/screens/screen_3_0.tscn" id="7_vv6lh"]
 [ext_resource type="PackedScene" uid="uid://dn6qnwn3q2awy" path="res://scenes/levels/level_0/screens/screen_3__1.tscn" id="8_qi6d7"]
+[ext_resource type="PackedScene" uid="uid://mh4m6fawwqs8" path="res://scenes/levels/level_0/screens/screen_4_0.tscn" id="9_icq3g"]
+[ext_resource type="PackedScene" uid="uid://ddo1evnfk1rtw" path="res://scenes/levels/level_0/screens/screen_2__1.tscn" id="10_uqyny"]
 
 [node name="Level_0" type="Node2D"]
 script = ExtResource("1_vgi4p")
 
 [node name="Player" parent="." instance=ExtResource("2_icq3g")]
-position = Vector2(4528, -1824)
+position = Vector2(3536, -1888)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("3_uqyny")]
 position = Vector2(0, -32)
-initial_screen = NodePath("../../Screens/Screen_3_0")
+initial_screen = NodePath("../../Screens/Screen_2_0")
 
 [node name="Screens" type="Node" parent="."]
 
@@ -33,4 +35,10 @@ position = Vector2(3232, -976)
 position = Vector2(4016, -1136)
 
 [node name="Screen_3_-1" parent="Screens" groups=["screen"] instance=ExtResource("8_qi6d7")]
+position = Vector2(4000, -1968)
+
+[node name="Screen_4_0" parent="Screens" groups=["screen"] instance=ExtResource("9_icq3g")]
+position = Vector2(4608, -1136)
+
+[node name="Screen_2_-1" parent="Screens" groups=["screen"] instance=ExtResource("10_uqyny")]
 position = Vector2(4000, -1968)
