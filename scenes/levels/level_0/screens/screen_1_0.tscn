@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="5_nbcvp"]
 [ext_resource type="PackedScene" uid="uid://cnjql86r6pll3" path="res://scenes/world_components/lights/torch_left.tscn" id="6_1tlib"]
 [ext_resource type="PackedScene" uid="uid://dsbgg15u12hh6" path="res://scenes/world_components/lights/torch_right.tscn" id="7_5xwds"]
-[ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/DiamondCollectable.tscn" id="7_st3tq"]
+[ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="7_st3tq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
