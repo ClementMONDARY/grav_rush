@@ -4,43 +4,43 @@
 [ext_resource type="Script" uid="uid://ceve54135b2i1" path="res://scripts/global/AudioLink.gd" id="1_dkg4u"]
 [ext_resource type="Script" uid="uid://cme0prll1o5k" path="res://scripts/world/collectables/DiamondCollectable.gd" id="1_ggbm7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkg4u"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_axddh"]
 atlas = ExtResource("1_4wtd7")
-region = Rect2(0, 0, 8, 9)
+region = Rect2(0, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ggbm7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6rey"]
 atlas = ExtResource("1_4wtd7")
-region = Rect2(8, 0, 8, 9)
+region = Rect2(10, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_57rbd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7jhn"]
 atlas = ExtResource("1_4wtd7")
-region = Rect2(16, 0, 8, 9)
+region = Rect2(20, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkf7c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqs36"]
 atlas = ExtResource("1_4wtd7")
-region = Rect2(24, 0, 8, 9)
+region = Rect2(30, 0, 10, 11)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rrjrc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_atpa8"]
 atlas = ExtResource("1_4wtd7")
-region = Rect2(32, 0, 8, 9)
+region = Rect2(40, 0, 10, 11)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1w06b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dkg4u")
+"texture": SubResource("AtlasTexture_axddh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ggbm7")
+"texture": SubResource("AtlasTexture_y6rey")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_57rbd")
+"texture": SubResource("AtlasTexture_d7jhn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dkf7c")
+"texture": SubResource("AtlasTexture_aqs36")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rrjrc")
+"texture": SubResource("AtlasTexture_atpa8")
 }],
 "loop": true,
 "name": &"idle",
@@ -147,6 +147,7 @@ radius = 8.0
 script = ExtResource("1_ggbm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_1w06b")
 animation = &"idle"
 
@@ -155,8 +156,8 @@ z_index = -1
 amount = 15
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 5.0
-initial_velocity_max = 10.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
 angle_max = 45.0
 scale_amount_min = 0.8
 scale_amount_max = 1.3

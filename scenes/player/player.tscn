@@ -27,7 +27,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cnsyf"]
 shader = ExtResource("3_ioxgp")
-shader_parameter/line_color = Color(0.205117, 0.205117, 0.205117, 1)
+shader_parameter/line_color = Color(0.133196, 0.133196, 0.133196, 1)
 shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
@@ -1211,7 +1211,7 @@ texture = SubResource("GradientTexture2D_6cv16")
 
 [node name="WallDetector" type="RayCast2D" parent="PlayerAnimatedSprite2D"]
 unique_name_in_owner = true
-position = Vector2(0, 2.5)
+position = Vector2(0, -6.5)
 target_position = Vector2(9, 0)
 
 [node name="FootstepPlayer" type="Node2D" parent="PlayerAnimatedSprite2D"]
