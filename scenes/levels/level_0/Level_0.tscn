@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cawsetb4mmcag"]
+[gd_scene load_steps=11 format=3 uid="uid://dwv2ag8moy1ml"]
 
 [ext_resource type="Script" uid="uid://bjkra8osevsek" path="res://scripts/world/level_0.gd" id="1_vgi4p"]
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="2_icq3g"]
@@ -15,11 +15,11 @@
 script = ExtResource("1_vgi4p")
 
 [node name="Player" parent="." instance=ExtResource("2_icq3g")]
-position = Vector2(3536, -1888)
+position = Vector2(3120, -1104)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("3_uqyny")]
 position = Vector2(0, -32)
-initial_screen = NodePath("../../Screens/Screen_2_0")
+initial_screen = NodePath("../../Screens/Screen_1_0")
 
 [node name="Screens" type="Node" parent="."]
 

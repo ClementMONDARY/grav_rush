@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gravity Switch"
-run/main_scene="uid://cawsetb4mmcag"
+run/main_scene="uid://dwv2ag8moy1ml"
 config/features=PackedStringArray("4.4", "Mobile")
 run/max_fps=60
 config/icon="uid://ytmptpppqhws"
