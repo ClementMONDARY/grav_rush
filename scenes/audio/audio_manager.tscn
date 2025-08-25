@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://de8uhiahpm1n4" path="res://scripts/audio/AudioManager.gd" id="1_f113j"]
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="2_2ccwd"]
-[ext_resource type="AudioStream" uid="uid://bdm0b3cpx3tgo" path="res://assets/audio/ressources/main_theme.tres" id="3_8kn1q"]
+[ext_resource type="AudioStream" uid="uid://djnvxds8f8aa7" path="res://assets/audio/ressources/main_theme.tres" id="3_8kn1q"]
 [ext_resource type="Resource" uid="uid://cu33jvdd832lp" path="res://assets/audio/ressources/player_dash.tres" id="3_cfl81"]
 [ext_resource type="Resource" uid="uid://j71qk05y5kbv" path="res://assets/audio/ressources/player_wall_grab.tres" id="4_85pnb"]
 [ext_resource type="Resource" uid="uid://bh6q2el7d3ohl" path="res://assets/audio/ressources/player_dash_voice.tres" id="4_cfl81"]
@@ -24,7 +24,7 @@ script = ExtResource("2_2ccwd")
 limit = 1
 type = 0
 sound_effect = ExtResource("3_8kn1q")
-volume = 0.0
+volume = -15.0
 pitch_scale = 1.0
 pitch_randomness = 0.0
 bus = &"Music"
@@ -113,3 +113,6 @@ metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_f113j")
 sound_effects = Array[ExtResource("2_2ccwd")]([SubResource("Resource_ryw36"), ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044"), SubResource("Resource_28alx"), SubResource("Resource_k26wb")])
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8kn1q")
