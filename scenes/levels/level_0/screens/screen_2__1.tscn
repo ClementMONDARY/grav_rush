@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=4 uid="uid://ddo1evnfk1rtw"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_60jas"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_y3uot"]
-[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="3_37dnp"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_y3uot"]
+[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://assets/graphics/world/main_lev_build.png" id="3_37dnp"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="4_y3uot"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]

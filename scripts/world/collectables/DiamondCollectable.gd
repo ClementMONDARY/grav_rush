@@ -2,7 +2,8 @@ extends Area2D
 
 @export var item_id: String = "Diamond_1"
 @export var max_follow_speed: float = 300.0
-@export var acceleration_duration: float = 1.0  # Durée (en secondes) pour atteindre la vitesse max
+@export var acceleration_duration: float = 1.0
+signal diamond_collected
 
 var player: Node2D = null
 var is_following: bool = false
@@ -39,4 +40,5 @@ func _process(delta: float) -> void:
 		# Si proche du joueur, collecter
 		if distance <= 5.0:
 			DiamondManager.collect(item_id)
+			diamond_collected.emit()
 			queue_free()

@@ -1,11 +1,11 @@
-[gd_scene load_steps=141 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=142 format=3 uid="uid://cjsayirv07kxw"]
 
-[ext_resource type="Script" uid="uid://bs6ob7vh7ygh" path="res://scenes/player/rich_text_label.gd" id="1_3j4b4"]
 [ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://bpbmlb4gtbxrs" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-parade.png" id="4_007i1"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
-[ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_cnsyf"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
 [ext_resource type="Script" uid="uid://do4cnh2ys466y" path="res://scripts/player/particules/jumping_cpu_particles_2d.gd" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
@@ -99,6 +99,10 @@ region = Rect2(156, 0, 52, 39)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vo27k"]
 atlas = ExtResource("4_cnsyf")
 region = Rect2(104, 78, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upxxc"]
+atlas = ExtResource("4_007i1")
+region = Rect2(0, 0, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_genst"]
 atlas = ExtResource("4_cnsyf")
@@ -240,6 +244,14 @@ animations = [{
 "loop": false,
 "name": &"jump",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upxxc")
+}],
+"loop": true,
+"name": &"parade",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -999,7 +1011,7 @@ nodes/WallSlide/node = SubResource("AnimationNodeAnimation_6cv16")
 nodes/WallSlide/position = Vector2(-20, 120)
 node_connections = [&"output", 0, &"WallSlide"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uniwh"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ln3h3"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8ydkj"]
@@ -1021,8 +1033,8 @@ states/WallGrab/node = SubResource("AnimationNodeBlendTree_28m0y")
 states/WallGrab/position = Vector2(388, 87)
 states/WallSlide/node = SubResource("AnimationNodeBlendTree_iqsei")
 states/WallSlide/position = Vector2(522, 87)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_uniwh")]
-graph_offset = Vector2(-103, 20)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ln3h3")]
+graph_offset = Vector2(-91, 30)
 
 [sub_resource type="Animation" id="Animation_lgqa7"]
 resource_name = "RESET"
@@ -1165,18 +1177,7 @@ radius = 8.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 floor_snap_length = 6.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -2.0
-offset_top = -53.5
-offset_right = 38.0
-offset_bottom = -30.5
-scale = Vector2(0.323732, 0.317465)
-fit_content = true
-script = ExtResource("1_3j4b4")
-metadata/_edit_use_anchors_ = true
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
 offset_left = -16.0
 offset_top = -43.5
 offset_right = 17.0

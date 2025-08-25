@@ -23,14 +23,13 @@ DiamondManager="*res://scripts/global/DiamondManager.gd"
 
 [display]
 
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [file_customization]
 
 folder_colors={
-"res://audio/": "green",
-"res://graphics/": "red",
+"res://assets/": "red",
 "res://scenes/": "yellow",
 "res://scripts/": "purple",
 "res://shaders/": "teal"
@@ -39,6 +38,7 @@ folder_colors={
 [global_group]
 
 player=""
+diamond=""
 
 [input]
 
@@ -95,3 +95,4 @@ wall_grab={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.0588235, 0.0509804, 0.054902, 1)

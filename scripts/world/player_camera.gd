@@ -4,8 +4,8 @@ extends Camera2D
 
 @onready var level_screens: Array = get_tree().get_nodes_in_group("screen").map(func(n): return n as ScreenData)
 @onready var actual_screen: ScreenData = get_node_or_null(initial_screen)
-@onready var actual_screen_name: String = actual_screen.name
 
+var actual_screen_name: String
 const SCREEN_WIDTH := 576.0
 const SCREEN_HEIGHT := 324.0
 const TRANSITION_DURATION := 0.15
@@ -13,6 +13,7 @@ const TRANSITION_DURATION := 0.15
 func _ready() -> void:
 	print(level_screens)
 	if actual_screen:
+		actual_screen_name = actual_screen.name
 		update_camera_limits_from_screen(actual_screen)
 
 func update_camera_limits_from_screen(screen: ScreenData) -> void:

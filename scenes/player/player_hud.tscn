@@ -1,0 +1,240 @@
+[gd_scene load_steps=16 format=3 uid="uid://cqkmebr1i3g71"]
+
+[ext_resource type="Script" uid="uid://3et5x8q558if" path="res://scripts/player/hud/diamond_tracker.gd" id="1_muj54"]
+[ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="1_v4fpl"]
+[ext_resource type="FontFile" uid="uid://c3vfel2xby62t" path="res://assets/font/m6x11.ttf" id="3_sqnk8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axddh"]
+atlas = ExtResource("1_v4fpl")
+region = Rect2(0, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6rey"]
+atlas = ExtResource("1_v4fpl")
+region = Rect2(10, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7jhn"]
+atlas = ExtResource("1_v4fpl")
+region = Rect2(20, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqs36"]
+atlas = ExtResource("1_v4fpl")
+region = Rect2(30, 0, 10, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atpa8"]
+atlas = ExtResource("1_v4fpl")
+region = Rect2(40, 0, 10, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0cgte"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axddh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6rey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7jhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqs36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atpa8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_muj54"]
+colors = PackedColorArray(0.239216, 0.686275, 0.815686, 1, 0.239216, 0.686275, 0.815686, 0)
+
+[sub_resource type="Animation" id="Animation_0cgte"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DiamondTrackerLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, -39)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DiamondTrackerLabel:theme_override_colors/font_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.31906, 0.685709, 0.912548, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v4fpl"]
+resource_name = "update"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DiamondTrackerLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2),
+"transitions": PackedFloat32Array(1, 2.73208, 0.5),
+"update": 0,
+"values": [Vector2(10, -39), Vector2(10, -45.205), Vector2(10, -39)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DiamondTrackerLabel:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.633333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.317647, 0.686275, 0.913725, 1), Color(1, 1, 1, 1), Color(0.317647, 0.686275, 0.913725, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_update_tracker"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_update_sfx"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sqnk8"]
+resource_name = "fade_in"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_muj54"]
+resource_name = "fade_out"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_muj54"]
+_data = {
+&"RESET": SubResource("Animation_0cgte"),
+&"fade_in": SubResource("Animation_sqnk8"),
+&"fade_out": SubResource("Animation_muj54"),
+&"update": SubResource("Animation_v4fpl")
+}
+
+[node name="PlayerHud" type="CanvasLayer"]
+
+[node name="DiamondTracker" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchor_left = 0.129
+anchor_top = 0.164
+anchor_right = 0.129
+anchor_bottom = 0.164
+offset_left = -74.608
+offset_top = -62.272
+offset_right = 33.392
+offset_bottom = 2.728
+script = ExtResource("1_muj54")
+
+[node name="DiamondAnimatedSprite2D" type="AnimatedSprite2D" parent="DiamondTracker"]
+position = Vector2(-21, 8)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_0cgte")
+animation = &"idle"
+frame_progress = 0.0862732
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="DiamondTracker/DiamondAnimatedSprite2D"]
+z_index = -1
+amount = 15
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angle_max = 45.0
+scale_amount_min = 3.0
+scale_amount_max = 4.0
+color_ramp = SubResource("Gradient_muj54")
+
+[node name="DiamondTrackerLabel" type="Label" parent="DiamondTracker"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -39.0
+offset_right = 836.0
+offset_bottom = 8.0
+scale = Vector2(2.255, 2.255)
+theme_override_colors/font_color = Color(0.31906, 0.685709, 0.912548, 1)
+theme_override_fonts/font = ExtResource("3_sqnk8")
+text = "x 0"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiamondTracker"]
+libraries = {
+&"": SubResource("AnimationLibrary_muj54")
+}
+
+[connection signal="animation_finished" from="DiamondTracker/AnimationPlayer" to="DiamondTracker" method="_on_animation_player_animation_finished"]

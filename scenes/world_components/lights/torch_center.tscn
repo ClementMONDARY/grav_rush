@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://byn113xx8i0qu"]
 
-[ext_resource type="Texture2D" uid="uid://cj6giggoqavaw" path="res://graphics/world/torch_c.png" id="1_28ni6"]
+[ext_resource type="Texture2D" uid="uid://cj6giggoqavaw" path="res://assets/graphics/world/torch_c.png" id="1_28ni6"]
 [ext_resource type="Script" uid="uid://b15lw2tjdmv4j" path="res://scripts/world_components/light_random_frame_start.gd" id="1_kld5w"]
 
 [sub_resource type="Curve" id="Curve_15p82"]

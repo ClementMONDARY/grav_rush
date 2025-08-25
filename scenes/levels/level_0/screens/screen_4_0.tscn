@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=4 uid="uid://mh4m6fawwqs8"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_roefo"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_7bsvm"]
-[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="3_4s2da"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_7bsvm"]
+[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://assets/graphics/world/main_lev_build.png" id="3_4s2da"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="4_4s2da"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="6_lu6hu"]
 

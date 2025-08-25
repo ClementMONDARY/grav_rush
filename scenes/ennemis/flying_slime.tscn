@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://dpw6cr8welwk2"]
 
-[ext_resource type="Texture2D" uid="uid://ctp0qckumxon5" path="res://graphics/slime/wings.png" id="1_jjxgg"]
-[ext_resource type="Texture2D" uid="uid://dcyediaddys3q" path="res://graphics/slime/slime.png" id="2_04pvl"]
+[ext_resource type="Texture2D" uid="uid://ctp0qckumxon5" path="res://assets/graphics/slime/wings.png" id="1_jjxgg"]
+[ext_resource type="Texture2D" uid="uid://dcyediaddys3q" path="res://assets/graphics/slime/slime.png" id="2_04pvl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2msp"]
 atlas = ExtResource("1_jjxgg")
@@ -178,7 +178,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_jjxgg"]
 resource_name = "idle"
-length = 5.0
+length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false

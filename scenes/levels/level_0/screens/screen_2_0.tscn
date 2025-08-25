@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=4 uid="uid://bt1k8yu5foe0x"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_5pwx8"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_dtxqi"]
-[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="3_27tgs"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_dtxqi"]
+[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://assets/graphics/world/main_lev_build.png" id="3_27tgs"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="5_27tgs"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="5_mwf6e"]
 
@@ -4123,5 +4123,5 @@ position = Vector2(624, -741)
 
 [node name="Collectables" type="Node2D" parent="."]
 
-[node name="Diamond" parent="Collectables" instance=ExtResource("5_mwf6e")]
+[node name="Diamond" parent="Collectables" groups=["diamond"] instance=ExtResource("5_mwf6e")]
 position = Vector2(735, -734)
