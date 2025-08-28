@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uglb7rin6wr5"]
+
+[ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="1_pyjhf"]
+
+[node name="SpeedComponent" type="Node2D"]
+script = ExtResource("1_pyjhf")

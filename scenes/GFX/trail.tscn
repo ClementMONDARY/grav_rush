@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjhycw8l23l1p"]
+
+[ext_resource type="Script" uid="uid://dqpkwhvxawtw8" path="res://scenes/GFX/trail.gd" id="1_l1cna"]
+
+[sub_resource type="Curve" id="Curve_xjhlx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_xjhlx"]
+colors = PackedColorArray(0.533333, 0.564706, 0.858824, 0.713726, 1, 1, 1, 1)
+
+[node name="Trail" type="Line2D"]
+width = 5.0
+width_curve = SubResource("Curve_xjhlx")
+gradient = SubResource("Gradient_xjhlx")
+script = ExtResource("1_l1cna")
+MAX_LENGTH = 20
+
+[node name="TrailDurationTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true

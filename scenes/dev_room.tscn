@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbf0sy5aky4cj"]
+
+[ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_4ospm"]
+[ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="2_d27c4"]
+[ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="3_4ospm"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3yskv"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_4ospm")]
+position = Vector2(29, -2)
+
+[node name="PlayerCamera" parent="Player" instance=ExtResource("2_d27c4")]
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_3yskv")
+
+[node name="Diamond" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-48, -16)
+
+[node name="Diamond2" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-64, -16)
+item_id = "Diamond_2"
+
+[node name="Diamond3" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-80, -16)
+item_id = "Diamond_3"
+
+[node name="Diamond4" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-96, -16)
+item_id = "Diamond_4"
+
+[node name="Diamond5" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-112, -16)
+item_id = "Diamond_5"
+
+[node name="Diamond6" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-128, -16)
+item_id = "Diamond_6"
+
+[node name="Diamond7" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-144, -16)
+item_id = "Diamond_7"
+
+[node name="Diamond8" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-160, -16)
+item_id = "Diamond_8"
+
+[node name="Diamond9" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-176, -16)
+item_id = "Diamond_9"
+
+[node name="Diamond10" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
+position = Vector2(-192, -16)
+item_id = "Diamond_10"

@@ -1,0 +1,233 @@
+[gd_scene load_steps=18 format=3 uid="uid://dpw6cr8welwk2"]
+
+[ext_resource type="Texture2D" uid="uid://ctp0qckumxon5" path="res://assets/graphics/slime/wings.png" id="1_jjxgg"]
+[ext_resource type="Texture2D" uid="uid://dcyediaddys3q" path="res://assets/graphics/slime/slime.png" id="2_04pvl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2msp"]
+atlas = ExtResource("1_jjxgg")
+region = Rect2(0, 0, 28, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t161j"]
+atlas = ExtResource("1_jjxgg")
+region = Rect2(0, 7, 28, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_083pk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2msp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t161j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjxgg"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(28, 18, 28, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04pvl"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(0, 36, 28, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_083pk"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(28, 36, 28, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_di866"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(0, 54, 28, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edbaf"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(0, 0, 28, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umea1"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(28, 0, 28, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkjej"]
+atlas = ExtResource("2_04pvl")
+region = Rect2(0, 18, 28, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_di866"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjxgg")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04pvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_083pk")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_di866")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edbaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umea1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkjej")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_04pvl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slime:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u2msp"]
+resource_name = "alert"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"alert"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slime:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jjxgg"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.233333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slime:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t161j"]
+_data = {
+&"RESET": SubResource("Animation_04pvl"),
+&"alert": SubResource("Animation_u2msp"),
+&"idle": SubResource("Animation_jjxgg")
+}
+
+[node name="FlyingSlime" type="CharacterBody2D"]
+
+[node name="Wings" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.886262, 0.886261, 0.886262, 1)
+position = Vector2(2, -9.5)
+sprite_frames = SubResource("SpriteFrames_083pk")
+frame_progress = 0.0254696
+
+[node name="Slime" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.737193, 0.737193, 0.737193, 1)
+position = Vector2(0, -0.5)
+sprite_frames = SubResource("SpriteFrames_di866")
+animation = &"idle"
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t161j")
+}
