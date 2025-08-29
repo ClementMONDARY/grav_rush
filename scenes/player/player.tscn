@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=153 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://6gg02mmjhjfr" path="res://scripts/global_components/dash_component.gd" id="12_fm80t"]
 [ext_resource type="Script" uid="uid://bwuu7f0cf7fn6" path="res://scripts/player/states/PlayerWallSlideState.gd" id="14_3j4b4"]
 [ext_resource type="Script" uid="uid://b2hnxvhtnid6u" path="res://scripts/global_components/stamina_component.gd" id="14_ugbui"]
+[ext_resource type="Script" uid="uid://bw3l63ifsvedb" path="res://scripts/player/states/PlayerGroundAttackState.gd" id="17_cnsyf"]
 [ext_resource type="PackedScene" uid="uid://dc1sh8pfn7fty" path="res://scenes/global_components/jump_component.tscn" id="17_kvlxm"]
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
@@ -63,6 +64,22 @@ region = Rect2(52, 117, 52, 39)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5mf0n"]
 atlas = ExtResource("4_cnsyf")
 region = Rect2(104, 117, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln3h3"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(156, 273, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uygh0"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(104, 234, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1aof"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(156, 234, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8qe1"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(208, 234, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4hvnv"]
 atlas = ExtResource("4_cnsyf")
@@ -202,6 +219,23 @@ animations = [{
 "loop": true,
 "name": &"fall",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln3h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uygh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1aof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8qe1")
+}],
+"loop": false,
+"name": &"ground_attack",
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -381,6 +415,15 @@ point_count = 3
 [sub_resource type="Gradient" id="Gradient_6cv16"]
 colors = PackedColorArray(0.928743, 0.935693, 0.98251, 1, 0.827451, 0.843137, 0.956863, 0.337255)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hdvrm"]
+size = Vector2(33, 41)
+
+[sub_resource type="Gradient" id="Gradient_j4nxn"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_28m0y"]
+colors = PackedColorArray(0.8, 0.8, 0.8, 0.803922, 0.741176, 0.741176, 0.741176, 0.596078)
+
 [sub_resource type="Animation" id="Animation_pk8ii"]
 resource_name = "ground_jump"
 length = 0.001
@@ -509,6 +552,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/Hitboxes/AttackboxArea:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint/SwordSwingParticules:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_6cv16"]
 resource_name = "air_dash"
@@ -620,6 +699,85 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"fall"]
+}
+
+[sub_resource type="Animation" id="Animation_5mf0n"]
+resource_name = "ground_attack"
+length = 0.25
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ground_attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/Hitboxes/AttackboxArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerStateMachine/GroundAttack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_play_attack_audio"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint/SwordSwingParticules:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -3.66519]
 }
 
 [sub_resource type="Animation" id="Animation_007i1"]
@@ -888,6 +1046,7 @@ _data = {
 &"air_dash": SubResource("Animation_6cv16"),
 &"double_jump": SubResource("Animation_iqsei"),
 &"fall": SubResource("Animation_cnsyf"),
+&"ground_attack": SubResource("Animation_5mf0n"),
 &"ground_dash": SubResource("Animation_007i1"),
 &"idle": SubResource("Animation_8ydkj"),
 &"jump": SubResource("Animation_ioxgp"),
@@ -910,7 +1069,7 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_5mf0n")
 blend_point_1/pos = 1.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bbmj2"]
-graph_offset = Vector2(-424.975, -8.3719)
+graph_offset = Vector2(-219.566, 58.1104)
 nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_4hvnv")
 nodes/FloorContext/position = Vector2(40, 120)
 node_connections = [&"output", 0, &"FloorContext"]
@@ -919,16 +1078,25 @@ node_connections = [&"output", 0, &"FloorContext"]
 animation = &"fall"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3j4b4"]
-graph_offset = Vector2(-497, 15)
+graph_offset = Vector2(-479, 60)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_8ydkj")
 nodes/Fall/position = Vector2(20, 140)
 node_connections = [&"output", 0, &"Fall"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hvnv"]
+animation = &"ground_attack"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qxvo"]
+graph_offset = Vector2(-296.182, 3.0909)
+nodes/GroundAttack/node = SubResource("AnimationNodeAnimation_4hvnv")
+nodes/GroundAttack/position = Vector2(60, 80)
+node_connections = [&"output", 0, &"GroundAttack"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cnsyf"]
 animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_007i1"]
-graph_offset = Vector2(-128.143, 34.3596)
+graph_offset = Vector2(-104.149, 48.1096)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_cnsyf")
 nodes/Idle/position = Vector2(340, 100)
 nodes/output/position = Vector2(680, 140)
@@ -948,6 +1116,7 @@ blend_point_1/pos = 1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j4nxn"]
+graph_offset = Vector2(-7, -26)
 nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_cnsyf")
 nodes/FloorContext/position = Vector2(540, 20)
 nodes/output/position = Vector2(920, 100)
@@ -1020,6 +1189,8 @@ states/Dash/position = Vector2(677, 215)
 states/End/position = Vector2(827, 151)
 states/Fall/node = SubResource("AnimationNodeBlendTree_3j4b4")
 states/Fall/position = Vector2(574, 151)
+states/GroundAttack/node = SubResource("AnimationNodeBlendTree_8qxvo")
+states/GroundAttack/position = Vector2(538, 215)
 states/Idle/node = SubResource("AnimationNodeBlendTree_007i1")
 states/Idle/position = Vector2(368, 151)
 states/Jump/node = SubResource("AnimationNodeBlendTree_j4nxn")
@@ -1034,7 +1205,7 @@ states/WallGrab/position = Vector2(388, 87)
 states/WallSlide/node = SubResource("AnimationNodeBlendTree_iqsei")
 states/WallSlide/position = Vector2(522, 87)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ln3h3")]
-graph_offset = Vector2(-91, 30)
+graph_offset = Vector2(-108, 33)
 
 [sub_resource type="Animation" id="Animation_lgqa7"]
 resource_name = "RESET"
@@ -1175,6 +1346,8 @@ graph_offset = Vector2(-184, -83)
 radius = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 29
 floor_snap_length = 6.0
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -1309,12 +1482,48 @@ scale_amount_curve = SubResource("Curve_007i1")
 color_ramp = SubResource("Gradient_6cv16")
 script = ExtResource("4_yj68g")
 
-[node name="Trail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
+[node name="DashTrail" parent="PlayerAnimatedSprite2D" instance=ExtResource("3_uf5tr")]
 top_level = true
 width = 2.0
 script = ExtResource("4_lgqa7")
 fade_duration = 0.2
 MAX_LENGTH = 30
+
+[node name="Hitboxes" type="Node2D" parent="PlayerAnimatedSprite2D"]
+
+[node name="AttackboxArea" type="Area2D" parent="PlayerAnimatedSprite2D/Hitboxes"]
+collision_layer = 0
+collision_mask = 5
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnimatedSprite2D/Hitboxes/AttackboxArea"]
+position = Vector2(14.5, -2)
+shape = SubResource("RectangleShape2D_hdvrm")
+debug_color = Color(1, 0, 0, 0)
+
+[node name="SwordSwingParticulesPivotpoint" type="Node2D" parent="PlayerAnimatedSprite2D"]
+position = Vector2(8, -2.5)
+
+[node name="SwordSwingParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint"]
+position = Vector2(-5, 18)
+rotation = -4.95499
+emitting = false
+amount = 20
+lifetime = 0.25
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
+direction = Vector2(0.07, -0.2)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+linear_accel_min = -100.0
+linear_accel_max = -100.0
+angle_max = 45.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color_ramp = SubResource("Gradient_j4nxn")
+color_initial_ramp = SubResource("Gradient_28m0y")
 
 [node name="AnimationPlayerParticules" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1387,6 +1596,10 @@ script = ExtResource("10_fcs02")
 [node name="WallClimb" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_myrg7")
 
+[node name="GroundAttack" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("17_cnsyf")
+metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
+
 [node name="Components" type="Node" parent="."]
 
 [node name="SpeedComponent" type="Node2D" parent="Components"]
@@ -1422,4 +1635,5 @@ MAX_DB_JUMPS = 0
 [node name="WallControlComponent" parent="Components" instance=ExtResource("20_3j4b4")]
 unique_name_in_owner = true
 
-[connection signal="state_changed" from="PlayerStateMachine" to="PlayerAnimatedSprite2D/Trail" method="_on_player_dash"]
+[connection signal="animation_finished" from="AnimationPlayerSprite/AnimationTreeSprite" to="PlayerStateMachine/GroundAttack" method="_on_animation_player_sprite_animation_finished"]
+[connection signal="state_changed" from="PlayerStateMachine" to="PlayerAnimatedSprite2D/DashTrail" method="_on_player_dash"]

@@ -30,6 +30,8 @@ process_mode = 3
 [node name="LeftBorder" type="Area2D" parent="CameraBorders"]
 process_mode = 3
 position = Vector2(-297, 0)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/LeftBorder"]
 process_mode = 3
@@ -40,6 +42,8 @@ shape = SubResource("SegmentShape2D_7pa0d")
 process_mode = 3
 position = Vector2(0, -171)
 rotation = 3.14159
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder"]
 process_mode = 3
@@ -49,6 +53,8 @@ shape = SubResource("SegmentShape2D_eanys")
 process_mode = 3
 position = Vector2(297, 0)
 rotation = -1.5708
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/RightBorder"]
 process_mode = 3
@@ -57,6 +63,8 @@ shape = SubResource("SegmentShape2D_tparg")
 [node name="BottomBorder" type="Area2D" parent="CameraBorders"]
 process_mode = 3
 position = Vector2(0, 169)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder"]
 process_mode = 3

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://j71qk05y5kbv"]
 
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_ereje"]
-[ext_resource type="AudioStream" uid="uid://c8gxvk4l3q8ym" path="res://assets/audio/player/Player_Wall_Grab_0.mp3" id="2_l5nm6"]
+[ext_resource type="AudioStream" uid="uid://c8gxvk4l3q8ym" path="res://assets/audio/player/intercation/Player_Wall_Grab_0.mp3" id="2_l5nm6"]
 
 [resource]
 script = ExtResource("1_ereje")

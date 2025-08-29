@@ -15,6 +15,9 @@ enum SOUND_EFFECT_TYPE {
 	ON_PLAYER_FOOTSTEP_WOOD, # 8
 	ON_DIAMOND_TRACKER_UPDATED, # 9
 	ON_ITEM_PICKUP, #10
+	ON_PLAYER_SWORD_ATTACK_MISS, #11
+	ON_PLAYER_SWORD_ATTACK_HIT_ENNEMY, #12
+	ON_PLAYER_SWORD_ATTACK_HIT_WORLD, #13
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.

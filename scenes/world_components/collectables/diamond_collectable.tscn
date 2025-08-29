@@ -144,6 +144,8 @@ _data = {
 radius = 8.0
 
 [node name="Diamond" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_ggbm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

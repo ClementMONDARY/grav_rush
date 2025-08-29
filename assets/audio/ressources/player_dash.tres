@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SoundEffect" load_steps=5 format=3 uid="uid://cu33jvdd832lp"]
 
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_f2oaq"]
-[ext_resource type="AudioStream" uid="uid://bodpnacrhivbx" path="res://assets/audio/player/Player_Dash_0.wav" id="2_1oar3"]
-[ext_resource type="AudioStream" uid="uid://bmvxxob7fv273" path="res://assets/audio/player/Player_Dash_1.wav" id="3_gcsh3"]
+[ext_resource type="AudioStream" uid="uid://bodpnacrhivbx" path="res://assets/audio/player/intercation/Player_Dash_0.wav" id="2_1oar3"]
+[ext_resource type="AudioStream" uid="uid://bmvxxob7fv273" path="res://assets/audio/player/intercation/Player_Dash_1.wav" id="3_gcsh3"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f2oaq"]
 streams_count = 2

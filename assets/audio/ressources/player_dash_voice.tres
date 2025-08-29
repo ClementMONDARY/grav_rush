@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SoundEffect" load_steps=6 format=3 uid="uid://bh6q2el7d3ohl"]
 
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_6s1v6"]
-[ext_resource type="AudioStream" uid="uid://ds4g0itbmhnqg" path="res://assets/audio/player/Player_Dash_SFX_0.mp3" id="2_adq8y"]
-[ext_resource type="AudioStream" uid="uid://ve50fvuhhj2c" path="res://assets/audio/player/Player_Dash_SFX_1.MP3" id="3_ydcpd"]
-[ext_resource type="AudioStream" uid="uid://bw855oyu3ajfp" path="res://assets/audio/player/Player_Dash_SFX_2.MP3" id="4_6eeyh"]
+[ext_resource type="AudioStream" uid="uid://ds4g0itbmhnqg" path="res://assets/audio/player/intercation/Player_Dash_SFX_0.mp3" id="2_adq8y"]
+[ext_resource type="AudioStream" uid="uid://ve50fvuhhj2c" path="res://assets/audio/player/intercation/Player_Dash_SFX_1.MP3" id="3_ydcpd"]
+[ext_resource type="AudioStream" uid="uid://bw855oyu3ajfp" path="res://assets/audio/player/intercation/Player_Dash_SFX_2.MP3" id="4_6eeyh"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hqgb3"]
 streams_count = 3

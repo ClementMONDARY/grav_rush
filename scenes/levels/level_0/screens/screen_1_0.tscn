@@ -4059,6 +4059,7 @@ texture = ExtResource("3_nbcvp")
 
 [sub_resource type="TileSet" id="TileSet_wjk5u"]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 14
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_ulyey")
 custom_data_layer_0/name = "material"
 custom_data_layer_0/type = 4

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://fhsdqmbo0di5"
-path="res://.godot/imported/Land_Wood_0.wav-b1c1f838211a1a2492a937508d8bf5d1.sample"
+path="res://.godot/imported/Land_Wood_0.wav-e5814f45cae2d397b4bcb85a56f9ba89.sample"
 
 [deps]
 
-source_file="res://assets/audio/player/Land_Wood_0.wav"
-dest_files=["res://.godot/imported/Land_Wood_0.wav-b1c1f838211a1a2492a937508d8bf5d1.sample"]
+source_file="res://assets/audio/player/intercation/Land_Wood_0.wav"
+dest_files=["res://.godot/imported/Land_Wood_0.wav-e5814f45cae2d397b4bcb85a56f9ba89.sample"]
 
 [params]
 

@@ -40,6 +40,6 @@ func _process(delta: float) -> void:
 		# Si proche du joueur, collecter
 		if distance <= 5.0:
 			DiamondManager.collect(item_id)
-			AudioManager.create_2d_audio_at_location(position, SoundEffect.SOUND_EFFECT_TYPE.ON_ITEM_PICKUP)
+			AudioManager.create_2d_audio_at_location(get_global_position(), SoundEffect.SOUND_EFFECT_TYPE.ON_ITEM_PICKUP)
 			diamond_collected.emit()
 			queue_free()

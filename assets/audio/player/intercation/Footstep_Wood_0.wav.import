@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://baxjqgx48wmi1"
-path="res://.godot/imported/Footstep_Wood_0.wav-f3d589cf76d1a519e7a73a64df1d2e1e.sample"
+path="res://.godot/imported/Footstep_Wood_0.wav-93e503bcd4fb9b97ed15f1713755cafd.sample"
 
 [deps]
 
-source_file="res://assets/audio/player/Footstep_Wood_0.wav"
-dest_files=["res://.godot/imported/Footstep_Wood_0.wav-f3d589cf76d1a519e7a73a64df1d2e1e.sample"]
+source_file="res://assets/audio/player/intercation/Footstep_Wood_0.wav"
+dest_files=["res://.godot/imported/Footstep_Wood_0.wav-93e503bcd4fb9b97ed15f1713755cafd.sample"]
 
 [params]
 

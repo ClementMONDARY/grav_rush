@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbf0sy5aky4cj"]
+[gd_scene load_steps=6 format=3 uid="uid://dbf0sy5aky4cj"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_4ospm"]
 [ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="2_d27c4"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="3_4ospm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3yskv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ospm"]
+size = Vector2(40, 46)
 
 [node name="Node2D" type="Node2D"]
 
@@ -56,3 +59,17 @@ item_id = "Diamond_9"
 [node name="Diamond10" parent="." groups=["diamond"] instance=ExtResource("3_4ospm")]
 position = Vector2(-192, -16)
 item_id = "Diamond_10"
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(114, -8)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_4ospm")
+
+[node name="Panel" type="Panel" parent="Area2D2"]
+offset_left = -20.0
+offset_top = -38.0
+offset_right = 21.0
+offset_bottom = 8.0
