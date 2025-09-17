@@ -49,7 +49,7 @@ func _handle_stamina() -> void:
 func _handle_wall_release() -> void:
 	if Input.get_axis("move_left", "move_right") == wall_direction:
 		_update_animation_blend()
-		if Input.is_action_just_pressed("dash"):
+		if Input.is_action_just_pressed("dash") and PlayerManager.can_dash:
 			sprite.scale.x = -sprite.scale.x
 			Transitioned.emit(self, "dash")
 	else:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bcclb17enh7by"]
 
-[ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://graphics/collectables/diamond.png" id="1_4wtd7"]
+[ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="1_4wtd7"]
 [ext_resource type="Script" uid="uid://ceve54135b2i1" path="res://scripts/global/AudioLink.gd" id="1_dkg4u"]
 [ext_resource type="Script" uid="uid://cme0prll1o5k" path="res://scripts/world/collectables/DiamondCollectable.gd" id="1_ggbm7"]
 
@@ -144,6 +144,8 @@ _data = {
 radius = 8.0
 
 [node name="Diamond" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_ggbm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

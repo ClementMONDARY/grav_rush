@@ -29,6 +29,8 @@ func Physics_Update(delta: float) -> void:
 		return
 	if _handle_wall_grab():
 		return
+	if _handle_ground_attack():
+		return
 
 	player.move_and_slide()
 
@@ -61,7 +63,7 @@ func _handle_jump() -> bool:
 	return false
 
 func _handle_dash() -> bool:
-	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
+	if Input.is_action_just_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "dash")
 		return true
 	return false
@@ -70,5 +72,11 @@ func _handle_wall_grab() -> bool:
 	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
 		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")
+		return true
+	return false
+
+func _handle_ground_attack() -> bool:
+	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
+		Transitioned.emit(self, "groundattack")
 		return true
 	return false

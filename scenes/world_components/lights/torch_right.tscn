@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://dsbgg15u12hh6"]
 
 [ext_resource type="Script" uid="uid://b15lw2tjdmv4j" path="res://scripts/world_components/light_random_frame_start.gd" id="1_8yaxu"]
-[ext_resource type="Texture2D" uid="uid://c37dc8on10uky" path="res://graphics/world/torch_a.png" id="1_38ebf"]
+[ext_resource type="Texture2D" uid="uid://c37dc8on10uky" path="res://assets/graphics/world/torch_a.png" id="1_38ebf"]
 
 [sub_resource type="Curve" id="Curve_38ebf"]
 _data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(0.267045, 0.921348), 0.534467, 0.534467, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccu8orxn0eq01"]
+[gd_scene load_steps=6 format=3 uid="uid://ccu8orxn0eq01"]
 
 [ext_resource type="Script" uid="uid://be1bt234n75jd" path="res://scripts/world/player_camera.gd" id="1_7pa0d"]
+[ext_resource type="PackedScene" uid="uid://cqkmebr1i3g71" path="res://scenes/player/player_hud.tscn" id="2_eanys"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_7pa0d"]
 a = Vector2(-162, 0)
@@ -15,7 +16,7 @@ a = Vector2(162, 0)
 b = Vector2(-162, 0)
 
 [node name="PlayerCamera" type="Camera2D"]
-process_mode = 1
+process_mode = 3
 zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -29,6 +30,8 @@ process_mode = 3
 [node name="LeftBorder" type="Area2D" parent="CameraBorders"]
 process_mode = 3
 position = Vector2(-297, 0)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/LeftBorder"]
 process_mode = 3
@@ -39,15 +42,20 @@ shape = SubResource("SegmentShape2D_7pa0d")
 process_mode = 3
 position = Vector2(0, -171)
 rotation = 3.14159
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder"]
 process_mode = 3
+position = Vector2(0, 7)
 shape = SubResource("SegmentShape2D_eanys")
 
 [node name="RightBorder" type="Area2D" parent="CameraBorders"]
 process_mode = 3
 position = Vector2(297, 0)
 rotation = -1.5708
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/RightBorder"]
 process_mode = 3
@@ -56,10 +64,15 @@ shape = SubResource("SegmentShape2D_tparg")
 [node name="BottomBorder" type="Area2D" parent="CameraBorders"]
 process_mode = 3
 position = Vector2(0, 169)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder"]
 process_mode = 3
+position = Vector2(0, 9)
 shape = SubResource("SegmentShape2D_eanys")
+
+[node name="PlayerHud" parent="." instance=ExtResource("2_eanys")]
 
 [connection signal="body_entered" from="CameraBorders/LeftBorder" to="." method="_on_left_border_body_entered"]
 [connection signal="body_entered" from="CameraBorders/TopBorder" to="." method="_on_top_border_body_entered"]

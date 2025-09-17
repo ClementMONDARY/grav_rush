@@ -24,6 +24,8 @@ func Physics_Update(delta: float) -> void:
 		return
 	if _handle_dash():
 		return
+	if _handle_ground_attack():
+		return
 
 	_handle_horizontal_movement(delta)
 	_flip_sprite()
@@ -49,7 +51,7 @@ func _handle_jump() -> bool:
 	return false
 
 func _handle_dash() -> bool:
-	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
+	if Input.is_action_just_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "dash")
 		return true
 	return false
@@ -93,5 +95,11 @@ func _handle_idle_transition() -> bool:
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if abs(player.velocity.x) < 5.0 and input_dir == 0:
 		Transitioned.emit(self, "idle")
+		return true
+	return false
+
+func _handle_ground_attack() -> bool:
+	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
+		Transitioned.emit(self, "groundattack")
 		return true
 	return false

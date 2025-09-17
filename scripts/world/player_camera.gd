@@ -4,15 +4,13 @@ extends Camera2D
 
 @onready var level_screens: Array = get_tree().get_nodes_in_group("screen").map(func(n): return n as ScreenData)
 @onready var actual_screen: ScreenData = get_node_or_null(initial_screen)
-@onready var actual_screen_name: String = actual_screen.name
 
-const SCREEN_WIDTH := 576.0
-const SCREEN_HEIGHT := 324.0
-const TRANSITION_DURATION := 0.15
+var actual_screen_name: String
 
 func _ready() -> void:
 	print(level_screens)
 	if actual_screen:
+		actual_screen_name = actual_screen.name
 		update_camera_limits_from_screen(actual_screen)
 
 func update_camera_limits_from_screen(screen: ScreenData) -> void:
@@ -80,13 +78,12 @@ func transition_to_screen(direction: Vector2) -> void:
 	if target_screen == null:
 		push_warning("Target screen %s not found!" % target_name)
 		return
-		
-	set_borders_enabled(false)
-	update_camera_limits_from_screen(target_screen)
 	
+	set_deferred("set_borders_enabled", false)
+	update_camera_limits_from_screen(target_screen)
 	position_smoothing_speed *= 2.5
 	Engine.time_scale = 0.3
-	await get_tree().create_timer(TRANSITION_DURATION).timeout
+	await get_tree().create_timer(0.15).timeout
 	position_smoothing_speed /= 2.5
 	Engine.time_scale = 1.0
 	
