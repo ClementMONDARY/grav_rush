@@ -102,7 +102,7 @@ func _handle_wall_jump() -> void:
 	Transitioned.emit(self, "jump")
 
 func _handle_air_dash() -> bool:
-	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
+	if Input.is_action_just_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "dash")
 		return true
 	return false

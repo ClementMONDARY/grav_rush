@@ -1,7 +1,8 @@
-[gd_scene load_steps=153 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=154 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://cqlp3jlol7va5" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-damaged.png" id="3_007i1"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpbmlb4gtbxrs" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-parade.png" id="4_007i1"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
@@ -191,6 +192,14 @@ animations = [{
 "loop": false,
 "name": &"air_dash",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_007i1")
+}],
+"loop": true,
+"name": &"damaged",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -430,7 +439,7 @@ length = 0.001
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAnimatedSprite2D/JUMPING_CPUParticles2D")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D/JumpingParticules")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -448,7 +457,7 @@ length = 0.001
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAnimatedSprite2D/LANDING_CPUParticles2D")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D/LandingParticules")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -543,7 +552,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/2/path = NodePath("PlayerAnimatedSprite2D/DashParticules:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -575,18 +584,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_6cv16"]
@@ -633,7 +630,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/DashParticules:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -824,7 +821,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerAnimatedSprite2D/DASH_CPUParticles2D:emitting")
+tracks/3/path = NodePath("PlayerAnimatedSprite2D/DashParticules:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1225,7 +1222,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerAnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D/SweatParticules:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1254,7 +1251,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerAnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/1/path = NodePath("PlayerAnimatedSprite2D/SweatParticules:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1271,7 +1268,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAnimatedSprite2D/STAMINASWEAT_CPUParticles2D:emitting")
+tracks/0/path = NodePath("PlayerAnimatedSprite2D/SweatParticules:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1324,13 +1321,13 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lgqa7"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioxgp"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cnsyf"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_007i1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yj68g"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
 states/EmptyStamina/node = SubResource("AnimationNodeBlendTree_uf5tr")
@@ -1339,8 +1336,8 @@ states/LowStamina/node = SubResource("AnimationNodeBlendTree_lgqa7")
 states/LowStamina/position = Vector2(635, 100)
 states/RESET/node = SubResource("AnimationNodeBlendTree_8ydkj")
 states/RESET/position = Vector2(409, 100)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "EmptyStamina", "LowStamina", SubResource("AnimationNodeStateMachineTransition_yj68g"), "LowStamina", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "EmptyStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "RESET", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_007i1")]
-graph_offset = Vector2(-184, -83)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "RESET", "LowStamina", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "LowStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "LowStamina", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_ioxgp"), "EmptyStamina", "RESET", SubResource("AnimationNodeStateMachineTransition_cnsyf"), "RESET", "EmptyStamina", SubResource("AnimationNodeStateMachineTransition_007i1"), "EmptyStamina", "LowStamina", SubResource("AnimationNodeStateMachineTransition_yj68g")]
+graph_offset = Vector2(-147, -81)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 radius = 8.0
@@ -1385,7 +1382,7 @@ z_index = -1
 position = Vector2(0, 18.2)
 script = ExtResource("5_007i1")
 
-[node name="FOOTSTEPS_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
+[node name="FootstepsParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/FootstepPlayer"]
 emitting = false
 amount = 3
 lifetime = 0.3
@@ -1402,7 +1399,7 @@ scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_3j4b4")
 color_ramp = SubResource("Gradient_lgqa7")
 
-[node name="DASH_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+[node name="DashParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
 position = Vector2(0, 2.5)
 emitting = false
@@ -1419,7 +1416,7 @@ initial_velocity_max = 13.05
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_uf5tr")
 
-[node name="STAMINASWEAT_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+[node name="SweatParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 position = Vector2(0, -6)
 emitting = false
 amount = 4
@@ -1434,7 +1431,7 @@ initial_velocity_max = 30.7
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_kvlxm")
 
-[node name="LANDING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+[node name="LandingParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 z_index = -1
 position = Vector2(0, 17.5)
 emitting = false
@@ -1458,7 +1455,7 @@ scale_amount_curve = SubResource("Curve_ioxgp")
 color_ramp = SubResource("Gradient_cnsyf")
 script = SubResource("GDScript_007i1")
 
-[node name="JUMPING_CPUParticles2D" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+[node name="JumpingParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
 position = Vector2(0, 17.5)
 emitting = false
 amount = 5
@@ -1501,12 +1498,12 @@ position = Vector2(14.5, -2)
 shape = SubResource("RectangleShape2D_hdvrm")
 debug_color = Color(1, 0, 0, 0)
 
-[node name="SwordSwingParticulesPivotpoint" type="Node2D" parent="PlayerAnimatedSprite2D"]
+[node name="SwordSwingParticulesPivotpoint" type="Marker2D" parent="PlayerAnimatedSprite2D"]
 position = Vector2(8, -2.5)
 
 [node name="SwordSwingParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint"]
 position = Vector2(-5, 18)
-rotation = -4.95499
+rotation = 1.3282
 emitting = false
 amount = 20
 lifetime = 0.25
@@ -1537,6 +1534,7 @@ tree_root = SubResource("AnimationNodeStateMachine_pk8ii")
 anim_player = NodePath("..")
 
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="."]
+active = false
 libraries = {
 &"": SubResource("AnimationLibrary_3j4b4")
 }

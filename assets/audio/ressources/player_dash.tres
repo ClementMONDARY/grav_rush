@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SoundEffect" load_steps=5 format=3 uid="uid://cu33jvdd832lp"]
 
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_f2oaq"]
-[ext_resource type="AudioStream" uid="uid://bodpnacrhivbx" path="res://assets/audio/player/intercation/Player_Dash_0.wav" id="2_1oar3"]
-[ext_resource type="AudioStream" uid="uid://bmvxxob7fv273" path="res://assets/audio/player/intercation/Player_Dash_1.wav" id="3_gcsh3"]
+[ext_resource type="AudioStream" uid="uid://bodpnacrhivbx" path="res://assets/audio/player/interaction/Player_Dash_0.wav" id="2_1oar3"]
+[ext_resource type="AudioStream" uid="uid://bmvxxob7fv273" path="res://assets/audio/player/interaction/Player_Dash_1.wav" id="3_gcsh3"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f2oaq"]
 streams_count = 2
@@ -11,11 +11,9 @@ stream_1/stream = ExtResource("3_gcsh3")
 
 [resource]
 script = ExtResource("1_f2oaq")
-limit = 5
 type = 1
 sound_effect = SubResource("AudioStreamRandomizer_f2oaq")
 volume = -15.0
 pitch_scale = 1.5
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"

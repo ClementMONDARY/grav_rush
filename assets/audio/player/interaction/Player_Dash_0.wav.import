@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bodpnacrhivbx"
-path="res://.godot/imported/Player_Dash_0.wav-a5505f54906b2c94086a3b2b46668ada.sample"
+path="res://.godot/imported/Player_Dash_0.wav-e4c5b523cb0d99648f47fc710aa40c0d.sample"
 
 [deps]
 
-source_file="res://assets/audio/player/intercation/Player_Dash_0.wav"
-dest_files=["res://.godot/imported/Player_Dash_0.wav-a5505f54906b2c94086a3b2b46668ada.sample"]
+source_file="res://assets/audio/player/interaction/Player_Dash_0.wav"
+dest_files=["res://.godot/imported/Player_Dash_0.wav-e4c5b523cb0d99648f47fc710aa40c0d.sample"]
 
 [params]
 

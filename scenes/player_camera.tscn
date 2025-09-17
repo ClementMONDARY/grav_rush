@@ -47,6 +47,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder"]
 process_mode = 3
+position = Vector2(0, 7)
 shape = SubResource("SegmentShape2D_eanys")
 
 [node name="RightBorder" type="Area2D" parent="CameraBorders"]
@@ -68,6 +69,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder"]
 process_mode = 3
+position = Vector2(0, 9)
 shape = SubResource("SegmentShape2D_eanys")
 
 [node name="PlayerHud" parent="." instance=ExtResource("2_eanys")]

@@ -90,7 +90,7 @@ func _handle_jump() -> bool:
 	return false
 
 func _handle_dash() -> bool:
-	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
+	if Input.is_action_just_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "dash")
 		return true
 	return false
@@ -109,15 +109,13 @@ func _play_fall_sound() -> void:
 	var material = _get_floor_type()
 	match material:
 		"stone":
-			print("stone")
 			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
 		"wood":
-			print("wood")
 			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_WOOD)
+		"metal":
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_METAL)
 		null, "":
-			print("null")
 			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
-
 
 func _get_floor_type() -> String:
 	var last_floor_collision := player.get_last_slide_collision()

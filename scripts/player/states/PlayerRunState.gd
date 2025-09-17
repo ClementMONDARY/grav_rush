@@ -51,7 +51,7 @@ func _handle_jump() -> bool:
 	return false
 
 func _handle_dash() -> bool:
-	if Input.is_action_just_pressed("dash") and dash_component.remaining_dashs > 0:
+	if Input.is_action_just_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "dash")
 		return true
 	return false
