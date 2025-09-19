@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://bt1k8yu5foe0x"]
+[gd_scene load_steps=24 format=4 uid="uid://bt1k8yu5foe0x"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_5pwx8"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_dtxqi"]
-[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://assets/graphics/world/main_lev_build.png" id="3_27tgs"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_dtxqi"]
+[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="3_27tgs"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="5_27tgs"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="5_mwf6e"]
+[ext_resource type="AudioStream" uid="uid://6c1vgw1htaac" path="res://assets/audio/world/water_drips.wav" id="6_nebeh"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
@@ -4162,4 +4163,13 @@ position = Vector2(735, -734)
 position = Vector2(480, -928)
 amount = 30
 lifetime = 4.5
+visibility_rect = Rect2(-256, -368, 736, 672)
 process_material = SubResource("ParticleProcessMaterial_vxcfr")
+
+[node name="WaterDropsAudio" type="AudioStreamPlayer2D" parent="Scenery"]
+position = Vector2(480, -812)
+stream = ExtResource("6_nebeh")
+volume_db = -25.0
+autoplay = true
+max_distance = 500.0
+bus = &"SFX"

@@ -127,7 +127,6 @@ func _get_floor_type() -> String:
 		var tile_map_layer := collider as TileMapLayer
 		var local_point = tile_map_layer.to_local(last_floor_collision.get_position())
 		var pos = tile_map_layer.local_to_map(local_point)
-		print(pos)
 		var data = tile_map_layer.get_cell_tile_data(pos)
 		if data:
 			return data.get_custom_data("material")

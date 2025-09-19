@@ -42,25 +42,21 @@ func _process(_delta: float) -> void:
 func _on_right_border_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
-	print("right border entered!")
 	transition_to_screen(Vector2(1, 0))
 
 func _on_left_border_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
-	print("left border entered!")
 	transition_to_screen(Vector2(-1, 0))
 
 func _on_top_border_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
-	print("top border entered!")
 	transition_to_screen(Vector2(0, -1))
 
 func _on_bottom_border_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("player"):
 		return
-	print("bottom border entered!")
 	transition_to_screen(Vector2(0, 1))
 
 # ---- MAIN TRANSITION LOGIC ----
