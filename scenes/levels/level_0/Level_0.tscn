@@ -65,7 +65,7 @@ Vector2i(-1, -1): {
 [node name="Level_0" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_icq3g")]
-position = Vector2(5104, -1536)
+position = Vector2(5184, -2032)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("3_uqyny")]
 position = Vector2(0, -32)
@@ -109,6 +109,3 @@ stream = SubResource("AudioStreamInteractive_ktttv")
 volume_db = -15.0
 autoplay = true
 bus = &"Music"
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(5024, -1344)

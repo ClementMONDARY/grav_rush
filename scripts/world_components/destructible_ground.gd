@@ -1,7 +1,10 @@
 extends TileMapLayer
 
+signal wall_destroyed()
+
 const DEBRIS_PARTICULES_SCENE = preload("uid://wq4xrfptlgjy")
 
+@export var wall_id_in: int
 @export var structures_health: int = 1
 
 @export_group("Limits")
@@ -65,10 +68,11 @@ func _on_break():
 		mat.emission_box_extents = Vector3(width / 2.0, height / 2.0, 0)
 
 	# Nombre de tiles recouvertes
-	var tile_count = abs(abs(furthest_right_tile_unit) - abs(furthest_left_tile_unit)) * abs(abs(furthest_bottom_tile_unit) - abs(furthest_top_tile_unit)) * 30
+	var tile_count = abs(abs(furthest_right_tile_unit) - abs(furthest_left_tile_unit)) * abs(abs(furthest_bottom_tile_unit) - abs(furthest_top_tile_unit)) * 20
 	debris.amount = abs(tile_count)
 	debris.emitting = true
 	print(debris.position)
 	get_tree().current_scene.add_child(debris)
-
+	
+	wall_destroyed.emit()
 	queue_free()
