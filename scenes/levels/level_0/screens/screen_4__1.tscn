@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://des2062mwps42"]
+[gd_scene load_steps=18 format=4 uid="uid://des2062mwps42"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_grslt"]
 [ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_kkdgg"]
 [ext_resource type="TileSet" uid="uid://bw1xbph3y7krj" path="res://assets/tilesets/ground_tileset.tres" id="3_uya5p"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="4_rjh17"]
 [ext_resource type="PackedScene" uid="uid://bucu6s1d1eckx" path="res://scenes/world_components/lights/ceiling_light.tscn" id="5_uya5p"]
+[ext_resource type="PackedScene" uid="uid://cnxsq8xqdu6k3" path="res://scenes/world_components/tiles/checkoint.tscn" id="6_qhb8d"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
@@ -1604,8 +1605,6 @@ position = Vector2(368, 379)
 [node name="TorchCenter_5" parent="Lights" instance=ExtResource("4_rjh17")]
 position = Vector2(592, -118)
 
-[node name="Collectables" type="Node2D" parent="."]
-
 [node name="Miscellaneous" type="Node2D" parent="."]
 
 [node name="FadeToBg" type="TextureRect" parent="Miscellaneous"]
@@ -1617,8 +1616,19 @@ offset_bottom = 288.0
 rotation = -1.5707964
 texture = SubResource("GradientTexture1D_qhb8d")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = -304
-limit_right = 624
-limit_bottom = 476
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("6_qhb8d")]
+position = Vector2(224, -96)
+a = Vector2(-208, -64)
+b = Vector2(-208, 0)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("6_qhb8d")]
+position = Vector2(432, 400)
+a = Vector2(-16, 64)
+b = Vector2(-112, 64)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("6_qhb8d")]
+position = Vector2(512, -96)
+a = Vector2(96, -96)
+b = Vector2(96, 0)

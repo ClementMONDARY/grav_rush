@@ -40,23 +40,19 @@ func _process(_delta: float) -> void:
 
 # ---- BORDERS LOGIC ----
 func _on_right_border_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		return
+	if not body.is_in_group("player"): return
 	transition_to_screen(Vector2(1, 0))
 
 func _on_left_border_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		return
+	if not body.is_in_group("player"): return
 	transition_to_screen(Vector2(-1, 0))
 
 func _on_top_border_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		return
+	if not body.is_in_group("player"): return
 	transition_to_screen(Vector2(0, -1))
 
 func _on_bottom_border_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		return
+	if not body.is_in_group("player"): return
 	transition_to_screen(Vector2(0, 1))
 
 # ---- MAIN TRANSITION LOGIC ----

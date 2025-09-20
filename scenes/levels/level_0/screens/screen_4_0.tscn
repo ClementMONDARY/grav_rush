@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://mh4m6fawwqs8"]
+[gd_scene load_steps=20 format=4 uid="uid://mh4m6fawwqs8"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_roefo"]
 [ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_7bsvm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://djxy2d65pmqy" path="res://scenes/world_components/tiles/destructible_ground.tscn" id="4_lu6hu"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="6_lu6hu"]
 [ext_resource type="Script" uid="uid://dbcsexefw6efv" path="res://scripts/world_components/hiding_plate.gd" id="7_46kdo"]
+[ext_resource type="PackedScene" uid="uid://cnxsq8xqdu6k3" path="res://scenes/world_components/tiles/checkoint.tscn" id="8_onabu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
@@ -1570,7 +1571,7 @@ tile_set = SubResource("TileSet_sw2gv")
 [node name="Walls_1" type="TileMapLayer" parent="Tiles"]
 light_mask = 2
 z_index = -3
-tile_map_data = PackedByteArray("AAAJAPT/AABhACEAAAAJAPX/AABhACIAAAAJAPb/AABhACMAAAAKAPT/AABiACEAAAAKAPX/AABiACIAAAAKAPb/AABiACMAAAAZAPT/AABhACEAAAAZAPX/AABhACIAAAAZAPb/AABhACMAAAAaAPT/AABiACEAAAAaAPX/AABiACIAAAAaAPb/AABiACMAAAAFAPD/AABhAB0AAAAFAPH/AABhAB4AAAANAPD/AABhAB0AAAANAPH/AABhAB4AAAAWAPD/AABhAB0AAAAWAPH/AABhAB4AAAAHAPr/AAADACIAAAAHAPv/AAADACMAAAAIAPr/AAAEACIAAAAIAPv/AAAEACMAAAAbAPr/AAADACIAAAAbAPv/AAADACMAAAAcAPr/AAAEACIAAAAcAPv/AAAEACMAAAAgAPD/AABhAB0AAAAgAPH/AABhAB4AAAAZAPP/AAB5AAsAAAAaAPP/AAB6AAsAAAAbAPP/AAB7AAsAAAAcAPP/AAB8AAsAAAAdAPP/AAB9AAsAAAAYAPP/AAB9AAsAAAAQAPX/AABXACcAAAAQAPb/AABXACIAAAAQAPf/AABXACMAAAARAPX/AABSACMAAAARAPb/AABSACEAAAARAPf/AABcACcAAAASAPX/AABTACMAAAASAPb/AABTACEAAAASAPf/AABdACcAAAATAPX/AABTACMAAAATAPb/AABTACEAAAATAPf/AABeACcAAAAUAPX/AABUACMAAAAUAPb/AABUACEAAAAUAPf/AABfACcAAAAVAPX/AABXACcAAAAVAPb/AABXACIAAAAVAPf/AABXACMAAAAGAOn/AABXACcAAAAGAOr/AABXACIAAAAGAOv/AABXACMAAAAHAOn/AABSACMAAAAHAOr/AABSACEAAAAHAOv/AABcACcAAAAIAOn/AABTACMAAAAIAOr/AABTACEAAAAIAOv/AABdACcAAAAJAOn/AABTACMAAAAJAOr/AABTACEAAAAJAOv/AABeACcAAAAKAOn/AABUACMAAAAKAOr/AABUACEAAAAKAOv/AABfACcAAAALAOn/AABXACcAAAALAOr/AABXACIAAAALAOv/AABXACMAAAA=")
+tile_map_data = PackedByteArray("AAAJAPT/AABhACEAAAAJAPX/AABhACIAAAAJAPb/AABhACMAAAAKAPT/AABiACEAAAAKAPX/AABiACIAAAAKAPb/AABiACMAAAAZAPT/AABhACEAAAAZAPX/AABhACIAAAAZAPb/AABhACMAAAAaAPT/AABiACEAAAAaAPX/AABiACIAAAAaAPb/AABiACMAAAAFAPD/AABhAB0AAAAFAPH/AABhAB4AAAANAPD/AABhAB0AAAANAPH/AABhAB4AAAAWAPD/AABhAB0AAAAWAPH/AABhAB4AAAAHAPr/AAADACIAAAAHAPv/AAADACMAAAAIAPr/AAAEACIAAAAIAPv/AAAEACMAAAAbAPr/AAADACIAAAAbAPv/AAADACMAAAAcAPr/AAAEACIAAAAcAPv/AAAEACMAAAAgAPD/AABhAB0AAAAgAPH/AABhAB4AAAAZAPP/AAB5AAsAAAAaAPP/AAB6AAsAAAAbAPP/AAB7AAsAAAAcAPP/AAB8AAsAAAAdAPP/AAB9AAsAAAAYAPP/AAB9AAsAAAA=")
 tile_set = SubResource("TileSet_r675i")
 
 [node name="Decoration" type="TileMapLayer" parent="Tiles"]
@@ -1611,12 +1612,29 @@ item_id = "Diamond_2"
 [node name="FadeToBg" type="TextureRect" parent="Miscellaneous"]
 z_index = 2
 material = SubResource("CanvasItemMaterial_onabu")
-offset_left = 368.0
+offset_left = 351.98816
 offset_top = -320.0
-offset_right = 448.0
-offset_bottom = -176.0
+offset_right = 431.98816
+offset_bottom = -144.0
 rotation = -1.5707964
 texture = SubResource("GradientTexture1D_k1cy1")
 script = ExtResource("7_46kdo")
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("8_onabu")]
+position = Vector2(80, -128)
+a = Vector2(-64, -64)
+b = Vector2(-64, 0)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("8_onabu")]
+position = Vector2(496, -128)
+a = Vector2(64, -64)
+b = Vector2(64, 0)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("8_onabu")]
+position = Vector2(472, -208)
+a = Vector2(8, -96)
+b = Vector2(-88, -96)
 
 [connection signal="wall_destroyed" from="Tiles/DestructibleGround" to="Miscellaneous/FadeToBg" method="_on_destructible_ground_wall_destroyed"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnxsq8xqdu6k3"]
+
+[ext_resource type="Script" uid="uid://bt4oscw6447yn" path="res://scripts/world_components/checkoint.gd" id="1_jqcy3"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_w1j4m"]
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jqcy3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_w1j4m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

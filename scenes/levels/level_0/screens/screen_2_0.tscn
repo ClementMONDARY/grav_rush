@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bt1k8yu5foe0x"]
+[gd_scene load_steps=21 format=4 uid="uid://bt1k8yu5foe0x"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_5pwx8"]
 [ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_dtxqi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="5_27tgs"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="5_mwf6e"]
 [ext_resource type="AudioStream" uid="uid://6c1vgw1htaac" path="res://assets/audio/world/water_drips.wav" id="6_nebeh"]
+[ext_resource type="PackedScene" uid="uid://cnxsq8xqdu6k3" path="res://scenes/world_components/tiles/checkoint.tscn" id="7_vxcfr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
@@ -1649,3 +1650,25 @@ volume_db = -25.0
 autoplay = true
 max_distance = 500.0
 bus = &"SFX"
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("7_vxcfr")]
+position = Vector2(320, -160)
+a = Vector2(-304, -32)
+b = Vector2(-304, 32)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("7_vxcfr")]
+position = Vector2(704, -288)
+a = Vector2(64, -64)
+b = Vector2(64, 0)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("7_vxcfr")]
+position = Vector2(304, -912)
+a = Vector2(16, -64)
+b = Vector2(-64, -64)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("7_vxcfr")]
+position = Vector2(720, -720)
+a = Vector2(48, -64)
+b = Vector2(48, 0)

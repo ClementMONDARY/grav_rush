@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bwd6upfqo3n6d"]
+[gd_scene load_steps=17 format=4 uid="uid://bwd6upfqo3n6d"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_xfsta"]
 [ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_r5j7b"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnjql86r6pll3" path="res://scenes/world_components/lights/torch_left.tscn" id="6_1tlib"]
 [ext_resource type="PackedScene" uid="uid://dsbgg15u12hh6" path="res://scenes/world_components/lights/torch_right.tscn" id="7_5xwds"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="7_st3tq"]
+[ext_resource type="PackedScene" uid="uid://cnxsq8xqdu6k3" path="res://scenes/world_components/tiles/checkoint.tscn" id="8_3330i"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
@@ -1612,3 +1613,15 @@ position = Vector2(289, -411)
 [node name="Diamond" parent="Collectables" groups=["diamond"] instance=ExtResource("7_st3tq")]
 position = Vector2(433, -440)
 item_id = "Diamond_0"
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("8_3330i")]
+position = Vector2(352, -128)
+a = Vector2(-336, -80)
+b = Vector2(-336, 16)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("8_3330i")]
+position = Vector2(624, -320)
+a = Vector2(64, -64)
+b = Vector2(64, 0)
