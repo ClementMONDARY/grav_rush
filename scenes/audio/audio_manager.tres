@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=3 format=3 uid="uid://cemnmj4m4e8tu"]
+
+[ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_ux6sy"]
+[ext_resource type="AudioStream" uid="uid://djnvxds8f8aa7" path="res://assets/audio/ressources/main_theme.tres" id="2_e1ir1"]
+
+[resource]
+script = ExtResource("1_ux6sy")
+limit = 1
+sound_effect = ExtResource("2_e1ir1")
+volume = -15.0
+bus = &"Music"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"

@@ -1,10 +1,11 @@
 extends Area2D
 
 @export var item_id: String = "Diamond_1"
-@export var max_follow_speed: float = 300.0
-@export var acceleration_duration: float = 1.0
+
 signal diamond_collected
 
+var max_follow_speed: float = 300.0
+var acceleration_duration: float = 1.0
 var player: Node2D = null
 var is_following: bool = false
 var time_following: float = 0.0

@@ -1,22 +1,21 @@
-[gd_scene load_steps=50 format=3 uid="uid://co1ba1frb83ms"]
+[gd_scene load_steps=52 format=3 uid="uid://bin7t6d1qjf85"]
 
 [ext_resource type="Script" uid="uid://de8uhiahpm1n4" path="res://scripts/audio/AudioManager.gd" id="1_f113j"]
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="2_2ccwd"]
-[ext_resource type="AudioStream" uid="uid://djnvxds8f8aa7" path="res://assets/audio/ressources/main_theme.tres" id="3_8kn1q"]
-[ext_resource type="Resource" uid="uid://cu33jvdd832lp" path="res://assets/audio/ressources/player_dash.tres" id="3_cfl81"]
-[ext_resource type="Resource" uid="uid://j71qk05y5kbv" path="res://assets/audio/ressources/player_wall_grab.tres" id="4_85pnb"]
-[ext_resource type="Resource" uid="uid://bh6q2el7d3ohl" path="res://assets/audio/ressources/player_dash_voice.tres" id="4_cfl81"]
-[ext_resource type="AudioStream" uid="uid://cwexl6ix8rokx" path="res://assets/audio/player/interaction/Footstep_Stone_0.wav" id="6_xe7xr"]
-[ext_resource type="AudioStream" uid="uid://cd5v3ej4204xw" path="res://assets/audio/player/interaction/Footstep_Stone_1.wav" id="7_2c6c2"]
-[ext_resource type="AudioStream" uid="uid://3w71bfk7hovd" path="res://assets/audio/player/interaction/Footstep_Stone_2.wav" id="8_i0hgu"]
-[ext_resource type="AudioStream" uid="uid://dvxn3qdkmxb4s" path="res://assets/audio/player/interaction/Footstep_Stone_3.wav" id="9_8kn1q"]
-[ext_resource type="AudioStream" uid="uid://l2tw0mrrspsf" path="res://assets/audio/player/interaction/Land_Stone_1.wav" id="10_2c6c2"]
-[ext_resource type="AudioStream" uid="uid://cr3hbpvkt1c4x" path="res://assets/audio/player/interaction/Player_Jump.wav" id="11_i0hgu"]
-[ext_resource type="AudioStream" uid="uid://fhsdqmbo0di5" path="res://assets/audio/player/interaction/Land_Wood_0.wav" id="13_ryw36"]
-[ext_resource type="AudioStream" uid="uid://baxjqgx48wmi1" path="res://assets/audio/player/interaction/Footstep_Wood_0.wav" id="14_7bp0g"]
-[ext_resource type="AudioStream" uid="uid://cwupcinflocdm" path="res://assets/audio/player/interaction/Footstep_Wood_1.wav" id="15_kpp2c"]
-[ext_resource type="AudioStream" uid="uid://et5bm14ol2hk" path="res://assets/audio/player/interaction/Footstep_Wood_2.wav" id="16_k26wb"]
-[ext_resource type="AudioStream" uid="uid://c2wmt6hputdp1" path="res://assets/audio/player/interaction/Footstep_Wood_3.wav" id="17_0qag5"]
+[ext_resource type="Resource" uid="uid://cu33jvdd832lp" path="res://audio/ressources/player_dash.tres" id="3_cfl81"]
+[ext_resource type="Resource" uid="uid://j71qk05y5kbv" path="res://audio/ressources/player_wall_grab.tres" id="4_85pnb"]
+[ext_resource type="Resource" uid="uid://bh6q2el7d3ohl" path="res://audio/ressources/player_dash_voice.tres" id="4_cfl81"]
+[ext_resource type="AudioStream" uid="uid://cwexl6ix8rokx" path="res://audio/player/Footstep_Stone_0.wav" id="6_xe7xr"]
+[ext_resource type="AudioStream" uid="uid://cd5v3ej4204xw" path="res://audio/player/Footstep_Stone_1.wav" id="7_2c6c2"]
+[ext_resource type="AudioStream" uid="uid://3w71bfk7hovd" path="res://audio/player/Footstep_Stone_2.wav" id="8_i0hgu"]
+[ext_resource type="AudioStream" uid="uid://dvxn3qdkmxb4s" path="res://audio/player/Footstep_Stone_3.wav" id="9_8kn1q"]
+[ext_resource type="AudioStream" uid="uid://l2tw0mrrspsf" path="res://audio/player/Land_Stone_1.wav" id="10_2c6c2"]
+[ext_resource type="AudioStream" uid="uid://cr3hbpvkt1c4x" path="res://audio/player/Player_Jump.wav" id="11_i0hgu"]
+[ext_resource type="AudioStream" uid="uid://fhsdqmbo0di5" path="res://audio/player/Land_Wood_0.wav" id="13_ryw36"]
+[ext_resource type="AudioStream" uid="uid://baxjqgx48wmi1" path="res://audio/player/Footstep_Wood_0.wav" id="14_7bp0g"]
+[ext_resource type="AudioStream" uid="uid://cwupcinflocdm" path="res://audio/player/Footstep_Wood_1.wav" id="15_kpp2c"]
+[ext_resource type="AudioStream" uid="uid://et5bm14ol2hk" path="res://audio/player/Footstep_Wood_2.wav" id="16_k26wb"]
+[ext_resource type="AudioStream" uid="uid://c2wmt6hputdp1" path="res://audio/player/Footstep_Wood_3.wav" id="17_0qag5"]
 [ext_resource type="AudioStream" uid="uid://bjeikevwl5kw7" path="res://assets/audio/player/hud/ui_game_chatoptions_select.wav" id="18_kpp2c"]
 [ext_resource type="AudioStream" uid="uid://c0i6qgwuyovqo" path="res://assets/audio/player/interaction/item_pickup.wav" id="19_k26wb"]
 [ext_resource type="AudioStream" uid="uid://djo02dwxmw2jf" path="res://assets/audio/player/weapon/sword_miss_01.wav" id="20_28alx"]
@@ -29,18 +28,9 @@
 [ext_resource type="AudioStream" uid="uid://dkkdmanbl87ks" path="res://assets/audio/player/interaction/Footstep_Metal_0.wav" id="27_1mp4c"]
 [ext_resource type="AudioStream" uid="uid://c5n0lwvchp0lg" path="res://assets/audio/player/interaction/Footstep_Metal_1.wav" id="28_wfmnx"]
 [ext_resource type="AudioStream" uid="uid://dsa2yur5ypqhl" path="res://assets/audio/player/interaction/Footstep_Metal_2.wav" id="29_n8661"]
+[ext_resource type="AudioStream" uid="uid://dl6fdkf64f7cj" path="res://assets/audio/world/ground_crack_stone.wav" id="30_n8661"]
 [ext_resource type="AudioStream" uid="uid://c4ni7nmbem3g8" path="res://assets/audio/player/interaction/Land_Metal_0.wav" id="30_wfmnx"]
-
-[sub_resource type="Resource" id="Resource_ryw36"]
-script = ExtResource("2_2ccwd")
-limit = 1
-type = 0
-sound_effect = ExtResource("3_8kn1q")
-volume = -15.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
-bus = &"Music"
-metadata/_custom_type_script = "uid://nshqrmwvj6tu"
+[ext_resource type="AudioStream" uid="uid://w5xe0ue5wvt2" path="res://assets/audio/world/ground_break_stone.wav" id="31_n8661"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ryw36"]
 streams_count = 4
@@ -51,19 +41,16 @@ stream_3/stream = ExtResource("9_8kn1q")
 
 [sub_resource type="Resource" id="Resource_8p317"]
 script = ExtResource("2_2ccwd")
-limit = 5
-type = 3
+type = 2
 sound_effect = SubResource("AudioStreamRandomizer_ryw36")
-volume = 0.0
 pitch_scale = 1.3
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [sub_resource type="Resource" id="Resource_i0hgu"]
 script = ExtResource("2_2ccwd")
 limit = 3
-type = 4
+type = 3
 sound_effect = ExtResource("10_2c6c2")
 volume = -10.0
 pitch_scale = 1.2
@@ -74,18 +61,17 @@ metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 [sub_resource type="Resource" id="Resource_8kn1q"]
 script = ExtResource("2_2ccwd")
 limit = 3
-type = 5
+type = 4
 sound_effect = ExtResource("11_i0hgu")
 volume = -10.0
 pitch_scale = 3.0
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [sub_resource type="Resource" id="Resource_xm044"]
 script = ExtResource("2_2ccwd")
 limit = 3
-type = 6
+type = 5
 sound_effect = ExtResource("13_ryw36")
 volume = -10.0
 pitch_scale = 1.2
@@ -102,33 +88,27 @@ stream_3/stream = ExtResource("17_0qag5")
 
 [sub_resource type="Resource" id="Resource_28alx"]
 script = ExtResource("2_2ccwd")
-limit = 5
-type = 8
+type = 7
 sound_effect = SubResource("AudioStreamRandomizer_fjnme")
 volume = -10.0
 pitch_scale = 1.2
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [sub_resource type="Resource" id="Resource_k26wb"]
 script = ExtResource("2_2ccwd")
 limit = 10
-type = 9
+type = 8
 sound_effect = ExtResource("18_kpp2c")
 volume = -10.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
-bus = &"Master"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [sub_resource type="Resource" id="Resource_0qag5"]
 script = ExtResource("2_2ccwd")
 limit = 10
-type = 10
+type = 9
 sound_effect = ExtResource("19_k26wb")
 volume = -10.0
-pitch_scale = 1.0
 pitch_randomness = 0.2
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
@@ -141,12 +121,9 @@ stream_2/stream = ExtResource("22_ypw6b")
 
 [sub_resource type="Resource" id="Resource_g78vt"]
 script = ExtResource("2_2ccwd")
-limit = 5
-type = 11
+type = 10
 sound_effect = SubResource("AudioStreamRandomizer_dlb7n")
 volume = -10.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
@@ -157,12 +134,9 @@ stream_1/stream = ExtResource("24_gkbs7")
 
 [sub_resource type="Resource" id="Resource_emnvs"]
 script = ExtResource("2_2ccwd")
-limit = 5
-type = 12
+type = 11
 sound_effect = SubResource("AudioStreamRandomizer_wfmnx")
 volume = -10.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
@@ -173,12 +147,9 @@ stream_1/stream = ExtResource("26_1mp4c")
 
 [sub_resource type="Resource" id="Resource_onqdg"]
 script = ExtResource("2_2ccwd")
-limit = 5
-type = 13
+type = 12
 sound_effect = SubResource("AudioStreamRandomizer_n8661")
 volume = -10.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
@@ -190,26 +161,41 @@ stream_2/stream = ExtResource("29_n8661")
 
 [sub_resource type="Resource" id="Resource_15ev1"]
 script = ExtResource("2_2ccwd")
-limit = 5
-type = 14
+type = 13
 sound_effect = SubResource("AudioStreamRandomizer_onqdg")
 volume = -20.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [sub_resource type="Resource" id="Resource_n8661"]
 script = ExtResource("2_2ccwd")
 limit = 3
-type = 15
+type = 14
 sound_effect = ExtResource("30_wfmnx")
 volume = -15.0
-pitch_scale = 1.0
 pitch_randomness = 0.15
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"
+
+[sub_resource type="Resource" id="Resource_v6axm"]
+script = ExtResource("2_2ccwd")
+limit = 2
+type = 15
+sound_effect = ExtResource("30_n8661")
+volume = -10.0
+pitch_randomness = 0.1
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"
+
+[sub_resource type="Resource" id="Resource_hkpre"]
+script = ExtResource("2_2ccwd")
+limit = 2
+type = 16
+sound_effect = ExtResource("31_n8661")
+volume = -15.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_f113j")
-sound_effects = Array[ExtResource("2_2ccwd")]([SubResource("Resource_ryw36"), ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044"), SubResource("Resource_28alx"), SubResource("Resource_k26wb"), SubResource("Resource_0qag5"), SubResource("Resource_g78vt"), SubResource("Resource_emnvs"), SubResource("Resource_onqdg"), SubResource("Resource_15ev1"), SubResource("Resource_n8661")])
+sound_effects = Array[ExtResource("2_2ccwd")]([ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044"), SubResource("Resource_28alx"), SubResource("Resource_k26wb"), SubResource("Resource_0qag5"), SubResource("Resource_g78vt"), SubResource("Resource_emnvs"), SubResource("Resource_onqdg"), SubResource("Resource_15ev1"), SubResource("Resource_n8661"), SubResource("Resource_v6axm"), SubResource("Resource_hkpre")])

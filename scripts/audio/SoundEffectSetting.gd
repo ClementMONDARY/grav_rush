@@ -4,22 +4,23 @@ extends Resource
 
 ## Stores the different types of sounds effects available to be played to distinguish them from another. Each new SoundEffect resource created should add to this enum, to allow them to be easily instantiated via [method AudioManager.create_2d_audio_at_location()] and [method AudioManager.create_audio()].
 enum SOUND_EFFECT_TYPE {
-	LEVEL_MUSIC, # 0
-	ON_PLAYER_DASH, # 1
-	ON_PLAYER_WALL_GRAB, # 2
-	ON_PLAYER_FOOTSTEP_STONE, # 3
-	ON_PLAYER_LAND_STONE, # 4
-	ON_PLAYER_JUMP, # 5
-	ON_PLAYER_LAND_WOOD, # 6
-	ON_DIAMOND_LOOTED, # 7
-	ON_PLAYER_FOOTSTEP_WOOD, # 8
-	ON_DIAMOND_TRACKER_UPDATED, # 9
-	ON_ITEM_PICKUP, #10
-	ON_PLAYER_SWORD_ATTACK_MISS, #11
-	ON_PLAYER_SWORD_ATTACK_HIT_ENNEMY, #12
-	ON_PLAYER_SWORD_ATTACK_HIT_WORLD, #13
-	ON_PLAYER_FOOTSTEP_METAL, #14
-	ON_PLAYER_LAND_METAL, # 15
+	ON_PLAYER_DASH, # 0
+	ON_PLAYER_WALL_GRAB, # 1
+	ON_PLAYER_FOOTSTEP_STONE, # 2
+	ON_PLAYER_LAND_STONE, # 3
+	ON_PLAYER_JUMP, # 4
+	ON_PLAYER_LAND_WOOD, # 5
+	ON_DIAMOND_LOOTED, # 6
+	ON_PLAYER_FOOTSTEP_WOOD, # 7
+	ON_DIAMOND_TRACKER_UPDATED, # 8
+	ON_ITEM_PICKUP, # 9
+	ON_PLAYER_SWORD_ATTACK_MISS, # 10
+	ON_PLAYER_SWORD_ATTACK_HIT_ENNEMY, # 11
+	ON_PLAYER_SWORD_ATTACK_HIT_WORLD, # 12
+	ON_PLAYER_FOOTSTEP_METAL, # 13
+	ON_PLAYER_LAND_METAL, # 14
+	ON_WALL_CRACK_STONE, # 15
+	ON_WALL_BREAK_STONE, # 16
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
