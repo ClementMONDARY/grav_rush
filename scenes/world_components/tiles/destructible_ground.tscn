@@ -2172,5 +2172,6 @@ custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_auikq")
 
 [node name="DestructibleGround" type="TileMapLayer"]
+light_mask = 2
 tile_set = SubResource("TileSet_yycqc")
 script = ExtResource("2_lpqjn")

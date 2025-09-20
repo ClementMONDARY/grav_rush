@@ -1,10 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://des2062mwps42"]
+[gd_scene load_steps=15 format=4 uid="uid://des2062mwps42"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_grslt"]
 [ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_kkdgg"]
 [ext_resource type="TileSet" uid="uid://bw1xbph3y7krj" path="res://assets/tilesets/ground_tileset.tres" id="3_uya5p"]
-[ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="4_uya5p"]
-[ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="5_qhb8d"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
@@ -1552,6 +1550,10 @@ width = 144
 
 [node name="Screen_4_-1" type="Node2D"]
 script = ExtResource("1_grslt")
+local_camera_limit_left = 0
+local_camera_limit_top = -288
+local_camera_limit_right = 704
+local_camera_limit_bottom = 476
 metadata/_custom_type_script = "uid://dfd8gwhh08yme"
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -1582,12 +1584,6 @@ tile_set = ExtResource("3_uya5p")
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="Collectables" type="Node2D" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("4_uya5p")]
-position = Vector2(432, 400)
-
-[node name="PlayerCamera" parent="Player" instance=ExtResource("5_qhb8d")]
-process_mode = 1
 
 [node name="Miscellaneous" type="Node2D" parent="."]
 

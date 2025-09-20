@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yn3ucw2mup2r"
+path="res://.godot/imported/Floor Cracking (Building Wall Ceiling Ground Concrete House Crack) Sound - Sound Effect (HD) [vAkjcDNEaSY].wav-5076e6cf068350595cc0b728a66a1564.sample"
+
+[deps]
+
+source_file="res://assets/audio/world/Floor Cracking (Building Wall Ceiling Ground Concrete House Crack) Sound - Sound Effect (HD) [vAkjcDNEaSY].wav"
+dest_files=["res://.godot/imported/Floor Cracking (Building Wall Ceiling Ground Concrete House Crack) Sound - Sound Effect (HD) [vAkjcDNEaSY].wav-5076e6cf068350595cc0b728a66a1564.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
