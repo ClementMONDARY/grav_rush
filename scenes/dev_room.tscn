@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbf0sy5aky4cj"]
+[gd_scene load_steps=7 format=4 uid="uid://dbf0sy5aky4cj"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="1_4ospm"]
 [ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="2_d27c4"]
 [ext_resource type="PackedScene" uid="uid://bcclb17enh7by" path="res://scenes/world_components/collectables/diamond_collectable.tscn" id="3_4ospm"]
+[ext_resource type="PackedScene" uid="uid://djxy2d65pmqy" path="res://scenes/world_components/tiles/destructible_ground.tscn" id="4_d27c4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3yskv"]
 
@@ -73,3 +74,9 @@ offset_left = -20.0
 offset_top = -38.0
 offset_right = 21.0
 offset_bottom = 8.0
+
+[node name="DestructibleGround" parent="." instance=ExtResource("4_d27c4")]
+position = Vector2(202, 0)
+tile_map_data = PackedByteArray("AAAAAP//AAAQAC0AAAAAAP7/AAAQAC0AAAAAAP3/AAAQAC0AAAAAAPz/AAAQAC0AAAABAPz/AAAQAC0AAAABAP3/AAAQAC0AAAABAP7/AAAQAC0AAAABAP//AAAQAC0AAAA=")
+furthest_top_tile_unit = 4
+furthest_right_tile_unit = 2

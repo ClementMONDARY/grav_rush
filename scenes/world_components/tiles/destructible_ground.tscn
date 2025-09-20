@@ -1,13 +1,13 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://bw1xbph3y7krj"]
+[gd_scene load_steps=6 format=3 uid="uid://djxy2d65pmqy"]
 
-[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="1_icjdv"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_g55eg"]
+[ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="1_lpqjn"]
+[ext_resource type="Script" uid="uid://ctawi24g4y3qy" path="res://scripts/world_components/destructible_ground.gd" id="2_lpqjn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ulyey"]
 rough = true
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2w6t1"]
-texture = ExtResource("1_icjdv")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_auikq"]
+texture = ExtResource("1_lpqjn")
 2:3/0 = 0
 2:3/0/custom_data_0 = "stone"
 3:3/0 = 0
@@ -2163,18 +2163,14 @@ texture = ExtResource("1_icjdv")
 28:17/0 = 0
 28:17/0/custom_data_0 = "stone"
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dxxhs"]
-texture = ExtResource("2_g55eg")
-13:10/0 = 0
-12:11/0 = 0
-14:11/0 = 0
-13:12/0 = 0
-
-[resource]
+[sub_resource type="TileSet" id="TileSet_yycqc"]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 14
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_ulyey")
 custom_data_layer_0/name = "material"
 custom_data_layer_0/type = 4
-sources/0 = SubResource("TileSetAtlasSource_2w6t1")
-sources/1 = SubResource("TileSetAtlasSource_dxxhs")
+sources/0 = SubResource("TileSetAtlasSource_auikq")
+
+[node name="DestructibleGround" type="TileMapLayer"]
+tile_set = SubResource("TileSet_yycqc")
+script = ExtResource("2_lpqjn")
