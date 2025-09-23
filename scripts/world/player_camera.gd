@@ -1,4 +1,5 @@
 extends Camera2D
+class_name PlayerCamera
 
 @export var initial_screen: NodePath
 
@@ -30,10 +31,10 @@ func set_camera_limits(limits: Vector4) -> void:
 	limit_right = limits.z
 	limit_bottom = limits.w
 
-func set_borders_enabled(enabled_value: bool) -> void:
+func set_borders_enabled(value: bool) -> void:
 	for border in $CameraBorders.get_children():
 		if border is Area2D:
-			border.set_deferred("monitoring", enabled_value)
+			border.set_deferred("monitoring", value)
 
 func _process(_delta: float) -> void:
 	$CameraBorders.global_position = get_screen_center_position()
@@ -57,6 +58,7 @@ func _on_bottom_border_body_entered(body: Node2D) -> void:
 
 # ---- MAIN TRANSITION LOGIC ----
 func transition_to_screen(direction: Vector2) -> void:
+	if direction == Vector2.ZERO : return
 	var current_coords := actual_screen_name.replace("Screen_", "").split("_")
 	var next_x := int(current_coords[0]) + int(direction.x)
 	var next_y := int(current_coords[1]) + int(direction.y)
@@ -71,6 +73,9 @@ func transition_to_screen(direction: Vector2) -> void:
 		push_warning("Target screen %s not found!" % target_name)
 		return
 	
+	engage_transition_animation(target_screen)
+
+func engage_transition_animation(target_screen: ScreenData) -> void:
 	set_deferred("set_borders_enabled", false)
 	update_camera_limits_from_screen(target_screen)
 	position_smoothing_speed *= 2.5
@@ -80,7 +85,6 @@ func transition_to_screen(direction: Vector2) -> void:
 	Engine.time_scale = 1.0
 	
 	_on_transition_complete(target_screen)
-
 
 func _on_transition_complete(new_screen: ScreenData) -> void:
 	actual_screen = new_screen

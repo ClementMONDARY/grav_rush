@@ -1,0 +1,26 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://df4ny5m45pd36"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j38fd"]
+rough = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rabwb"]
+load_path = "res://.godot/imported/other_and_decorative.png-b0d911dd48b6c7cbee0db2993958992f.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mbl5b"]
+texture = SubResource("CompressedTexture2D_rabwb")
+13:10/0 = 0
+13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.6666665, -8, -2.6666665)
+12:11/0 = 0
+12:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2.6666665, -8, -2.6666665, 8, -8, 8)
+14:11/0 = 0
+14:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.666667, -8, 8, -8, 8, 8, 2.666667, 8)
+13:12/0 = 0
+13:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.666667, 8, 2.666667, 8, 8, -8, 8)
+
+[resource]
+physics_layer_0/collision_layer = 32
+physics_layer_0/collision_mask = 0
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_j38fd")
+custom_data_layer_0/name = "material"
+custom_data_layer_0/type = 4
+sources/1 = SubResource("TileSetAtlasSource_mbl5b")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=157 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpbmlb4gtbxrs" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-parade.png" id="4_007i1"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
-[ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_cnsyf"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
 [ext_resource type="Script" uid="uid://do4cnh2ys466y" path="res://scripts/player/particules/jumping_cpu_particles_2d.gd" id="4_yj68g"]
 [ext_resource type="Script" uid="uid://cf67tegf43pt3" path="res://scripts/player/states/PlayerRunState.gd" id="5_0owmy"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://d3dja1ovbaycw" path="res://scripts/player/states/PlayerJumpState.gd" id="6_qek5x"]
 [ext_resource type="Script" uid="uid://1jucjd1pa3yq" path="res://scripts/player/states/PlayerFallState.gd" id="7_5gtgg"]
 [ext_resource type="Script" uid="uid://ck58qp1xub6f1" path="res://scripts/global_components/speed_component.gd" id="8_qek5x"]
+[ext_resource type="Script" uid="uid://msyp8xpnc7k3" path="res://scripts/player/hitboxes/hurtbox.gd" id="9_6cv16"]
 [ext_resource type="Script" uid="uid://duv8qfbxhvh0s" path="res://scripts/player/states/PlayerWallGrabState.gd" id="10_fcs02"]
 [ext_resource type="Script" uid="uid://kp6mxnfyk2qt" path="res://scripts/player/states/PlayerDashState.gd" id="11_3j4b4"]
 [ext_resource type="Script" uid="uid://b13g7rrdhhdx8" path="res://scripts/player/states/PlayerWallClimbState.gd" id="11_myrg7"]
@@ -25,6 +26,7 @@
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://jydxrb61hk7m" path="res://scripts/global_components/player_health_component.gd" id="27_j4nxn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
 atlas = ExtResource("4_cnsyf")
@@ -426,6 +428,10 @@ colors = PackedColorArray(0.928743, 0.935693, 0.98251, 1, 0.827451, 0.843137, 0.
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdvrm"]
 size = Vector2(33, 41)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j4nxn"]
+radius = 6.0
+height = 26.0
 
 [sub_resource type="Gradient" id="Gradient_j4nxn"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -1094,9 +1100,9 @@ animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_007i1"]
 graph_offset = Vector2(-104.149, 48.1096)
+nodes/output/position = Vector2(680, 140)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_cnsyf")
 nodes/Idle/position = Vector2(340, 100)
-nodes/output/position = Vector2(680, 140)
 node_connections = [&"output", 0, &"Idle"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3j4b4"]
@@ -1114,9 +1120,9 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j4nxn"]
 graph_offset = Vector2(-7, -26)
+nodes/output/position = Vector2(920, 100)
 nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_cnsyf")
 nodes/FloorContext/position = Vector2(540, 20)
-nodes/output/position = Vector2(920, 100)
 node_connections = [&"output", 0, &"FloorContext"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28m0y"]
@@ -1299,9 +1305,9 @@ animation = &"low_stamina"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lgqa7"]
 graph_offset = Vector2(-336, 57)
+nodes/output/position = Vector2(300, 160)
 nodes/LowStamina/node = SubResource("AnimationNodeAnimation_uf5tr")
 nodes/LowStamina/position = Vector2(0, 160)
-nodes/output/position = Vector2(300, 160)
 node_connections = [&"output", 0, &"LowStamina"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lgqa7"]
@@ -1309,9 +1315,9 @@ animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ydkj"]
 graph_offset = Vector2(-192, -46)
+nodes/output/position = Vector2(500, 80)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_lgqa7")
 nodes/Animation/position = Vector2(140, 80)
-nodes/output/position = Vector2(500, 80)
 node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
@@ -1344,7 +1350,7 @@ radius = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 29
+collision_mask = 25
 floor_snap_length = 6.0
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -1498,6 +1504,15 @@ position = Vector2(14.5, -2)
 shape = SubResource("RectangleShape2D_hdvrm")
 debug_color = Color(1, 0, 0, 0)
 
+[node name="Hurtbox" type="Area2D" parent="PlayerAnimatedSprite2D/Hitboxes"]
+collision_layer = 2
+collision_mask = 36
+script = ExtResource("9_6cv16")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAnimatedSprite2D/Hitboxes/Hurtbox"]
+position = Vector2(0, 3.5)
+shape = SubResource("CapsuleShape2D_j4nxn")
+
 [node name="SwordSwingParticulesPivotpoint" type="Marker2D" parent="PlayerAnimatedSprite2D"]
 position = Vector2(8, -2.5)
 
@@ -1545,10 +1560,10 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTreeSprite/../..")
 tree_root = SubResource("AnimationNodeStateMachine_8ydkj")
 anim_player = NodePath("..")
-parameters/Dash/FloorContext/blend_position = 0
+parameters/Dash/FloorContext/blend_position = 0.0
 parameters/Jump/FloorContext/blend_position = -0.00597012
-parameters/WallClimb/InputDir/blend_position = 0
-parameters/WallGrab/InputDir/blend_position = 0
+parameters/WallClimb/InputDir/blend_position = 0.0
+parameters/WallGrab/InputDir/blend_position = 0.0
 
 [node name="AnimationPlayerLowStamina" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1633,5 +1648,12 @@ MAX_DB_JUMPS = 0
 [node name="WallControlComponent" parent="Components" instance=ExtResource("20_3j4b4")]
 unique_name_in_owner = true
 
+[node name="HealthComponent" type="Node2D" parent="Components" node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+script = ExtResource("27_j4nxn")
+player = NodePath("../..")
+metadata/_custom_type_script = "uid://dx4anbgjvggcy"
+
+[connection signal="body_entered" from="PlayerAnimatedSprite2D/Hitboxes/Hurtbox" to="PlayerAnimatedSprite2D/Hitboxes/Hurtbox" method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayerSprite/AnimationTreeSprite" to="PlayerStateMachine/GroundAttack" method="_on_animation_player_sprite_animation_finished"]
 [connection signal="state_changed" from="PlayerStateMachine" to="PlayerAnimatedSprite2D/DashTrail" method="_on_player_dash"]
