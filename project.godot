@@ -100,6 +100,7 @@ attack={
 2d_physics/layer_3="Ennemies"
 2d_physics/layer_4="Lootable"
 2d_physics/layer_5="Camera Borders"
+2d_physics/layer_6="Spikes"
 
 [rendering]
 

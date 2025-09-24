@@ -65,7 +65,7 @@ Vector2i(-1, -1): {
 [node name="Level_0" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("2_icq3g")]
-position = Vector2(5184, -2032)
+position = Vector2(4688, -2032)
 
 [node name="PlayerCamera" parent="Player" instance=ExtResource("3_uqyny")]
 position = Vector2(0, -32)
