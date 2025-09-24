@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://bwd6upfqo3n6d"]
+[gd_scene load_steps=18 format=4 uid="uid://bwd6upfqo3n6d"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_xfsta"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_r5j7b"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_r5j7b"]
 [ext_resource type="TileSet" uid="uid://bw1xbph3y7krj" path="res://assets/tilesets/ground_tileset.tres" id="3_st3tq"]
+[ext_resource type="TileSet" uid="uid://df4ny5m45pd36" path="res://assets/tilesets/spikes.tres" id="4_v8qde"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="5_nbcvp"]
 [ext_resource type="PackedScene" uid="uid://cnjql86r6pll3" path="res://scenes/world_components/lights/torch_left.tscn" id="6_1tlib"]
 [ext_resource type="PackedScene" uid="uid://dsbgg15u12hh6" path="res://scenes/world_components/lights/torch_right.tscn" id="7_5xwds"]
@@ -1543,31 +1544,6 @@ texture = ExtResource("2_r5j7b")
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_xy1qu")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j38fd"]
-rough = true
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rabwb"]
-load_path = "res://.godot/imported/other_and_decorative.png-b0d911dd48b6c7cbee0db2993958992f.ctex"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3330i"]
-texture = SubResource("CompressedTexture2D_rabwb")
-13:10/0 = 0
-13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.6666665, -8, -2.6666665)
-12:11/0 = 0
-12:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2.6666665, -8, -2.6666665, 8, -8, 8)
-14:11/0 = 0
-14:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.666667, -8, 8, -8, 8, 8, 2.666667, 8)
-13:12/0 = 0
-13:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 2.666667, 8, 2.666667, 8, 8, -8, 8)
-
-[sub_resource type="TileSet" id="TileSet_v8qde"]
-physics_layer_0/collision_layer = 32
-physics_layer_0/collision_mask = 0
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_j38fd")
-custom_data_layer_0/name = "material"
-custom_data_layer_0/type = 4
-sources/1 = SubResource("TileSetAtlasSource_3330i")
-
 [node name="Screen_1_0" type="Node2D"]
 script = ExtResource("1_xfsta")
 local_camera_limit_left = 0
@@ -1604,7 +1580,7 @@ tile_set = ExtResource("3_st3tq")
 [node name="Spikes" type="TileMapLayer" parent="Tiles" groups=["spikes"]]
 light_mask = 2
 z_index = 1
-tile_set = SubResource("TileSet_v8qde")
+tile_set = ExtResource("4_v8qde")
 
 [node name="Lights" type="Node2D" parent="."]
 

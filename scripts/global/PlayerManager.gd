@@ -4,7 +4,7 @@ var last_checkpoint: Checkpoint:
 	get = get_last_checkpoint, set = set_last_checkpoint
 
 var can_attack: bool = true
-var can_dash: bool = true
+var can_dash: bool = false
 
 func get_last_checkpoint() -> Checkpoint:
 	return last_checkpoint

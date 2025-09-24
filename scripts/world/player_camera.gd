@@ -58,7 +58,7 @@ func _on_bottom_border_body_entered(body: Node2D) -> void:
 
 # ---- MAIN TRANSITION LOGIC ----
 func transition_to_screen(direction: Vector2) -> void:
-	if direction == Vector2.ZERO : return
+	if direction == Vector2.ZERO: return
 	var current_coords := actual_screen_name.replace("Screen_", "").split("_")
 	var next_x := int(current_coords[0]) + int(direction.x)
 	var next_y := int(current_coords[1]) + int(direction.y)
@@ -75,7 +75,7 @@ func transition_to_screen(direction: Vector2) -> void:
 	
 	engage_transition_animation(target_screen)
 
-func engage_transition_animation(target_screen: ScreenData) -> void:
+func engage_transition_animation(target_screen: ScreenData, for_respawn: bool = false) -> void:
 	set_deferred("set_borders_enabled", false)
 	update_camera_limits_from_screen(target_screen)
 	position_smoothing_speed *= 2.5
@@ -84,9 +84,17 @@ func engage_transition_animation(target_screen: ScreenData) -> void:
 	position_smoothing_speed /= 2.5
 	Engine.time_scale = 1.0
 	
-	_on_transition_complete(target_screen)
+	if for_respawn:
+		position_smoothing_enabled = false
+		await get_tree().process_frame
+		position_smoothing_enabled = true
 
-func _on_transition_complete(new_screen: ScreenData) -> void:
+	_on_transition_complete(target_screen, for_respawn)
+
+func _on_transition_complete(new_screen: ScreenData, for_respawn: bool) -> void:
 	actual_screen = new_screen
 	actual_screen_name = new_screen.name
+	if for_respawn: 
+		await get_tree().process_frame
+		await get_tree().process_frame
 	set_borders_enabled(true)

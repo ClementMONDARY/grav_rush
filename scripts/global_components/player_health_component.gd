@@ -9,4 +9,4 @@ func spiked() -> void:
 	var camera: PlayerCamera = player.get_node("PlayerCamera")
 	damage(1)
 	player.global_position = last_checkpoint.global_position
-	camera.engage_transition_animation(checkpoint_screen)
+	camera.engage_transition_animation(checkpoint_screen, true)
