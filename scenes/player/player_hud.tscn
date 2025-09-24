@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cqkmebr1i3g71"]
 
 [ext_resource type="Script" uid="uid://3et5x8q558if" path="res://scripts/player/hud/diamond_tracker.gd" id="1_muj54"]
-[ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="1_v4fpl"]
+[ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://graphics/collectables/diamond.png" id="1_v4fpl"]
 [ext_resource type="FontFile" uid="uid://c3vfel2xby62t" path="res://assets/font/m6x11.ttf" id="3_sqnk8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axddh"]
