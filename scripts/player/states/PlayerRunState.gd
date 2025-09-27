@@ -100,6 +100,7 @@ func _handle_idle_transition() -> bool:
 
 func _handle_ground_attack() -> bool:
 	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
-		Transitioned.emit(self, "groundattack")
+		Transitioned.emit(self, "attack")
+		player.move_and_slide()
 		return true
 	return false
