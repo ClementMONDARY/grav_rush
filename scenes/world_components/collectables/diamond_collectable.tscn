@@ -4,29 +4,32 @@
 [ext_resource type="Script" uid="uid://cme0prll1o5k" path="res://scripts/world/collectables/DiamondCollectable.gd" id="1_ggbm7"]
 [ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="2_axddh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y6rey"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_axddh"]
 atlas = ExtResource("2_axddh")
 region = Rect2(0, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d7jhn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6rey"]
 atlas = ExtResource("2_axddh")
 region = Rect2(12, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aqs36"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7jhn"]
 atlas = ExtResource("2_axddh")
 region = Rect2(24, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_atpa8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqs36"]
 atlas = ExtResource("2_axddh")
 region = Rect2(36, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_74mb8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_atpa8"]
 atlas = ExtResource("2_axddh")
 region = Rect2(48, 0, 12, 13)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1w06b"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_74mb8"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axddh")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y6rey")
 }, {
@@ -38,9 +41,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_atpa8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74mb8")
 }],
 "loop": true,
 "name": &"idle",
@@ -147,11 +147,13 @@ radius = 8.0
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_ggbm7")
+item_id = "Diamond_$IDX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
-sprite_frames = SubResource("SpriteFrames_1w06b")
+sprite_frames = SubResource("SpriteFrames_74mb8")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
 z_index = -1

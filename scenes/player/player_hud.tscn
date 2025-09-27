@@ -4,43 +4,43 @@
 [ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="2_muj54"]
 [ext_resource type="FontFile" uid="uid://c3vfel2xby62t" path="res://assets/font/m6x11.ttf" id="3_sqnk8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sqnk8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6rey"]
 atlas = ExtResource("2_muj54")
 region = Rect2(0, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m5iw4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7jhn"]
 atlas = ExtResource("2_muj54")
 region = Rect2(12, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2a5y5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqs36"]
 atlas = ExtResource("2_muj54")
 region = Rect2(24, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cqj5h"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_atpa8"]
 atlas = ExtResource("2_muj54")
 region = Rect2(36, 0, 12, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0br8r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_74mb8"]
 atlas = ExtResource("2_muj54")
 region = Rect2(48, 0, 12, 13)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0cgte"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_sqnk8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sqnk8")
+"texture": SubResource("AtlasTexture_y6rey")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m5iw4")
+"texture": SubResource("AtlasTexture_d7jhn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2a5y5")
+"texture": SubResource("AtlasTexture_aqs36")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cqj5h")
+"texture": SubResource("AtlasTexture_atpa8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0br8r")
+"texture": SubResource("AtlasTexture_74mb8")
 }],
 "loop": true,
 "name": &"idle",
@@ -203,9 +203,9 @@ script = ExtResource("1_muj54")
 [node name="DiamondAnimatedSprite2D" type="AnimatedSprite2D" parent="DiamondTracker"]
 position = Vector2(-21, 8)
 scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_0cgte")
+sprite_frames = SubResource("SpriteFrames_sqnk8")
 animation = &"idle"
-frame_progress = 0.0862732
+autoplay = "idle"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="DiamondTracker/DiamondAnimatedSprite2D"]
 z_index = -1

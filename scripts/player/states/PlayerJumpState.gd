@@ -37,8 +37,8 @@ func Physics_Update(delta: float) -> void:
 		return
 	if _handle_fall_transition():
 		return
-
-# --- Logic split below ---
+	if _handle_ground_attack():
+		return
 
 func _play_jump_animations() -> void:
 	if player.is_on_floor() or jump_component.has_coyote_time():
@@ -110,5 +110,12 @@ func _handle_air_dash() -> bool:
 func _handle_fall_transition() -> bool:
 	if player.velocity.y >= 0:
 		Transitioned.emit(self, "fall")
+		return true
+	return false
+
+func _handle_ground_attack() -> bool:
+	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
+		Transitioned.emit(self, "attack")
+		player.move_and_slide()
 		return true
 	return false

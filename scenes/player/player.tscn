@@ -1,10 +1,11 @@
-[gd_scene load_steps=157 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=158 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://cqlp3jlol7va5" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-damaged.png" id="3_007i1"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpbmlb4gtbxrs" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-parade.png" id="4_007i1"]
+[ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_28m0y"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_cnsyf"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
@@ -69,20 +70,20 @@ atlas = ExtResource("4_cnsyf")
 region = Rect2(104, 117, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ln3h3"]
-atlas = ExtResource("4_cnsyf")
-region = Rect2(156, 273, 52, 39)
+atlas = ExtResource("4_28m0y")
+region = Rect2(260, 507, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uygh0"]
-atlas = ExtResource("4_cnsyf")
-region = Rect2(104, 234, 52, 39)
+atlas = ExtResource("4_28m0y")
+region = Rect2(312, 507, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1aof"]
-atlas = ExtResource("4_cnsyf")
-region = Rect2(156, 234, 52, 39)
+atlas = ExtResource("4_28m0y")
+region = Rect2(0, 546, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8qe1"]
-atlas = ExtResource("4_cnsyf")
-region = Rect2(208, 234, 52, 39)
+atlas = ExtResource("4_28m0y")
+region = Rect2(52, 546, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4hvnv"]
 atlas = ExtResource("4_cnsyf")
@@ -747,7 +748,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerStateMachine/GroundAttack")
+tracks/3/path = NodePath("PlayerStateMachine/Attack")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -1059,6 +1060,15 @@ _data = {
 &"wall_slide": SubResource("Animation_j4nxn")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hvnv"]
+animation = &"ground_attack"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qxvo"]
+graph_offset = Vector2(-296.182, 3.0909)
+nodes/GroundAttack/node = SubResource("AnimationNodeAnimation_4hvnv")
+nodes/GroundAttack/position = Vector2(60, 80)
+node_connections = [&"output", 0, &"GroundAttack"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pk8ii"]
 animation = &"ground_dash"
 
@@ -1085,15 +1095,6 @@ graph_offset = Vector2(-479, 60)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_8ydkj")
 nodes/Fall/position = Vector2(20, 140)
 node_connections = [&"output", 0, &"Fall"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4hvnv"]
-animation = &"ground_attack"
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qxvo"]
-graph_offset = Vector2(-296.182, 3.0909)
-nodes/GroundAttack/node = SubResource("AnimationNodeAnimation_4hvnv")
-nodes/GroundAttack/position = Vector2(60, 80)
-node_connections = [&"output", 0, &"GroundAttack"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cnsyf"]
 animation = &"idle"
@@ -1187,13 +1188,13 @@ node_connections = [&"output", 0, &"WallSlide"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8ydkj"]
+states/Attack/node = SubResource("AnimationNodeBlendTree_8qxvo")
+states/Attack/position = Vector2(538, 215)
 states/Dash/node = SubResource("AnimationNodeBlendTree_bbmj2")
 states/Dash/position = Vector2(677, 215)
 states/End/position = Vector2(827, 151)
 states/Fall/node = SubResource("AnimationNodeBlendTree_3j4b4")
 states/Fall/position = Vector2(574, 151)
-states/GroundAttack/node = SubResource("AnimationNodeBlendTree_8qxvo")
-states/GroundAttack/position = Vector2(538, 215)
 states/Idle/node = SubResource("AnimationNodeBlendTree_007i1")
 states/Idle/position = Vector2(368, 151)
 states/Jump/node = SubResource("AnimationNodeBlendTree_j4nxn")
@@ -1609,7 +1610,7 @@ script = ExtResource("10_fcs02")
 [node name="WallClimb" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("11_myrg7")
 
-[node name="GroundAttack" type="Node" parent="PlayerStateMachine"]
+[node name="Attack" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("17_cnsyf")
 metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
 
@@ -1655,5 +1656,5 @@ player = NodePath("../..")
 metadata/_custom_type_script = "uid://dx4anbgjvggcy"
 
 [connection signal="body_entered" from="PlayerAnimatedSprite2D/Hitboxes/Hurtbox" to="PlayerAnimatedSprite2D/Hitboxes/Hurtbox" method="_on_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayerSprite/AnimationTreeSprite" to="PlayerStateMachine/GroundAttack" method="_on_animation_player_sprite_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayerSprite/AnimationTreeSprite" to="PlayerStateMachine/Attack" method="_on_animation_player_sprite_animation_finished"]
 [connection signal="state_changed" from="PlayerStateMachine" to="PlayerAnimatedSprite2D/DashTrail" method="_on_player_dash"]

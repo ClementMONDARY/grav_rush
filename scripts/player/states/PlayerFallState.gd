@@ -36,6 +36,9 @@ func Physics_Update(delta: float) -> void:
 
 	if _handle_landing():
 		return
+	
+	if _handle_ground_attack():
+		return
 
 # --- Logic split below ---
 
@@ -102,6 +105,13 @@ func _handle_landing() -> bool:
 		_play_fall_sound()
 		AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_LAND_STONE)
 		Transitioned.emit(self, "run" if player.velocity.x != 0 else "idle")
+		return true
+	return false
+
+func _handle_ground_attack() -> bool:
+	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
+		Transitioned.emit(self, "attack")
+		player.move_and_slide()
 		return true
 	return false
 
