@@ -22,6 +22,7 @@ AudioManager="*res://scenes/audio/audio_manager.tscn"
 DiamondManager="*res://scripts/global/DiamondManager.gd"
 PlayerManager="*res://scripts/global/PlayerManager.gd"
 EngineExtra="*res://scripts/global/EngineExtra.gd"
+PlayerHud="*res://scenes/player/player_hud.tscn"
 
 [display]
 

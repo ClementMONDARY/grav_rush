@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=4 uid="uid://des2062mwps42"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_grslt"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_kkdgg"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_kkdgg"]
 [ext_resource type="TileSet" uid="uid://bw1xbph3y7krj" path="res://assets/tilesets/ground_tileset.tres" id="3_uya5p"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="4_rjh17"]
 [ext_resource type="TileSet" uid="uid://df4ny5m45pd36" path="res://assets/tilesets/spikes.tres" id="4_vh2bq"]

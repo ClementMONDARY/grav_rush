@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cqkmebr1i3g71"]
+[gd_scene load_steps=20 format=3 uid="uid://cqkmebr1i3g71"]
 
 [ext_resource type="Script" uid="uid://3et5x8q558if" path="res://scripts/player/hud/diamond_tracker.gd" id="1_muj54"]
 [ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="2_muj54"]
@@ -185,6 +185,79 @@ _data = {
 &"update": SubResource("Animation_v4fpl")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muj54"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Animation" id="Animation_2a5y5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoverScreenPanel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CoverScreenPanel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_m5iw4"]
+resource_name = "spiked"
+length = 1.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CoverScreenPanel:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999997, 0.1, 0.25, 1.1500001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.54509807, 0, 0, 0), Color(0.34615496, 3.7000515e-07, 7.219613e-08, 0.5137255), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CoverScreenPanel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cqj5h"]
+_data = {
+&"RESET": SubResource("Animation_2a5y5"),
+&"spiked": SubResource("Animation_m5iw4")
+}
+
 [node name="PlayerHud" type="CanvasLayer"]
 
 [node name="DiamondTracker" type="Control" parent="."]
@@ -236,5 +309,23 @@ autowrap_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_muj54")
 }
+
+[node name="CoverScreenPanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_muj54")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cqj5h")
+}
+autoplay = "spiked"
 
 [connection signal="animation_finished" from="DiamondTracker/AnimationPlayer" to="DiamondTracker" method="_on_animation_player_animation_finished"]
