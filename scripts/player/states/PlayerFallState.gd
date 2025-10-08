@@ -19,6 +19,9 @@ var wall_direction: int = 0
 func Enter() -> void:
 	anim_tree_sprite.get("parameters/playback").travel("Fall")
 
+func Exit() -> void:
+	player.move_and_slide()
+
 func Physics_Update(delta: float) -> void:
 	_apply_gravity(delta)
 	_apply_air_control(delta)
@@ -77,7 +80,6 @@ func _handle_wall_interaction() -> bool:
 		wall_direction = sign(player.global_position.x - collision_pos.x)
 		player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 		sprite.scale.x = -sprite.scale.x
-		player.move_and_slide()
 		Transitioned.emit(self, "jump")
 		return true
 	return false
@@ -111,7 +113,6 @@ func _handle_landing() -> bool:
 func _handle_ground_attack() -> bool:
 	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
 		Transitioned.emit(self, "attack")
-		player.move_and_slide()
 		return true
 	return false
 

@@ -1,11 +1,10 @@
-[gd_scene load_steps=158 format=3 uid="uid://cjsayirv07kxw"]
+[gd_scene load_steps=157 format=3 uid="uid://cjsayirv07kxw"]
 
 [ext_resource type="Script" uid="uid://dgbr3e2dbv4bu" path="res://scenes/player/progress_bar.gd" id="1_gx1jg"]
 [ext_resource type="Script" uid="uid://dkq83gw12qtdp" path="res://scripts/FSM/StateMachine.gd" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://cqlp3jlol7va5" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-damaged.png" id="3_007i1"]
 [ext_resource type="PackedScene" uid="uid://bjhycw8l23l1p" path="res://scenes/GFX/trail.tscn" id="3_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://bpbmlb4gtbxrs" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-parade.png" id="4_007i1"]
-[ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://assets/graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_28m0y"]
 [ext_resource type="Script" uid="uid://b0eatb62fb346" path="res://scripts/player/states/PlayerIdleState.gd" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cpmkmfh05nj03" path="res://graphics/player/adventurer-v1.5-Sheet-1-outlined.png" id="4_cnsyf"]
 [ext_resource type="Script" uid="uid://bueyu8kseys2f" path="res://scripts/player/player_trail.gd" id="4_lgqa7"]
@@ -70,19 +69,19 @@ atlas = ExtResource("4_cnsyf")
 region = Rect2(104, 117, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ln3h3"]
-atlas = ExtResource("4_28m0y")
+atlas = ExtResource("4_cnsyf")
 region = Rect2(260, 507, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uygh0"]
-atlas = ExtResource("4_28m0y")
+atlas = ExtResource("4_cnsyf")
 region = Rect2(312, 507, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1aof"]
-atlas = ExtResource("4_28m0y")
+atlas = ExtResource("4_cnsyf")
 region = Rect2(0, 546, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w8qe1"]
-atlas = ExtResource("4_28m0y")
+atlas = ExtResource("4_cnsyf")
 region = Rect2(52, 546, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4hvnv"]
@@ -438,7 +437,7 @@ height = 26.0
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_28m0y"]
-colors = PackedColorArray(0.8, 0.8, 0.8, 0.803922, 0.741176, 0.741176, 0.741176, 0.596078)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_pk8ii"]
 resource_name = "ground_jump"
@@ -583,7 +582,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint/SwordSwingParticules:emitting")
+tracks/4/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticules:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -591,6 +590,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticules:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, -11.5)]
 }
 
 [sub_resource type="Animation" id="Animation_6cv16"]
@@ -708,7 +719,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_5mf0n"]
 resource_name = "ground_attack"
 length = 0.25
-step = 0.0625
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -762,11 +773,11 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint/SwordSwingParticules:emitting")
+tracks/4/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticules:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1875),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -774,14 +785,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint:rotation")
+tracks/5/path = NodePath("PlayerAnimatedSprite2D/SwordSwingParticules:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.1875),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -3.66519]
+"values": [Vector2(5, -15.5), Vector2(20, -7.5), Vector2(11, 6.5), Vector2(-9, 3.5), Vector2(-31, -15.5), Vector2(5, -15.5)]
 }
 
 [sub_resource type="Animation" id="Animation_007i1"]
@@ -1514,15 +1525,12 @@ script = ExtResource("9_6cv16")
 position = Vector2(0, 3.5)
 shape = SubResource("CapsuleShape2D_j4nxn")
 
-[node name="SwordSwingParticulesPivotpoint" type="Marker2D" parent="PlayerAnimatedSprite2D"]
-position = Vector2(8, -2.5)
-
-[node name="SwordSwingParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D/SwordSwingParticulesPivotpoint"]
-position = Vector2(-5, 18)
-rotation = 1.3282
+[node name="SwordSwingParticules" type="CPUParticles2D" parent="PlayerAnimatedSprite2D"]
+position = Vector2(11, -11.5)
 emitting = false
-amount = 20
-lifetime = 0.25
+amount = 30
+lifetime = 0.2
+one_shot = true
 emission_shape = 3
 emission_rect_extents = Vector2(2, 2)
 direction = Vector2(0.07, -0.2)

@@ -24,6 +24,9 @@ func Enter() -> void:
 	jump_component.consume_jump_buffer()
 	jump_component.consume_coyote_time()
 
+func Exit() -> void:
+	player.move_and_slide()
+
 func Physics_Update(delta: float) -> void:
 	_apply_variable_jump_height()
 	_apply_gravity(delta)
@@ -98,7 +101,6 @@ func _handle_wall_jump() -> void:
 	wall_direction = sign(player.global_position.x - collision_pos.x)
 	player.velocity.x = wall_direction * jump_component.JUMP_FORCE / 2.0
 	sprite.scale.x = -sprite.scale.x
-	player.move_and_slide()
 	Transitioned.emit(self, "jump")
 
 func _handle_air_dash() -> bool:
@@ -116,6 +118,5 @@ func _handle_fall_transition() -> bool:
 func _handle_ground_attack() -> bool:
 	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
 		Transitioned.emit(self, "attack")
-		player.move_and_slide()
 		return true
 	return false
