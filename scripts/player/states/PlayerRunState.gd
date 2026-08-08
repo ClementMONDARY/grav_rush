@@ -20,6 +20,9 @@ func Enter() -> void:
 func Exit() -> void:
 	player.move_and_slide()
 
+func _input(event: InputEvent) -> void:
+	if _handle_crouch(event) : return
+
 func Physics_Update(delta: float) -> void:
 	if _handle_airborne():
 		return
@@ -40,6 +43,12 @@ func Physics_Update(delta: float) -> void:
 		return
 
 # --- Logic split below ---
+
+func _handle_crouch(event: InputEvent) -> bool:
+	if event.is_action_pressed("crouch"):
+		Transitioned.emit(self, "crouch")
+		return true
+	return false
 
 func _handle_airborne() -> bool:
 	if not player.is_on_floor():

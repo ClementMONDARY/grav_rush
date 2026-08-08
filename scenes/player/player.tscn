@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://5qiyj46vs7r6" path="res://scripts/global_components/air_control_component.gd" id="19_lgqa7"]
 [ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
+[ext_resource type="Script" uid="uid://tflmaurvl5c7" path="res://scripts/player/states/PlayerCrouchState.gd" id="20_28m0y"]
 [ext_resource type="Script" uid="uid://jydxrb61hk7m" path="res://scripts/global_components/player_health_component.gd" id="27_j4nxn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
@@ -43,6 +44,22 @@ region = Rect2(0, 546, 52, 39)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
 atlas = ExtResource("4_cnsyf")
 region = Rect2(52, 546, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdvrm"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(208, 0, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xbmr"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(260, 0, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hir57"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(312, 0, 52, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7072n"]
+atlas = ExtResource("4_cnsyf")
+region = Rect2(0, 39, 52, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4nxn"]
 atlas = ExtResource("4_cnsyf")
@@ -194,6 +211,23 @@ animations = [{
 "loop": 0,
 "name": &"air_dash",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdvrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xbmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hir57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7072n")
+}],
+"loop": 1,
+"name": &"crouch",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -658,6 +692,35 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_gmu8b"]
+resource_name = "crouch"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"crouch"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="Animation" id="Animation_iqsei"]
 resource_name = "double_jump"
 length = 0.3636
@@ -1059,6 +1122,7 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_3j4b4"),
 &"air_dash": SubResource("Animation_6cv16"),
+&"crouch": SubResource("Animation_gmu8b"),
 &"double_jump": SubResource("Animation_iqsei"),
 &"fall": SubResource("Animation_cnsyf"),
 &"ground_attack": SubResource("Animation_5mf0n"),
@@ -1075,10 +1139,19 @@ _data = {
 animation = &"ground_attack"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qxvo"]
-graph_offset = Vector2(-296.182, 3.0909)
+graph_offset = Vector2(-306.64615, 7.83696)
 nodes/GroundAttack/node = SubResource("AnimationNodeAnimation_4hvnv")
 nodes/GroundAttack/position = Vector2(60, 80)
 node_connections = [&"output", 0, &"GroundAttack"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbmj2"]
+animation = &"crouch"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5q8fn"]
+graph_offset = Vector2(-382, 41)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_bbmj2")
+nodes/Animation/position = Vector2(80, 140)
+node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pk8ii"]
 animation = &"ground_dash"
@@ -1095,7 +1168,7 @@ blend_point_1/pos = 1.0
 blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bbmj2"]
-graph_offset = Vector2(-219.566, 58.1104)
+graph_offset = Vector2(-237.566, 29.110401)
 nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_4hvnv")
 nodes/FloorContext/position = Vector2(40, 120)
 node_connections = [&"output", 0, &"FloorContext"]
@@ -1104,7 +1177,7 @@ node_connections = [&"output", 0, &"FloorContext"]
 animation = &"fall"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3j4b4"]
-graph_offset = Vector2(-479, 60)
+graph_offset = Vector2(-562, 67)
 nodes/Fall/node = SubResource("AnimationNodeAnimation_8ydkj")
 nodes/Fall/position = Vector2(20, 140)
 node_connections = [&"output", 0, &"Fall"]
@@ -1135,7 +1208,7 @@ blend_point_1/pos = 1.0
 blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_j4nxn"]
-graph_offset = Vector2(-7, -26)
+graph_offset = Vector2(-5, -21)
 nodes/output/position = Vector2(920, 100)
 nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_cnsyf")
 nodes/FloorContext/position = Vector2(540, 20)
@@ -1209,9 +1282,11 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8ydkj"]
 states/Attack/node = SubResource("AnimationNodeBlendTree_8qxvo")
 states/Attack/position = Vector2(538, 215)
+states/Crouch/node = SubResource("AnimationNodeBlendTree_5q8fn")
+states/Crouch/position = Vector2(792, 151)
 states/Dash/node = SubResource("AnimationNodeBlendTree_bbmj2")
 states/Dash/position = Vector2(677, 215)
-states/End/position = Vector2(827, 151)
+states/End/position = Vector2(895, 151)
 states/Fall/node = SubResource("AnimationNodeBlendTree_3j4b4")
 states/Fall/position = Vector2(574, 151)
 states/Idle/node = SubResource("AnimationNodeBlendTree_007i1")
@@ -1367,6 +1442,10 @@ graph_offset = Vector2(-147, -81)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvlxm"]
 radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_28m0y"]
+radius = 7.0
+height = 22.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1281497306 groups=["player"]]
 collision_layer = 2
@@ -1565,7 +1644,6 @@ tree_root = SubResource("AnimationNodeStateMachine_pk8ii")
 anim_player = NodePath("..")
 
 [node name="AnimationPlayerSprite" type="AnimationPlayer" parent="." unique_id=1288595164]
-active = false
 libraries/ = SubResource("AnimationLibrary_3j4b4")
 autoplay = &"idle"
 
@@ -1587,11 +1665,17 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_3j4b4")
 anim_player = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2142310487]
+[node name="StandingHitbox" type="CollisionShape2D" parent="." unique_id=2142310487]
 z_index = 1
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_kvlxm")
 debug_color = Color(0.199521, 0.615296, 1, 0)
+
+[node name="CrouchingHitbox" type="CollisionShape2D" parent="." unique_id=420109829]
+z_index = 1
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_28m0y")
+debug_color = Color(0.9999998, 0.2136479, 0.72607267, 0)
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=853608654 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_gmlin")
@@ -1623,6 +1707,10 @@ script = ExtResource("11_myrg7")
 
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=243069477]
 script = ExtResource("17_cnsyf")
+metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
+
+[node name="Crouch" type="Node" parent="PlayerStateMachine" unique_id=2021621957]
+script = ExtResource("20_28m0y")
 metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
 
 [node name="Components" type="Node" parent="." unique_id=31905548]

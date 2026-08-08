@@ -4,6 +4,9 @@ extends State
 
 @onready var wall_detector: RayCast2D = %WallDetector
 @onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var standing_hitbox: CollisionShape2D = $"../../StandingHitbox"
+@onready var crouching_hitbox: CollisionShape2D = $"../../CrouchingHitbox"
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 
 @onready var dash_component: DashComponent = %DashComponent
 @onready var jump_component: JumpComponent = %JumpComponent
@@ -11,34 +14,41 @@ extends State
 @onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
 func Enter() -> void:
-	anim_tree.get("parameters/playback").travel("Idle")
-	stamina_component.refill_stamina()
+	_toggle_hitbox()
 	dash_component.refill_dash()
+	stamina_component.refill_stamina()
+	anim_tree.get("parameters/playback").travel("Crouch")
 
 func Exit() -> void:
+	_toggle_hitbox()
 	player.move_and_slide()
 
+func _input(event: InputEvent) -> void:
+	if _handle_uncrouch(event) : return
 
 func Physics_Update(delta: float) -> void:
 	if _handle_airborne():
 		return
 
 	_apply_slide(delta)
+	_handle_sprite_flip()
 
-	if _handle_crouch() : return
-	if _handle_run(): return
-	if _handle_jump(): return
-	if _handle_dash(): return
-	if _handle_wall_grab(): return
-	if _handle_ground_attack(): return
+	if _handle_jump():
+		return
+	if _handle_dash():
+		return
+	if _handle_wall_grab():
+		return
+	if _handle_ground_attack():
+		return
 
 	player.move_and_slide()
 
 # --- Logic split below ---
 
-func _handle_crouch() -> bool:
-	if Input.is_action_pressed("crouch"):
-		Transitioned.emit(self, "crouch")
+func _handle_uncrouch(event: InputEvent) -> bool:
+	if event.is_action_released("crouch"):
+		Transitioned.emit(self, "idle")
 		return true
 	return false
 
@@ -55,12 +65,6 @@ func _apply_slide(delta: float) -> void:
 		0,
 		ground_control_component.SLIDE_FRICTION * delta
 	)
-
-func _handle_run() -> bool:
-	if Input.get_axis("move_left", "move_right") != 0:
-		Transitioned.emit(self, "run")
-		return true
-	return false
 
 func _handle_jump() -> bool:
 	if jump_component.has_buffered_jump():
@@ -86,3 +90,15 @@ func _handle_ground_attack() -> bool:
 		Transitioned.emit(self, "attack")
 		return true
 	return false
+
+func _handle_sprite_flip() -> void:
+	var input_dir = Input.get_axis("move_left", "move_right")
+	if input_dir > 0:
+		sprite.scale.x = 1.0
+	elif input_dir < 0:
+		sprite.scale.x = -1.0
+
+func _toggle_hitbox() -> void:
+	var temp = standing_hitbox.disabled
+	standing_hitbox.disabled = crouching_hitbox.disabled
+	crouching_hitbox.disabled = temp
