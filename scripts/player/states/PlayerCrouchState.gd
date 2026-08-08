@@ -22,17 +22,16 @@ func Exit() -> void:
 
 func _input(event: InputEvent) -> void:
 	if _handle_uncrouch(event) : return
+	if _handle_dash(event): return
+	if _handle_wall_grab(event): return
+	if _handle_ground_attack(event): return
 
 func Physics_Update(delta: float) -> void:
-	_apply_slide(delta)
 	_handle_sprite_flip()
-	
 	if _handle_parade(): return
 	if _handle_jump(): return
-	if _handle_dash(): return
-	if _handle_wall_grab(): return
-	if _handle_ground_attack(): return
 	
+	_apply_slide(delta)
 	player.move_and_slide()
 
 # --- Logic split below ---
@@ -63,21 +62,21 @@ func _handle_jump() -> bool:
 		return true
 	return false
 
-func _handle_dash() -> bool:
-	if Input.is_action_just_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
+func _handle_dash(event: InputEvent) -> bool:
+	if event.is_action_pressed("dash") and PlayerManager.can_dash and dash_component.remaining_dashs > 0:
 		Transitioned.emit(self, "dash")
 		return true
 	return false
 
-func _handle_wall_grab() -> bool:
-	if wall_detector.is_colliding() and Input.is_action_pressed("wall_grab"):
+func _handle_wall_grab(event: InputEvent) -> bool:
+	if wall_detector.is_colliding() and event.is_action_pressed("wall_grab"):
 		AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_WALL_GRAB)
 		Transitioned.emit(self, "wallgrab")
 		return true
 	return false
 
-func _handle_ground_attack() -> bool:
-	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
+func _handle_ground_attack(event: InputEvent) -> bool:
+	if event.is_action_pressed("attack") and PlayerManager.can_attack:
 		Transitioned.emit(self, "attack")
 		return true
 	return false

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://d318dagdo3m2r"]
+
+[ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_oiwor"]
+[ext_resource type="AudioStream" uid="uid://db576kfp6u1a" path="res://assets/audio/player/weapon/sword_medium_parry_0.wav" id="2_f47mh"]
+[ext_resource type="AudioStream" uid="uid://8thic7bgy0vh" path="res://assets/audio/player/weapon/sword_medium_parry_1.wav" id="3_qta5v"]
+[ext_resource type="AudioStream" uid="uid://ctwo8t2vwaip6" path="res://assets/audio/player/weapon/sword_medium_parry_2.wav" id="4_xg403"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tdnk3"]
+streams_count = 3
+stream_0/stream = ExtResource("2_f47mh")
+stream_1/stream = ExtResource("3_qta5v")
+stream_2/stream = ExtResource("4_xg403")
+
+[resource]
+script = ExtResource("1_oiwor")
+limit = 3
+type = 20
+sound_effect = SubResource("AudioStreamRandomizer_tdnk3")
+volume = -10.0
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"

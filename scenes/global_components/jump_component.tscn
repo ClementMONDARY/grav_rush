@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc1sh8pfn7fty"]
+[gd_scene format=3 uid="uid://dc1sh8pfn7fty"]
 
 [ext_resource type="Script" uid="uid://dllf1u7papfbf" path="res://scripts/global_components/jump_component.gd" id="1_kd45i"]
 
-[node name="JumpComponent" type="Node2D"]
+[node name="JumpComponent" type="Node2D" unique_id=1952258058]
 script = ExtResource("1_kd45i")
 
-[node name="JumpBufferTimer" type="Timer" parent="."]
+[node name="JumpBufferTimer" type="Timer" parent="." unique_id=12166356]
 wait_time = 0.2
 one_shot = true
 
-[node name="CoyoteTimeTimer" type="Timer" parent="."]
+[node name="CoyoteTimeTimer" type="Timer" parent="." unique_id=1024689736]
 wait_time = 0.1

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://duaje0maxpbqb"]
+
+[ext_resource type="Script" uid="uid://t2wqth52aimq" path="res://scripts/global_components/parade_component.gd" id="1_nnab6"]
+
+[node name="ParadeComponent" type="Node2D" unique_id=419464592]
+script = ExtResource("1_nnab6")
+
+[node name="ParryTimer" type="Timer" parent="." unique_id=1605352692]

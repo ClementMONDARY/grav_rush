@@ -10,14 +10,17 @@ extends State
 
 @onready var dash_component: DashComponent = %DashComponent
 @onready var jump_component: JumpComponent = %JumpComponent
+@onready var parade_component: ParadeComponent = %ParadeComponent
 @onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Parade")
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_DRAW)
+	parade_component.start_parry()
 
 func Exit() -> void:
 	player.move_and_slide()
+	parade_component.stop_parying()
 
 func _input(event: InputEvent) -> void:
 	if _handle_unparry(event) : return
@@ -28,6 +31,7 @@ func Physics_Update(delta: float) -> void:
 
 	_apply_slide(delta)
 	_handle_sprite_flip()
+	_handle_parry()
 
 	if _handle_jump():
 		return
@@ -93,3 +97,12 @@ func _handle_sprite_flip() -> void:
 		sprite.scale.x = 1.0
 	elif input_dir < 0:
 		sprite.scale.x = -1.0
+
+func _handle_parry() -> void:
+	if parade_component.can_parry_attack():
+		var overlapping_areas = player.get_overlapping_areas()
+		for area in overlapping_areas:
+			var is_parrable = area.is_in_group("parrable")
+			if is_parrable:
+				anim_tree.get("parameters/playback").travel("Parry")
+				return
