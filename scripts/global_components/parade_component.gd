@@ -1,11 +1,14 @@
 class_name ParadeComponent extends Node2D
 
+## BLOCK is the permanent fallback (no bonus, no cooldown) whenever the timed parry isn't available.
 enum PARRY_LEVEL {
 	BLOCK,
 	LIGHT,
 	MEDIUM,
 	HEAVY
 }
+
+signal parried(level: PARRY_LEVEL)
 
 @export var parry_window_seconds: float = 0.25
 @export var rest_time_before_next_parry_seconds: float = 0.1
@@ -25,10 +28,6 @@ func start_parry() -> void:
 	parry_timer.start()
 	is_parrying = true
 
-func _process(delta: float) -> void:
-	if is_parrying:
-		print(str(rest_timer.time_left))
-
 func stop_parying() -> void:
 	parry_timer.stop()
 	rest_timer.stop()
@@ -44,4 +43,5 @@ func get_parry_level(attack_source: Area2D) -> PARRY_LEVEL:
 	var attack_source_component: AttackSourceComponent = attack_source.get_node_or_null("AttackSourceComponent")
 	if attack_source_component == null: return PARRY_LEVEL.BLOCK
 	rest_timer.start()
+	parried.emit(attack_source_component.parry_level)
 	return attack_source_component.parry_level

@@ -14,10 +14,15 @@ extends State
 @onready var parade_component: ParadeComponent = %ParadeComponent
 @onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
+func _ready() -> void:
+	hurtbox.area_entered.connect(_try_parry)
+
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Parade")
 	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_DRAW)
 	parade_component.start_parry()
+	for area in hurtbox.get_overlapping_areas():
+		_try_parry(area)
 
 func Exit() -> void:
 	player.move_and_slide()
@@ -32,7 +37,6 @@ func Physics_Update(delta: float) -> void:
 
 	_apply_slide(delta)
 	_handle_sprite_flip()
-	_handle_parry()
 
 	if _handle_jump():
 		return
@@ -99,19 +103,21 @@ func _handle_sprite_flip() -> void:
 	elif input_dir < 0:
 		sprite.scale.x = -1.0
 
-func _handle_parry() -> void:
+func _try_parry(area: Area2D) -> void:
 	if not parade_component.is_parrying: return
-	var overlapping_areas = hurtbox.get_overlapping_areas()
-	for area in overlapping_areas:
-		if not area.is_in_group("parable"): continue
-		var level = parade_component.get_parry_level(area)
-		match level:
-			# sfx/animations to implement here
-			ParadeComponent.PARRY_LEVEL.BLOCK:
-				print("Block level : BLOCK")
-			ParadeComponent.PARRY_LEVEL.LIGHT:
-				print("Block level : LIGHT")
-			ParadeComponent.PARRY_LEVEL.MEDIUM:
-				print("Block level : MEDIUM")
-			ParadeComponent.PARRY_LEVEL.HEAVY:
-				print("Block level : HEAVY")
+	if not area.is_in_group("parable"): return
+	var level = parade_component.get_parry_level(area)
+	match level:
+		# sfx/animations to implement here
+		ParadeComponent.PARRY_LEVEL.BLOCK:
+			print("Block level : BLOCK")
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_BLOCK)
+		ParadeComponent.PARRY_LEVEL.LIGHT:
+			print("Block level : LIGHT")
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_LIGHT_PARRY)
+		ParadeComponent.PARRY_LEVEL.MEDIUM:
+			print("Block level : MEDIUM")
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_MEDIUM_PARRY)
+		ParadeComponent.PARRY_LEVEL.HEAVY:
+			print("Block level : HEAVY")
+			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_HEAVY_PARRY)

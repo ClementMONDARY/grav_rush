@@ -32,6 +32,10 @@
 [ext_resource type="AudioStream" uid="uid://c4ni7nmbem3g8" path="res://assets/audio/player/interaction/Land_Metal_0.wav" id="30_wfmnx"]
 [ext_resource type="AudioStream" uid="uid://w5xe0ue5wvt2" path="res://assets/audio/world/ground_break_stone.wav" id="31_n8661"]
 [ext_resource type="Resource" uid="uid://xp2cg7w1j3ge" path="res://assets/audio/ressources/player_sword_draw.tres" id="32_onqdg"]
+[ext_resource type="Resource" uid="uid://cxxmwbppbicq7" path="res://assets/audio/ressources/player_sword_block.tres" id="33_mjcpo"]
+[ext_resource type="Resource" uid="uid://dpfceopcutjpt" path="res://assets/audio/ressources/player_sword_light_parry.tres" id="34_qnat3"]
+[ext_resource type="Resource" uid="uid://d318dagdo3m2r" path="res://assets/audio/ressources/player_sword_medium_parry.tres" id="35_nqbmb"]
+[ext_resource type="Resource" uid="uid://1l3aukebk4nu" path="res://assets/audio/ressources/player_sword_heavy.tres" id="36_m0mjg"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ryw36"]
 streams_count = 4
@@ -199,4 +203,4 @@ metadata/_custom_type_script = "uid://nshqrmwvj6tu"
 
 [node name="AudioManager" type="Node2D" unique_id=264747625]
 script = ExtResource("1_f113j")
-sound_effects = Array[ExtResource("2_2ccwd")]([ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044"), SubResource("Resource_28alx"), SubResource("Resource_k26wb"), SubResource("Resource_0qag5"), SubResource("Resource_g78vt"), SubResource("Resource_emnvs"), SubResource("Resource_onqdg"), SubResource("Resource_15ev1"), SubResource("Resource_n8661"), SubResource("Resource_v6axm"), SubResource("Resource_hkpre"), ExtResource("32_onqdg")])
+sound_effects = Array[ExtResource("2_2ccwd")]([ExtResource("3_cfl81"), ExtResource("4_cfl81"), ExtResource("4_85pnb"), SubResource("Resource_8p317"), SubResource("Resource_i0hgu"), SubResource("Resource_8kn1q"), SubResource("Resource_xm044"), SubResource("Resource_28alx"), SubResource("Resource_k26wb"), SubResource("Resource_0qag5"), SubResource("Resource_g78vt"), SubResource("Resource_emnvs"), SubResource("Resource_onqdg"), SubResource("Resource_15ev1"), SubResource("Resource_n8661"), SubResource("Resource_v6axm"), SubResource("Resource_hkpre"), ExtResource("32_onqdg"), ExtResource("33_mjcpo"), ExtResource("34_qnat3"), ExtResource("35_nqbmb"), ExtResource("36_m0mjg")])
