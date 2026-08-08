@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://df4ny5m45pd36"]
+[gd_resource type="TileSet" format=3 uid="uid://df4ny5m45pd36"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j38fd"]
 rough = true
