@@ -14,6 +14,7 @@ extends State
 
 func Enter() -> void:
 	anim_tree.get("parameters/playback").travel("Parade")
+	AudioManager.create_2d_audio_at_location(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_DRAW)
 
 func Exit() -> void:
 	player.move_and_slide()

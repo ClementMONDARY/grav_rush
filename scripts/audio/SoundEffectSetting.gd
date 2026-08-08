@@ -21,6 +21,7 @@ enum SOUND_EFFECT_TYPE {
 	ON_PLAYER_LAND_METAL, # 14
 	ON_WALL_CRACK_STONE, # 15
 	ON_WALL_BREAK_STONE, # 16
+	ON_PLAYER_SWORD_DRAW, # 17
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
