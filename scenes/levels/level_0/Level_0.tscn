@@ -64,12 +64,12 @@ Vector2i(-1, -1): {
 
 [node name="Level_0" type="Node2D" unique_id=2003989901]
 
-[node name="Player" parent="." unique_id=884823383 instance=ExtResource("2_icq3g")]
-position = Vector2(144, -64)
+[node name="Player" parent="." unique_id=608691579 instance=ExtResource("2_icq3g")]
+position = Vector2(4800, -2032)
 
 [node name="PlayerCamera" parent="Player" unique_id=790364261 instance=ExtResource("3_uqyny")]
 position = Vector2(0, -32)
-initial_screen = NodePath("../../Screens/Screen_0_0")
+initial_screen = NodePath("../../Screens/Screen_4_-1")
 
 [node name="Screens" type="Node" parent="." unique_id=992531000]
 
