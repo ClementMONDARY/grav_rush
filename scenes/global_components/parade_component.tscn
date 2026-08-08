@@ -6,3 +6,7 @@
 script = ExtResource("1_nnab6")
 
 [node name="ParryTimer" type="Timer" parent="." unique_id=1605352692]
+one_shot = true
+
+[node name="RestTimer" type="Timer" parent="." unique_id=625278113]
+one_shot = true

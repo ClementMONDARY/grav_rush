@@ -4,9 +4,10 @@ extends State
 
 @onready var wall_detector: RayCast2D = %WallDetector
 @onready var anim_tree: AnimationTree = %AnimationTreeSprite
+@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
 @onready var standing_hitbox: CollisionShape2D = $"../../StandingHitbox"
 @onready var crouching_hitbox: CollisionShape2D = $"../../CrouchingHitbox"
-@onready var sprite: AnimatedSprite2D = %PlayerAnimatedSprite2D
+@onready var hurtbox: Area2D = $"../../PlayerAnimatedSprite2D/Hitboxes/Hurtbox"
 
 @onready var dash_component: DashComponent = %DashComponent
 @onready var jump_component: JumpComponent = %JumpComponent
@@ -99,10 +100,18 @@ func _handle_sprite_flip() -> void:
 		sprite.scale.x = -1.0
 
 func _handle_parry() -> void:
-	if parade_component.can_parry_attack():
-		var overlapping_areas = player.get_overlapping_areas()
-		for area in overlapping_areas:
-			var is_parrable = area.is_in_group("parrable")
-			if is_parrable:
-				anim_tree.get("parameters/playback").travel("Parry")
-				return
+	if not parade_component.is_parrying: return
+	var overlapping_areas = hurtbox.get_overlapping_areas()
+	for area in overlapping_areas:
+		if not area.is_in_group("parable"): continue
+		var level = parade_component.get_parry_level(area)
+		match level:
+			# sfx/animations to implement here
+			ParadeComponent.PARRY_LEVEL.BLOCK:
+				print("Block level : BLOCK")
+			ParadeComponent.PARRY_LEVEL.LIGHT:
+				print("Block level : LIGHT")
+			ParadeComponent.PARRY_LEVEL.MEDIUM:
+				print("Block level : MEDIUM")
+			ParadeComponent.PARRY_LEVEL.HEAVY:
+				print("Block level : HEAVY")

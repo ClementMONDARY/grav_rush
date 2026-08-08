@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://tflmaurvl5c7" path="res://scripts/player/states/PlayerCrouchState.gd" id="20_28m0y"]
 [ext_resource type="Script" uid="uid://dshggylcnb57b" path="res://scripts/player/states/PlayerParryState.gd" id="21_uniwh"]
 [ext_resource type="Script" uid="uid://jydxrb61hk7m" path="res://scripts/global_components/player_health_component.gd" id="27_j4nxn"]
-[ext_resource type="Script" uid="uid://t2wqth52aimq" path="res://scripts/global_components/parade_component.gd" id="30_iqsei"]
+[ext_resource type="PackedScene" uid="uid://duaje0maxpbqb" path="res://scenes/global_components/parade_component.tscn" id="30_iqsei"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
 atlas = ExtResource("4_cnsyf")
@@ -1800,10 +1800,8 @@ script = ExtResource("27_j4nxn")
 player = NodePath("../..")
 metadata/_custom_type_script = "uid://dx4anbgjvggcy"
 
-[node name="ParadeComponent" type="Node2D" parent="Components" unique_id=794635065]
+[node name="ParadeComponent" parent="Components" unique_id=419464592 instance=ExtResource("30_iqsei")]
 unique_name_in_owner = true
-script = ExtResource("30_iqsei")
-metadata/_custom_type_script = "uid://t2wqth52aimq"
 
 [connection signal="body_entered" from="PlayerAnimatedSprite2D/Hitboxes/Hurtbox" to="PlayerAnimatedSprite2D/Hitboxes/Hurtbox" method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayerSprite/AnimationTreeSprite" to="PlayerStateMachine/Attack" method="_on_animation_player_sprite_animation_finished"]
