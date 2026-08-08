@@ -1,10 +1,13 @@
 extends Node2D
 class_name HealthComponent
 
-@export var max_hp: int = 1
+@export var max_hp: int = 3
 
-var current_hp: int = max_hp
+var current_hp: int
 var dmg_multiplier: int = 1
+
+func _ready() -> void:
+	current_hp = max_hp
 
 func damage(value: int) -> void:
 	current_hp -= value * dmg_multiplier

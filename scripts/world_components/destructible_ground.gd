@@ -1,7 +1,5 @@
 extends TileMapLayer
 
-signal wall_destroyed()
-
 const DEBRIS_PARTICULES_SCENE = preload("uid://wq4xrfptlgjy")
 
 @export var wall_id_in: int
@@ -74,5 +72,4 @@ func _on_break():
 	print(debris.position)
 	get_tree().current_scene.add_child(debris)
 	
-	wall_destroyed.emit()
 	queue_free()

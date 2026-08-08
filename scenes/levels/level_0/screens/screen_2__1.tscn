@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=4 uid="uid://ddo1evnfk1rtw"]
 
 [ext_resource type="Script" uid="uid://dfd8gwhh08yme" path="res://scripts/world/level/screen_data.gd" id="1_60jas"]
-[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://assets/graphics/world/other_and_decorative.png" id="2_y3uot"]
+[ext_resource type="Texture2D" uid="uid://chejkbll83s1j" path="res://graphics/world/other_and_decorative.png" id="2_y3uot"]
 [ext_resource type="TileSet" uid="uid://bw1xbph3y7krj" path="res://assets/tilesets/ground_tileset.tres" id="3_37dnp"]
 [ext_resource type="TileSet" uid="uid://df4ny5m45pd36" path="res://assets/tilesets/spikes.tres" id="4_61jxc"]
 [ext_resource type="PackedScene" uid="uid://byn113xx8i0qu" path="res://scenes/world_components/lights/torch_center.tscn" id="4_y3uot"]
@@ -1606,7 +1606,7 @@ tile_set = ExtResource("3_37dnp")
 [node name="Spikes" type="TileMapLayer" parent="Tiles" groups=["spikes"]]
 light_mask = 2
 z_index = 1
-tile_map_data = PackedByteArray("AAD1//3/AQANAAwAAAD0//3/AQANAAwAAADz//3/AQANAAwAAADy//3/AQANAAwAAADp//z/AQANAAwAAADo//z/AQANAAwAAADn//z/AQANAAwAAADm//z/AQANAAwAAADf//D/AQANAAoAAADg//D/AQANAAoAAADh//D/AQANAAoAAADi//D/AQANAAoAAADj//D/AQANAAoAAADm/+//AQANAAoAAADn/+//AQANAAoAAADo/+//AQANAAoAAADp/+//AQANAAoAAADz/+7/AQANAAoAAAD0/+7/AQANAAoAAAD1/+7/AQANAAoAAADy/+7/AQANAAoAAAD4/+7/AQANAAoAAAD5/+7/AQANAAoAAAD6/+7/AQANAAoAAAD7/+7/AQANAAoAAAA=")
+tile_map_data = PackedByteArray("AAD1//3/AQANAAwAAAD0//3/AQANAAwAAADz//3/AQANAAwAAADy//3/AQANAAwAAADp//z/AQANAAwAAADo//z/AQANAAwAAADn//z/AQANAAwAAADm//z/AQANAAwAAADf//D/AQANAAoAAADg//D/AQANAAoAAADh//D/AQANAAoAAADi//D/AQANAAoAAADj//D/AQANAAoAAADm/+//AQANAAoAAADn/+//AQANAAoAAADo/+//AQANAAoAAADp/+//AQANAAoAAADz/+7/AQANAAoAAAD0/+7/AQANAAoAAAD1/+7/AQANAAoAAADy/+7/AQANAAoAAAD4/+7/AQANAAoAAAD5/+7/AQANAAoAAAD6/+7/AQANAAoAAAD7/+7/AQANAAoAAADk//T/AQANAAwAAADl//T/AQANAAwAAADq//P/AQANAAwAAADr//P/AQANAAwAAADw//n/AQANAAwAAADx//n/AQANAAwAAAD2//L/AQANAAwAAAD3//L/AQANAAwAAAA=")
 tile_set = ExtResource("4_61jxc")
 
 [node name="Lights" type="Node2D" parent="."]

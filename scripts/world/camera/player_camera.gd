@@ -25,7 +25,7 @@ func update_camera_limits_from_screen(screen: ScreenData) -> void:
 		bottom_right.y
 	))
 
-func set_camera_limits(limits: Vector4) -> void:
+func set_camera_limits(limits: Vector4i) -> void:
 	limit_left = limits.x
 	limit_top = limits.y
 	limit_right = limits.z
@@ -77,18 +77,21 @@ func transition_to_screen(direction: Vector2) -> void:
 
 func engage_transition_animation(target_screen: ScreenData, for_respawn: bool = false) -> void:
 	set_borders_enabled(false)
-	update_camera_limits_from_screen(target_screen)
-	position_smoothing_speed *= 2.5
-	Engine.time_scale = 0.3
-	await get_tree().create_timer(0.15).timeout
-	position_smoothing_speed /= 2.5
-	Engine.time_scale = 1.0
-	
-	if for_respawn:
-		position_smoothing_enabled = false
-		await get_tree().process_frame
-		await get_tree().process_frame
-		position_smoothing_enabled = true
+	match for_respawn:
+		false:
+			update_camera_limits_from_screen(target_screen)
+			position_smoothing_speed *= 2.5
+			Engine.time_scale = 0.3
+			await get_tree().create_timer(0.15).timeout
+			position_smoothing_speed /= 2.5
+			Engine.time_scale = 1.0
+		true:
+			await get_tree().create_timer(0.1).timeout
+			update_camera_limits_from_screen(target_screen)
+			position_smoothing_enabled = false
+			await get_tree().process_frame
+			await get_tree().process_frame
+			position_smoothing_enabled = true
 
 	_on_transition_complete(target_screen)
 

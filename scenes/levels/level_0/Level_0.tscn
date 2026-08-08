@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cawsetb4mmcag"]
+[gd_scene format=4 uid="uid://cawsetb4mmcag"]
 
 [ext_resource type="PackedScene" uid="uid://cjsayirv07kxw" path="res://scenes/player/player.tscn" id="2_icq3g"]
 [ext_resource type="PackedScene" uid="uid://ccu8orxn0eq01" path="res://scenes/player_camera.tscn" id="3_uqyny"]
@@ -62,49 +62,49 @@ Vector2i(-1, -1): {
 }
 }
 
-[node name="Level_0" type="Node2D"]
+[node name="Level_0" type="Node2D" unique_id=2003989901]
 
-[node name="Player" parent="." instance=ExtResource("2_icq3g")]
-position = Vector2(4688, -2032)
+[node name="Player" parent="." unique_id=608691579 instance=ExtResource("2_icq3g")]
+position = Vector2(4800, -2032)
 
-[node name="PlayerCamera" parent="Player" instance=ExtResource("3_uqyny")]
+[node name="PlayerCamera" parent="Player" unique_id=790364261 instance=ExtResource("3_uqyny")]
 position = Vector2(0, -32)
 initial_screen = NodePath("../../Screens/Screen_4_-1")
 
-[node name="Screens" type="Node" parent="."]
+[node name="Screens" type="Node" parent="." unique_id=992531000]
 
-[node name="Screen_0_0" parent="Screens" groups=["screen"] instance=ExtResource("4_u8rab")]
+[node name="Screen_0_0" parent="Screens" unique_id=1679495141 groups=["screen"] instance=ExtResource("4_u8rab")]
 
-[node name="Screen_1_0" parent="Screens" groups=["screen"] instance=ExtResource("5_jgss6")]
+[node name="Screen_1_0" parent="Screens" unique_id=1755354709 groups=["screen"] instance=ExtResource("5_jgss6")]
 position = Vector2(2528, -784)
 
-[node name="Screen_2_0" parent="Screens" groups=["screen"] instance=ExtResource("6_aja5w")]
+[node name="Screen_2_0" parent="Screens" unique_id=1599612875 groups=["screen"] instance=ExtResource("6_aja5w")]
 position = Vector2(3232, -976)
 
-[node name="Screen_3_0" parent="Screens" groups=["screen"] instance=ExtResource("7_vv6lh")]
+[node name="Screen_3_0" parent="Screens" unique_id=600913472 groups=["screen"] instance=ExtResource("7_vv6lh")]
 position = Vector2(4016, -1136)
 
-[node name="Screen_3_-1" parent="Screens" groups=["screen"] instance=ExtResource("8_qi6d7")]
+[node name="Screen_3_-1" parent="Screens" unique_id=1638382739 groups=["screen"] instance=ExtResource("8_qi6d7")]
 position = Vector2(4000, -1968)
 
-[node name="Screen_4_0" parent="Screens" groups=["screen"] instance=ExtResource("9_icq3g")]
+[node name="Screen_4_0" parent="Screens" unique_id=1495376819 groups=["screen"] instance=ExtResource("9_icq3g")]
 position = Vector2(4608, -1136)
 
-[node name="Screen_2_-1" parent="Screens" groups=["screen"] instance=ExtResource("10_uqyny")]
+[node name="Screen_2_-1" parent="Screens" unique_id=1805305584 groups=["screen"] instance=ExtResource("10_uqyny")]
 position = Vector2(4000, -1968)
 
-[node name="Screen_4_-1" parent="Screens" groups=["screen"] instance=ExtResource("11_u8rab")]
+[node name="Screen_4_-1" parent="Screens" unique_id=1030795551 groups=["screen"] instance=ExtResource("11_u8rab")]
 position = Vector2(4672, -1936)
 
-[node name="Audio" type="Node" parent="."]
+[node name="Audio" type="Node" parent="." unique_id=917106029]
 
-[node name="Ambiance" type="AudioStreamPlayer" parent="Audio"]
+[node name="Ambiance" type="AudioStreamPlayer" parent="Audio" unique_id=43506833]
 stream = ExtResource("12_jgss6")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
-[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+[node name="Music" type="AudioStreamPlayer" parent="Audio" unique_id=1407856852]
 stream = SubResource("AudioStreamInteractive_ktttv")
 volume_db = -15.0
 autoplay = true

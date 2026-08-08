@@ -15,6 +15,9 @@ func Enter() -> void:
 	stamina_component.refill_stamina()
 	dash_component.refill_dash()
 
+func Exit() -> void:
+	player.move_and_slide()
+
 func Physics_Update(delta: float) -> void:
 	if _handle_airborne():
 		return
@@ -77,6 +80,6 @@ func _handle_wall_grab() -> bool:
 
 func _handle_ground_attack() -> bool:
 	if Input.is_action_just_pressed("attack") and PlayerManager.can_attack:
-		Transitioned.emit(self, "groundattack")
+		Transitioned.emit(self, "attack")
 		return true
 	return false
