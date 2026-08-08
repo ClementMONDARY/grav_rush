@@ -24,25 +24,26 @@ func _input(event: InputEvent) -> void:
 	if _handle_crouch(event) : return
 
 func Physics_Update(delta: float) -> void:
-	if _handle_airborne():
-		return
-	if _handle_jump():
-		return
-	if _handle_dash():
-		return
-	if _handle_ground_attack():
-		return
+	if _handle_parade() : return
+	if _handle_airborne(): return
+	if _handle_jump(): return
+	if _handle_dash(): return
+	if _handle_ground_attack(): return
 
 	_handle_horizontal_movement(delta)
 	_flip_sprite()
 	player.move_and_slide()
 
-	if _handle_wall_grab():
-		return
-	if _handle_idle_transition():
-		return
+	if _handle_wall_grab(): return
+	if _handle_idle_transition(): return
 
 # --- Logic split below ---
+
+func _handle_parade() -> bool:
+	if Input.is_action_pressed("parade"):
+		Transitioned.emit(self, "parade")
+		return true
+	return false
 
 func _handle_crouch(event: InputEvent) -> bool:
 	if event.is_action_pressed("crouch"):

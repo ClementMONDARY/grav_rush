@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://b75uk1srgxn6w" path="res://scenes/global_components/wall_control_component.tscn" id="20_3j4b4"]
 [ext_resource type="Script" uid="uid://7yqoxs3p6wpt" path="res://scripts/global_components/ground_control_component.gd" id="20_8ydkj"]
 [ext_resource type="Script" uid="uid://tflmaurvl5c7" path="res://scripts/player/states/PlayerCrouchState.gd" id="20_28m0y"]
+[ext_resource type="Script" uid="uid://dshggylcnb57b" path="res://scripts/player/states/PlayerParryState.gd" id="21_uniwh"]
 [ext_resource type="Script" uid="uid://jydxrb61hk7m" path="res://scripts/global_components/player_health_component.gd" id="27_j4nxn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
@@ -969,6 +970,34 @@ tracks/1/keys = {
 "values": [&"jump"]
 }
 
+[sub_resource type="Animation" id="Animation_4hvnv"]
+resource_name = "parade"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"parade"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerAnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_yj68g"]
 resource_name = "run"
 length = 0.5455
@@ -1129,6 +1158,7 @@ _data = {
 &"ground_dash": SubResource("Animation_007i1"),
 &"idle": SubResource("Animation_8ydkj"),
 &"jump": SubResource("Animation_ioxgp"),
+&"parade": SubResource("Animation_4hvnv"),
 &"run": SubResource("Animation_yj68g"),
 &"wall_climb": SubResource("Animation_uniwh"),
 &"wall_grab": SubResource("Animation_28m0y"),
@@ -1214,6 +1244,15 @@ nodes/FloorContext/node = SubResource("AnimationNodeBlendSpace1D_cnsyf")
 nodes/FloorContext/position = Vector2(540, 20)
 node_connections = [&"output", 0, &"FloorContext"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxw46"]
+animation = &"parade"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wva7c"]
+graph_offset = Vector2(-700.02094, 43.977753)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kxw46")
+nodes/Animation/position = Vector2(100, 160)
+node_connections = [&"output", 0, &"Animation"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28m0y"]
 animation = &"run"
 
@@ -1293,6 +1332,8 @@ states/Idle/node = SubResource("AnimationNodeBlendTree_007i1")
 states/Idle/position = Vector2(368, 151)
 states/Jump/node = SubResource("AnimationNodeBlendTree_j4nxn")
 states/Jump/position = Vector2(677, 151)
+states/Parade/node = SubResource("AnimationNodeBlendTree_wva7c")
+states/Parade/position = Vector2(414, 215)
 states/Run/node = SubResource("AnimationNodeBlendTree_uniwh")
 states/Run/position = Vector2(476, 151)
 states/Start/position = Vector2(227, 151)
@@ -1711,6 +1752,10 @@ metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
 
 [node name="Crouch" type="Node" parent="PlayerStateMachine" unique_id=2021621957]
 script = ExtResource("20_28m0y")
+metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
+
+[node name="Parade" type="Node" parent="PlayerStateMachine" unique_id=63021795]
+script = ExtResource("21_uniwh")
 metadata/_custom_type_script = "uid://cqc4uwcl3mosw"
 
 [node name="Components" type="Node" parent="." unique_id=31905548]

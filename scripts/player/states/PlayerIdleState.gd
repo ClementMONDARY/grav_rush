@@ -18,13 +18,13 @@ func Enter() -> void:
 func Exit() -> void:
 	player.move_and_slide()
 
-
 func Physics_Update(delta: float) -> void:
 	if _handle_airborne():
 		return
 
 	_apply_slide(delta)
 
+	if _handle_parade() : return
 	if _handle_crouch() : return
 	if _handle_run(): return
 	if _handle_jump(): return
@@ -35,6 +35,12 @@ func Physics_Update(delta: float) -> void:
 	player.move_and_slide()
 
 # --- Logic split below ---
+
+func _handle_parade() -> bool:
+	if Input.is_action_pressed("parade"):
+		Transitioned.emit(self, "parade")
+		return true
+	return false
 
 func _handle_crouch() -> bool:
 	if Input.is_action_pressed("crouch"):

@@ -13,15 +13,13 @@ extends State
 @onready var ground_control_component: GroundControlComponent = %GroundControlComponent
 
 func Enter() -> void:
-	_toggle_hitbox()
-	anim_tree.get("parameters/playback").travel("Crouch")
+	anim_tree.get("parameters/playback").travel("Parade")
 
 func Exit() -> void:
-	_toggle_hitbox()
 	player.move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if _handle_uncrouch(event) : return
+	if _handle_unparry(event) : return
 
 func Physics_Update(delta: float) -> void:
 	if _handle_airborne():
@@ -43,8 +41,8 @@ func Physics_Update(delta: float) -> void:
 
 # --- Logic split below ---
 
-func _handle_uncrouch(event: InputEvent) -> bool:
-	if event.is_action_released("crouch"):
+func _handle_unparry(event: InputEvent) -> bool:
+	if event.is_action_released("parade"):
 		Transitioned.emit(self, "idle")
 		return true
 	return false
@@ -94,8 +92,3 @@ func _handle_sprite_flip() -> void:
 		sprite.scale.x = 1.0
 	elif input_dir < 0:
 		sprite.scale.x = -1.0
-
-func _toggle_hitbox() -> void:
-	var temp = standing_hitbox.disabled
-	standing_hitbox.disabled = crouching_hitbox.disabled
-	crouching_hitbox.disabled = temp
