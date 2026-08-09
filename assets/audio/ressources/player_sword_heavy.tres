@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://1l3aukebk4nu"]
+
+[ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_1wshq"]
+[ext_resource type="AudioStream" uid="uid://bad26fu31kr7v" path="res://assets/audio/player/weapon/sword_heavy_parry_0.wav" id="2_kqqmf"]
+
+[resource]
+script = ExtResource("1_1wshq")
+limit = 3
+type = 21
+sound_effect = ExtResource("2_kqqmf")
+volume = -15.0
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"

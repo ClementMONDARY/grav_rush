@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cqkmebr1i3g71"]
+[gd_scene format=3 uid="uid://cqkmebr1i3g71"]
 
 [ext_resource type="Script" uid="uid://3et5x8q558if" path="res://scripts/player/hud/diamond_tracker.gd" id="1_muj54"]
 [ext_resource type="Texture2D" uid="uid://ctb1lck4bnym6" path="res://assets/graphics/collectables/diamond.png" id="2_muj54"]
@@ -42,7 +42,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74mb8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 6.0
 }]
@@ -258,9 +258,9 @@ _data = {
 &"spiked": SubResource("Animation_m5iw4")
 }
 
-[node name="PlayerHud" type="CanvasLayer"]
+[node name="PlayerHud" type="CanvasLayer" unique_id=1455271212]
 
-[node name="DiamondTracker" type="Control" parent="."]
+[node name="DiamondTracker" type="Control" parent="." unique_id=588944649]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchor_left = 0.129
@@ -273,14 +273,14 @@ offset_right = 33.392
 offset_bottom = 2.728
 script = ExtResource("1_muj54")
 
-[node name="DiamondAnimatedSprite2D" type="AnimatedSprite2D" parent="DiamondTracker"]
+[node name="DiamondAnimatedSprite2D" type="AnimatedSprite2D" parent="DiamondTracker" unique_id=1314697054]
 position = Vector2(-21, 8)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_sqnk8")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="DiamondTracker/DiamondAnimatedSprite2D"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="DiamondTracker/DiamondAnimatedSprite2D" unique_id=1078931530]
 z_index = -1
 amount = 15
 spread = 180.0
@@ -292,7 +292,7 @@ scale_amount_min = 3.0
 scale_amount_max = 4.0
 color_ramp = SubResource("Gradient_muj54")
 
-[node name="DiamondTrackerLabel" type="Label" parent="DiamondTracker"]
+[node name="DiamondTrackerLabel" type="Label" parent="DiamondTracker" unique_id=849589149]
 layout_mode = 0
 offset_left = 10.0
 offset_top = -39.0
@@ -305,12 +305,10 @@ text = "x 0"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DiamondTracker"]
-libraries = {
-&"": SubResource("AnimationLibrary_muj54")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiamondTracker" unique_id=960951759]
+libraries/ = SubResource("AnimationLibrary_muj54")
 
-[node name="CoverScreenPanel" type="Panel" parent="."]
+[node name="CoverScreenPanel" type="Panel" parent="." unique_id=1661709115]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
@@ -322,10 +320,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_muj54")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_cqj5h")
-}
-autoplay = "spiked"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=609808733]
+libraries/ = SubResource("AnimationLibrary_cqj5h")
+autoplay = &"spiked"
 
 [connection signal="animation_finished" from="DiamondTracker/AnimationPlayer" to="DiamondTracker" method="_on_animation_player_animation_finished"]

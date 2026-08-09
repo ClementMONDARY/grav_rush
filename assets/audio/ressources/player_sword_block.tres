@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://cxxmwbppbicq7"]
+
+[ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_mndih"]
+[ext_resource type="AudioStream" uid="uid://lyelygy4xhm4" path="res://assets/audio/player/weapon/sword_block_0.wav" id="2_5cbmh"]
+[ext_resource type="AudioStream" uid="uid://0u87a40ompqs" path="res://assets/audio/player/weapon/sword_block_1.wav" id="3_k7ii8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ff30y"]
+streams_count = 2
+stream_0/stream = ExtResource("2_5cbmh")
+stream_1/stream = ExtResource("3_k7ii8")
+
+[resource]
+script = ExtResource("1_mndih")
+limit = 3
+type = 18
+sound_effect = SubResource("AudioStreamRandomizer_ff30y")
+volume = -15.0
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SoundEffect" load_steps=6 format=3 uid="uid://bh6q2el7d3ohl"]
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://bh6q2el7d3ohl"]
 
 [ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_6s1v6"]
 [ext_resource type="AudioStream" uid="uid://ds4g0itbmhnqg" path="res://audio/player/Player_Dash_SFX_0.mp3" id="2_adq8y"]

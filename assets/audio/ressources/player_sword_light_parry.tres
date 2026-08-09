@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="SoundEffect" format=3 uid="uid://dpfceopcutjpt"]
+
+[ext_resource type="Script" uid="uid://nshqrmwvj6tu" path="res://scripts/audio/SoundEffectSetting.gd" id="1_ogylp"]
+[ext_resource type="AudioStream" uid="uid://dflk30wlvlks7" path="res://assets/audio/player/weapon/sword_light_parry_0.wav" id="2_e4vfm"]
+[ext_resource type="AudioStream" uid="uid://c676mdeugb8u" path="res://assets/audio/player/weapon/sword_light_parry_1.wav" id="3_pvh52"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ws7sn"]
+streams_count = 3
+stream_0/stream = ExtResource("2_e4vfm")
+stream_1/stream = ExtResource("3_pvh52")
+stream_2/stream = ExtResource("3_pvh52")
+
+[resource]
+script = ExtResource("1_ogylp")
+limit = 3
+type = 19
+sound_effect = SubResource("AudioStreamRandomizer_ws7sn")
+volume = -15.0
+bus = &"SFX"
+metadata/_custom_type_script = "uid://nshqrmwvj6tu"

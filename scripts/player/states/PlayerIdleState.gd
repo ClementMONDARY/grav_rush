@@ -24,20 +24,29 @@ func Physics_Update(delta: float) -> void:
 
 	_apply_slide(delta)
 
-	if _handle_run():
-		return
-	if _handle_jump():
-		return
-	if _handle_dash():
-		return
-	if _handle_wall_grab():
-		return
-	if _handle_ground_attack():
-		return
+	if _handle_parade() : return
+	if _handle_crouch() : return
+	if _handle_run(): return
+	if _handle_jump(): return
+	if _handle_dash(): return
+	if _handle_wall_grab(): return
+	if _handle_ground_attack(): return
 
 	player.move_and_slide()
 
 # --- Logic split below ---
+
+func _handle_parade() -> bool:
+	if Input.is_action_pressed("parade"):
+		Transitioned.emit(self, "parade")
+		return true
+	return false
+
+func _handle_crouch() -> bool:
+	if Input.is_action_pressed("crouch"):
+		Transitioned.emit(self, "crouch")
+		return true
+	return false
 
 func _handle_airborne() -> bool:
 	if not player.is_on_floor():
