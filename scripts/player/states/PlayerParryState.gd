@@ -106,18 +106,38 @@ func _handle_sprite_flip() -> void:
 func _try_parry(area: Area2D) -> void:
 	if not parade_component.is_parrying: return
 	if not area.is_in_group("parable"): return
+	var parry_contact_point = hurtbox.global_position.lerp(area.global_position, 0.5)
 	var level = parade_component.get_parry_level(area)
 	match level:
-		# sfx/animations to implement here
 		ParadeComponent.PARRY_LEVEL.BLOCK:
 			print("Block level : BLOCK")
-			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_BLOCK)
+			ANIM_block(parry_contact_point)
 		ParadeComponent.PARRY_LEVEL.LIGHT:
 			print("Block level : LIGHT")
-			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_LIGHT_PARRY)
+			ANIM_light_parry(parry_contact_point)
 		ParadeComponent.PARRY_LEVEL.MEDIUM:
 			print("Block level : MEDIUM")
-			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_MEDIUM_PARRY)
+			ANIM_medium_parry(parry_contact_point)
 		ParadeComponent.PARRY_LEVEL.HEAVY:
 			print("Block level : HEAVY")
-			AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_HEAVY_PARRY)
+			ANIM_heavy_parry(parry_contact_point)
+
+func ANIM_block(parry_contact_point: Vector2) -> void:
+	AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_BLOCK)
+	Fx.spawn("hit_flash", parry_contact_point, {"size": 0.5, "color_main": Color("#555555"), "color_accent": Color("#222222")})
+
+func ANIM_light_parry(parry_contact_point: Vector2) -> void:
+	AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_LIGHT_PARRY)
+	Fx.spawn("impact_spark", parry_contact_point, {"size": 0.5})
+	Fx.shake(1, 0.1)
+
+func ANIM_medium_parry(parry_contact_point: Vector2) -> void:
+	AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_MEDIUM_PARRY)
+	Fx.spawn("impact_spark", parry_contact_point, {"size": 0.7})
+	Fx.shake(5, 0.2)
+
+func ANIM_heavy_parry(parry_contact_point: Vector2) -> void:
+	AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_HEAVY_PARRY)
+	Fx.spawn("impact_spark", parry_contact_point, {"size": 0.9})
+	Fx.shake(6, 0.3)
+	Fx.hitstop(0.15)

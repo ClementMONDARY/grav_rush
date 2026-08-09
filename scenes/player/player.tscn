@@ -1634,6 +1634,8 @@ script = ExtResource("4_lgqa7")
 fade_duration = 0.2
 MAX_LENGTH = 30
 
+[node name="ParryParticules" type="Node2D" parent="PlayerAnimatedSprite2D" unique_id=1634258898]
+
 [node name="Hitboxes" type="Node2D" parent="PlayerAnimatedSprite2D" unique_id=983656823]
 
 [node name="AttackboxArea" type="Area2D" parent="PlayerAnimatedSprite2D/Hitboxes" unique_id=264260833]

@@ -16,6 +16,6 @@ script = ExtResource("1_oiwor")
 limit = 3
 type = 20
 sound_effect = SubResource("AudioStreamRandomizer_tdnk3")
-volume = -10.0
+volume = -15.0
 bus = &"SFX"
 metadata/_custom_type_script = "uid://nshqrmwvj6tu"

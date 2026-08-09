@@ -31,9 +31,11 @@ DiamondManager="*res://scripts/global/DiamondManager.gd"
 PlayerManager="*res://scripts/global/PlayerManager.gd"
 EngineExtra="*res://scripts/global/EngineExtra.gd"
 PlayerHud="*res://scenes/player/player_hud.tscn"
+Fx="*uid://u6sqyh22tpu3"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [file_customization]
