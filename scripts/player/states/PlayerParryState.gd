@@ -139,5 +139,6 @@ func ANIM_medium_parry(parry_contact_point: Vector2) -> void:
 func ANIM_heavy_parry(parry_contact_point: Vector2) -> void:
 	AudioManager.create_2d_audio_at_location_with_culling(player.global_position, SoundEffect.SOUND_EFFECT_TYPE.ON_PLAYER_SWORD_HEAVY_PARRY)
 	Fx.spawn("impact_spark", parry_contact_point, {"size": 0.9})
+	Fx.spawn("hit_burst", parry_contact_point, {"size": 0.2})
 	Fx.shake(6, 0.3)
 	Fx.hitstop(0.15)

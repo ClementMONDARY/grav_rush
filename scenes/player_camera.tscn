@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccu8orxn0eq01"]
+[gd_scene format=3 uid="uid://ccu8orxn0eq01"]
 
 [ext_resource type="Script" uid="uid://be1bt234n75jd" path="res://scripts/world/camera/player_camera.gd" id="1_7pa0d"]
 [ext_resource type="PackedScene" uid="uid://cqkmebr1i3g71" path="res://scenes/player/player_hud.tscn" id="2_eanys"]
-[ext_resource type="PackedScene" uid="uid://cuuvrfl6gtvtc" path="res://scenes/camera_shake_effect.tscn" id="2_tparg"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_7pa0d"]
 a = Vector2(-162, 0)
@@ -16,7 +15,7 @@ b = Vector2(-288, 0)
 a = Vector2(162, 0)
 b = Vector2(-162, 0)
 
-[node name="PlayerCamera" type="Camera2D"]
+[node name="PlayerCamera" type="Camera2D" unique_id=1021690237]
 process_mode = 3
 zoom = Vector2(2, 2)
 limit_smoothed = true
@@ -25,58 +24,55 @@ position_smoothing_speed = 7.0
 editor_draw_limits = true
 script = ExtResource("1_7pa0d")
 
-[node name="CameraBorders" type="Node2D" parent="."]
+[node name="CameraBorders" type="Node2D" parent="." unique_id=32718771]
 process_mode = 3
 
-[node name="LeftBorder" type="Area2D" parent="CameraBorders"]
+[node name="LeftBorder" type="Area2D" parent="CameraBorders" unique_id=628199946]
 process_mode = 3
 position = Vector2(-297, 0)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/LeftBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/LeftBorder" unique_id=512316791]
 process_mode = 3
 rotation = 1.5708
 shape = SubResource("SegmentShape2D_7pa0d")
 
-[node name="TopBorder" type="Area2D" parent="CameraBorders"]
+[node name="TopBorder" type="Area2D" parent="CameraBorders" unique_id=808462701]
 process_mode = 3
 position = Vector2(0, -171)
 rotation = 3.14159
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/TopBorder" unique_id=1954346147]
 process_mode = 3
 position = Vector2(0, 7)
 shape = SubResource("SegmentShape2D_eanys")
 
-[node name="RightBorder" type="Area2D" parent="CameraBorders"]
+[node name="RightBorder" type="Area2D" parent="CameraBorders" unique_id=975481986]
 process_mode = 3
 position = Vector2(297, 0)
 rotation = -1.5708
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/RightBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/RightBorder" unique_id=1477439178]
 process_mode = 3
 shape = SubResource("SegmentShape2D_tparg")
 
-[node name="BottomBorder" type="Area2D" parent="CameraBorders"]
+[node name="BottomBorder" type="Area2D" parent="CameraBorders" unique_id=1418471541]
 process_mode = 3
 position = Vector2(0, 169)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBorders/BottomBorder" unique_id=51211628]
 process_mode = 3
 position = Vector2(0, 9)
 shape = SubResource("SegmentShape2D_eanys")
 
-[node name="CameraShakeEffect" parent="." node_paths=PackedStringArray("camera2D") instance=ExtResource("2_tparg")]
-camera2D = NodePath("..")
-
-[node name="PlayerHud" parent="." instance=ExtResource("2_eanys")]
+[node name="PlayerHud" parent="." unique_id=1526482480 instance=ExtResource("2_eanys")]
 
 [connection signal="body_entered" from="CameraBorders/LeftBorder" to="." method="_on_left_border_body_entered"]
 [connection signal="body_entered" from="CameraBorders/TopBorder" to="." method="_on_top_border_body_entered"]
