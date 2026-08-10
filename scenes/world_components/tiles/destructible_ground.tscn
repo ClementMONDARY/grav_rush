@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://djxy2d65pmqy"]
+[gd_scene format=3 uid="uid://djxy2d65pmqy"]
 
 [ext_resource type="Texture2D" uid="uid://xoutt0sdslnw" path="res://graphics/world/main_lev_build.png" id="1_lpqjn"]
 [ext_resource type="Script" uid="uid://ctawi24g4y3qy" path="res://scripts/world_components/destructible_ground.gd" id="2_lpqjn"]
@@ -2171,7 +2171,13 @@ custom_data_layer_0/name = "material"
 custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_auikq")
 
-[node name="DestructibleGround" type="TileMapLayer"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgbounds_default"]
+size = Vector2(32, 32)
+
+[node name="DestructibleGround" type="TileMapLayer" unique_id=150988329]
 light_mask = 2
 tile_set = SubResource("TileSet_yycqc")
 script = ExtResource("2_lpqjn")
+
+[node name="BreakBounds" type="CollisionShape2D" parent="." unique_id=376320133]
+shape = SubResource("RectangleShape2D_dgbounds_default")
