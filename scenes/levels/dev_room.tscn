@@ -10,7 +10,10 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3yskv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ospm"]
-size = Vector2(42, 46)
+size = Vector2(40, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu5f4"]
+size = Vector2(32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(8, 50)
@@ -183,22 +186,22 @@ position = Vector2(114, -8)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1725498547]
-position = Vector2(1, -15)
+position = Vector2(2, -15)
 shape = SubResource("RectangleShape2D_4ospm")
 
 [node name="Panel" type="Panel" parent="Area2D2" unique_id=859092226]
-offset_left = -20.0
+offset_left = -18.0
 offset_top = -38.0
-offset_right = 21.0
+offset_right = 22.0
 offset_bottom = 8.0
 
 [node name="DestructibleGround" parent="." unique_id=1522986751 instance=ExtResource("4_d27c4")]
-position = Vector2(202, 0)
+position = Vector2(200, 0)
 tile_map_data = PackedByteArray("AAD+//3/AAAPAC0AAAD+//z/AAAPAC0AAAD+//v/AAAPAC0AAAD9//v/AAAPAC0AAAD9//z/AAAPAC0AAAD9//3/AAAPAC0AAAA=")
-furthest_left_tile_unit = 3
-furthest_top_tile_unit = 5
-furthest_right_tile_unit = -1
-furthest_bottom_tile_unit = -2
+
+[node name="BreakBounds" parent="DestructibleGround" index="0" unique_id=376320133]
+position = Vector2(-32, -56)
+shape = SubResource("RectangleShape2D_gu5f4")
 
 [node name="CPUParticles2D" parent="." unique_id=432383460 instance=ExtResource("5_ynnkj")]
 position = Vector2(159, -64)
@@ -232,3 +235,5 @@ offset_right = 312.0
 offset_bottom = -61.0
 theme_override_font_sizes/font_size = 7
 text = "Attack level : LIGHT"
+
+[editable path="DestructibleGround"]
