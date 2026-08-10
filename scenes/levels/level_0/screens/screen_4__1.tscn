@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bucu6s1d1eckx" path="res://scenes/world_components/lights/ceiling_light.tscn" id="5_uya5p"]
 [ext_resource type="PackedScene" uid="uid://cnxsq8xqdu6k3" path="res://scenes/world_components/tiles/checkpoint.tscn" id="6_qhb8d"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bounds"]
+size = Vector2(624, 784)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
 
@@ -1554,11 +1557,13 @@ width = 144
 
 [node name="Screen_4_-1" type="Node2D" unique_id=674546761]
 script = ExtResource("1_grslt")
-local_camera_limit_left = 0
-local_camera_limit_top = -304
-local_camera_limit_right = 624
-local_camera_limit_bottom = 480
 metadata/_custom_type_script = "uid://dfd8gwhh08yme"
+
+[node name="CameraBounds" type="CollisionShape2D" parent="." unique_id=82423970]
+z_index = -4096
+position = Vector2(312, 88)
+shape = SubResource("RectangleShape2D_bounds")
+debug_color = Color(1, 0, 0, 0.039215688)
 
 [node name="Tiles" type="Node2D" parent="." unique_id=3592792]
 
