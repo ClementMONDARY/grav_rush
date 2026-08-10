@@ -15,8 +15,9 @@ func _ready() -> void:
 		update_camera_limits_from_screen(actual_screen)
 
 func update_camera_limits_from_screen(screen: ScreenData) -> void:
-	var top_left := screen.global_position + Vector2(screen.local_camera_limit_left, screen.local_camera_limit_top)
-	var bottom_right := screen.global_position + Vector2(screen.local_camera_limit_right, screen.local_camera_limit_bottom)
+	var rect := screen.get_camera_rect()
+	var top_left := screen.global_position + rect.position
+	var bottom_right := screen.global_position + rect.position + rect.size
 	
 	set_camera_limits(Vector4(
 		top_left.x,

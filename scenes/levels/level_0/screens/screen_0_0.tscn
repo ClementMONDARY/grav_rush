@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cnxsq8xqdu6k3" path="res://scenes/world_components/tiles/checkpoint.tscn" id="6_qau0k"]
 [ext_resource type="PackedScene" uid="uid://cnjql86r6pll3" path="res://scenes/world_components/lights/torch_left.tscn" id="8_h1rpm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bounds"]
+size = Vector2(2528, 1120)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eokde"]
 load_path = "res://.godot/imported/main_lev_build.png-635b4ec92e8c3ef7b975087d825100c2.ctex"
 
@@ -1550,10 +1553,12 @@ sources/1 = SubResource("TileSetAtlasSource_xy1qu")
 
 [node name="Screen_0_0" type="Node2D" unique_id=73005382]
 script = ExtResource("1_toqj2")
-local_camera_limit_left = 0
-local_camera_limit_top = -1120
-local_camera_limit_right = 2528
-local_camera_limit_bottom = 0
+
+[node name="CameraBounds" type="CollisionShape2D" parent="." unique_id=119083555]
+z_index = -4096
+position = Vector2(1264, -560)
+shape = SubResource("RectangleShape2D_bounds")
+debug_color = Color(1, 0, 0, 0.039215688)
 
 [node name="Tiles" type="Node2D" parent="." unique_id=1728590157]
 
